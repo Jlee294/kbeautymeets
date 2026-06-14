@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register — KSAPS Summit 2026 · K-Beauty MEETS</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+.toast{position:fixed;bottom:24px;right:24px;padding:16px 24px;border-radius:12px;font-size:14px;font-weight:600;display:none;align-items:center;gap:10px;z-index:600;box-shadow:0 8px 24px rgba(0,0,0,.15);max-width:400px}
+.toast.show{display:flex}
+.toast-success{background:#DCFCE7;color:#166534;border:1px solid #86EFAC}
+.toast-error{background:#FEE2E2;color:#991B1B;border:1px solid #FECACA}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed}
+.success-screen{text-align:center;padding:48px 24px;background:#E1F5EE;border-radius:16px;margin-bottom:24px}
+.success-screen h2{font-size:24px;font-weight:600;color:#085041;margin-bottom:8px}
+.success-screen p{font-size:14px;color:#0F6E56;line-height:1.7}
+.success-code{font-family:monospace;font-size:18px;font-weight:700;color:#085041;background:#fff;padding:8px 16px;border-radius:8px;display:inline-block;margin:12px 0;letter-spacing:.08em}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a1a1a;background:#fff;font-size:15px}
+a{text-decoration:none;color:inherit}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-bottom:1px solid #e8e6e0;position:sticky;top:0;background:#fff;z-index:100}
+.logo{font-size:16px;font-weight:600}.logo span{color:#0F6E56}
+.navlinks{display:flex;gap:24px;font-size:13px;color:#5f5e5a}
+.navlinks a:hover{color:#0F6E56}
+.navlinks a.active{color:#534AB7;font-weight:600}
+.lang{display:flex;gap:6px;font-size:12px}
+.lang span{padding:3px 8px;border-radius:20px;border:1px solid #d3d1c7;cursor:pointer;color:#5f5e5a}
+.lang span.active{background:#0F6E56;color:#E1F5EE;border-color:#0F6E56}
+.hero{background:#EEEDFE;padding:28px 32px;border-bottom:1px solid #e8e6e0}
+.breadcrumb{font-size:12px;color:#534AB7;margin-bottom:10px}
+.breadcrumb span{color:#888780}
+.badge{display:inline-block;font-size:11px;padding:3px 12px;border-radius:20px;background:#534AB7;color:#EEEDFE;font-weight:600;margin-bottom:10px}
+.hero h1{font-size:24px;font-weight:600;color:#26215C;margin-bottom:8px}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:#534AB7}
+.layout{display:grid;grid-template-columns:1fr 300px;gap:28px;padding:28px 32px;align-items:start}
+.steps{display:flex;margin-bottom:28px}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative}
+.step::after{content:'';position:absolute;top:15px;left:50%;right:-50%;height:1px;background:#d3d1c7}
+.step:last-child::after{display:none}
+.step-dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;z-index:1;background:#fff}
+.s-done{background:#0F6E56;color:#E1F5EE;border:2px solid #0F6E56}
+.s-active{background:#EEEDFE;color:#3C3489;border:2px solid #534AB7}
+.s-todo{background:#f5f4f0;color:#888780;border:2px solid #d3d1c7}
+.step-label{font-size:11px;color:#888780;text-align:center}
+.step-label.active{color:#3C3489;font-weight:600}
+.card{background:#fff;border:1px solid #e8e6e0;border-radius:12px;padding:22px;margin-bottom:18px}
+.card-title{font-size:15px;font-weight:600;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #e8e6e0}
+.card-sub{font-size:12px;color:#888780;font-weight:400;margin-left:8px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;color:#5f5e5a;margin-bottom:6px;font-weight:500}
+.req{color:#E24B4A}
+.field input,.field select,.field textarea{width:100%;padding:9px 13px;border:1px solid #d3d1c7;border-radius:8px;font-size:14px;background:#fff;color:#1a1a1a;font-family:inherit;transition:border-color 0.15s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#534AB7}
+.field input::placeholder,.field textarea::placeholder{color:#b4b2a9}
+.field textarea{resize:vertical;min-height:80px;line-height:1.6}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.day-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.day-opt{border:1px solid #d3d1c7;border-radius:10px;padding:16px;cursor:pointer;transition:all 0.15s;text-align:center}
+.day-opt:hover{border-color:#534AB7}
+.day-opt.sel{border:2px solid #534AB7;background:#EEEDFE}
+.day-opt-name{font-size:13px;font-weight:600;margin-bottom:4px;color:#3C3489}
+.day-opt-date{font-size:11px;color:#888780;margin-bottom:6px}
+.day-opt-venue{font-size:11px;color:#5f5e5a}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.check-item{display:flex;align-items:center;gap:8px;font-size:13px;color:#5f5e5a;cursor:pointer}
+.check-item input{width:15px;height:15px;cursor:pointer;accent-color:#534AB7}
+.policy{background:#EEEDFE;border-radius:10px;padding:16px;margin-bottom:18px}
+.policy-title{font-size:13px;font-weight:600;color:#3C3489;margin-bottom:10px}
+.policy-item{display:flex;gap:8px;font-size:12px;color:#534AB7;margin-bottom:7px;line-height:1.6}
+.policy-item:last-child{margin-bottom:0}
+.policy-dot{width:5px;height:5px;border-radius:50%;background:#534AB7;margin-top:5px;flex-shrink:0}
+.agree{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#5f5e5a;margin-bottom:18px;line-height:1.6}
+.agree input{width:16px;height:16px;margin-top:2px;cursor:pointer;accent-color:#534AB7;flex-shrink:0}
+.submit-btn{width:100%;padding:14px;background:#534AB7;color:#EEEDFE;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background 0.15s}
+.submit-btn:hover{background:#3C3489}
+.side-card{background:#fff;border:1px solid #e8e6e0;border-radius:12px;padding:18px;margin-bottom:14px}
+.side-title{font-size:14px;font-weight:600;margin-bottom:14px}
+.info-row{display:flex;gap:12px;margin-bottom:12px}
+.info-row:last-child{margin-bottom:0}
+.info-icon{width:32px;height:32px;border-radius:8px;background:#EEEDFE;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.info-label{font-size:11px;color:#888780;margin-bottom:2px}
+.info-val{font-size:13px;font-weight:600}
+.info-sub{font-size:11px;color:#888780}
+.free-badge{display:flex;align-items:center;gap:10px;background:#E1F5EE;border-radius:10px;padding:12px 14px;margin-bottom:14px}
+.free-icon{width:32px;height:32px;border-radius:50%;background:#0F6E56;color:#E1F5EE;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:700}
+.free-title{font-size:13px;font-weight:600;color:#085041}
+.free-sub{font-size:11px;color:#0F6E56}
+.seat-bar{height:7px;border-radius:4px;background:#f5f4f0;margin:10px 0 5px;overflow:hidden}
+.seat-fill-d1{height:100%;border-radius:4px;background:#534AB7;width:86%}
+.seat-fill-d2{height:100%;border-radius:4px;background:#534AB7;width:60%}
+.seat-meta{display:flex;justify-content:space-between;font-size:12px;color:#5f5e5a}
+.noshow{background:#FCEBEB;border-radius:10px;padding:14px;margin-top:12px}
+.noshow-title{font-size:13px;font-weight:600;color:#791F1F;margin-bottom:5px}
+.noshow-text{font-size:12px;color:#A32D2D;line-height:1.6}
+.contact-text{font-size:12px;color:#5f5e5a;line-height:1.8}
+.contact-text a{color:#534AB7}
+footer{padding:24px 32px;border-top:1px solid #e8e6e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:#f5f4f0}
+.footer-brand{font-size:14px;font-weight:600}.footer-brand span{color:#0F6E56}
+.footer-meta{font-size:12px;color:#888780}
+@media(max-width:768px){.layout{grid-template-columns:1fr}.row2,.day-grid,.check-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="logo"><a href="index.html">K-Beauty <span>MEETS</span></a></div>
+  <div class="navlinks">
+    <a href="summit.html" class="active">Summit</a>
+    <a href="congress.html">Congress</a>
+    <a href="kat.html">KAT</a>
+    <a href="speakers.html">Speakers</a>
+  </div>
+  <div class="lang"><span>VN</span><span>KR</span><span class="active">EN</span></div>
+</nav>
+<div class="hero">
+  <p class="breadcrumb"><a href="index.html">K-Beauty MEETS</a> <span>›</span> <a href="summit.html">KSAPS Summit</a> <span>›</span> Register</p>
+  <span class="badge">Korea Meets VSAPS · KSAPS Summit 2026</span>
+  <h1>Register for KSAPS Summit 2026</h1>
+  <div class="hero-meta">
+    <span>📅 October 3, 2026</span>
+    <span>📍 Kangnam Aesthetic Hospital Aesthetic Hospital, HCMC</span>
+    <span>👥 100 doctors · 1 day · Free to attend</span>
+    <span>Lecture + Live Demo + Live Surgery + Hands-on</span>
+  </div>
+</div>
+<div class="layout">
+<div>
+  <div class="steps">
+    <div class="step"><div class="step-dot s-done">1</div><span class="step-label">Event</span></div>
+    <div class="step"><div class="step-dot s-active">2</div><span class="step-label active">Details</span></div>
+    <div class="step"><div class="step-dot s-todo">3</div><span class="step-label">Specialty</span></div>
+    <div class="step"><div class="step-dot s-todo">4</div><span class="step-label">Confirm</span></div>
+  </div>
+  <div class="card">
+    <p class="card-title">1-day event <span class="card-sub">— October 3, 2026</span></p>
+    <div style="background:var(--purple-p);border-radius:12px;padding:20px 24px;border-left:3px solid var(--purple)">
+          <p style="font-size:13px;font-weight:600;color:var(--purple);margin-bottom:10px">Program at a glance — October 3, 2026</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">09:00 – 09:30</span><span>Opening Ceremony</span></div>
+            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">09:30 – 10:00</span><span style="font-weight:600;color:var(--purple)">Press Conference</span></div>
+            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">10:00 – 12:00</span><span>4 Scientific Lectures</span></div>
+            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">12:00 – 13:00</span><span style="color:var(--gray2)">Lunch &amp; Networking</span></div>
+            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">13:00 – 16:00</span><span>Live Device Demo (3 companies)</span></div>
+            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">16:00 – 17:30</span><span style="font-weight:600;color:var(--coral)">Live Surgery — Rhinoplasty</span></div>
+            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">17:30 – 18:00</span><span>Closing &amp; CME Certificate</span></div>
+          </div>
+        </div>
+      <div class="day-opt" onclick="this.classList.toggle('sel')">
+        <p class="day-opt-name">Day 2</p>
+        <p class="day-opt-date">October 3, 2026</p>
+        <p class="day-opt-venue">Kangnam Aesthetic Hospital</p>
+      </div>
+      <div class="day-opt" onclick="document.querySelectorAll('.day-opt').forEach(d=>d.classList.add('sel'));this.parentElement.querySelectorAll('.day-opt:not(:last-child)').forEach(d=>d.classList.add('sel'))">
+        <p class="day-opt-name">Both days</p>
+        <p class="day-opt-date">Oct 3 + 27</p>
+        <p class="day-opt-venue">Priority registration</p>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <p class="card-title">Personal information</p>
+    <div class="row2">
+      <div class="field"><label>Full name <span class="req">*</span></label><input id="f-name" type="text" placeholder="Dr. Nguyen Van A" required></div>
+      <div class="field"><label>Phone number <span class="req">*</span></label><input id="f-phone" type="text" placeholder="+84 912 345 678" required></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Email address <span class="req">*</span></label><input id="f-email" type="email" placeholder="doctor@clinic.com" required></div>
+      <div class="field"><label>CME number / Medical license</label><input id="f-cme" type="text" placeholder="VN-CME-XXXXX"></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Hospital / Clinic name <span class="req">*</span></label><input id="f-hospital" type="text" placeholder="Hospital or clinic name" required></div>
+      <div class="field"><label>City <span class="req">*</span></label>
+        <select id="f-city"><option>Ho Chi Minh City</option><option>Hanoi</option><option>Da Nang</option><option>Can Tho</option><option>Other city</option></select>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Specialty <span class="req">*</span></label>
+        <select id="f-specialty"><option>Aesthetic / Plastic Surgery</option><option>Dermatology</option><option>ENT</option><option>General Practice</option><option>Other</option></select>
+      </div>
+      <div class="field"><label>Years of experience <span class="req">*</span></label>
+        <select id="f-experience"><option>Less than 2 years</option><option>2 – 5 years</option><option>5 – 10 years</option><option>More than 10 years</option></select>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <p class="card-title">Topics of interest</p>
+    <div class="check-grid">
+      <label class="check-item"><input type="checkbox" checked> RF / HIFU combination lifting</label>
+      <label class="check-item"><input type="checkbox"> Korean rhinoplasty</label>
+      <label class="check-item"><input type="checkbox" checked> Thread lifting technique</label>
+      <label class="check-item"><input type="checkbox"> Blepharoplasty</label>
+      <label class="check-item"><input type="checkbox"> High-viscosity filler protocol</label>
+      <label class="check-item"><input type="checkbox"> Bio-filler / BIOSTER</label>
+      <label class="check-item"><input type="checkbox" checked> Hands-on device training</label>
+      <label class="check-item"><input type="checkbox"> KOL networking</label>
+    </div>
+    <div class="field" style="margin-top:16px;margin-bottom:0">
+      <label>What do you hope to gain from KSAPS Summit?</label>
+      <textarea id="f-goals" placeholder="e.g. I want hands-on experience with Korean RF/HIFU combination protocols..."></textarea>
+    </div>
+  </div>
+  <div class="policy">
+    <p class="policy-title">Attendance policy — please read before submitting</p>
+    <div class="policy-item"><div class="policy-dot"></div><span>Free to attend — 100 seats. Registration does not guarantee a spot. <strong>Registration deadline: September 26, 2026.</strong></span></div>
+    <div class="policy-item"><div class="policy-dot"></div><span>Confirmation emails sent within 3–5 business days. </span></div>
+    <div class="policy-item"><div class="policy-dot"></div><span>If you cannot attend, email congress@kbitassociation.com in advance.</span></div>
+    <div class="policy-item"><div class="policy-dot"></div><span>No-shows without notice will affect priority for future KSAPS events.</span></div>
+  </div>
+  <div class="agree">
+    <input type="checkbox" id="agree">
+    <label for="agree">I have read and agree to the attendance policy. I commit to notifying the Organizing Committee if I am unable to attend.</label>
+  </div>
+  <button class="submit-btn" id="submit-btn" onclick="submitRegistration()">Submit application →</button>
+  <div id="success-screen" class="success-screen" style="display:none">
+    <div style="font-size:48px;margin-bottom:16px">✅</div>
+    <h2>Registration submitted!</h2>
+    <p>Your registration code:</p>
+    <div class="success-code" id="reg-code">—</div>
+    <p>We will review your application and send a confirmation email within 3–5 business days.<br>Please save your registration code for check-in.</p>
+    <a href="index.html" style="display:inline-block;margin-top:16px;padding:10px 24px;background:#0F6E56;color:#fff;border-radius:8px;font-weight:600;font-size:14px">Back to homepage</a>
+  </div>
+</div>
+<div>
+  <div class="free-badge">
+    <div class="free-icon">✓</div>
+    <div><p class="free-title">Free to attend</p><p class="free-sub">Supported by KHIDI · Korean Government</p></div>
+  </div>
+  <div class="side-card">
+    <p class="side-title">Day 1 — October 3</p>
+    <div class="info-row"><div class="info-icon">🏥</div><div><p class="info-label">Venue</p><p class="info-val">Kangnam Aesthetic Hospital</p><p class="info-sub">Ho Chi Minh City</p></div></div>
+    <div class="info-row"><div class="info-icon">🕐</div><div><p class="info-label">Time</p><p class="info-val">08:00 – 18:00</p></div></div>
+    <p style="font-size:12px;color:#5f5e5a;margin:8px 0 4px;font-weight:500">Available seats</p>
+    
+  </div>
+  <div class="side-card">
+    <p class="side-title">Day 2 — October 4</p>
+    <div class="info-row"><div class="info-icon">🏥</div><div><p class="info-label">Venue</p><p class="info-val">Kangnam Aesthetic Hospital</p><p class="info-sub">Ho Chi Minh City</p></div></div>
+    <div class="info-row"><div class="info-icon">🕐</div><div><p class="info-label">Time</p><p class="info-val">08:00 – 17:30</p></div></div>
+    <p style="font-size:12px;color:#5f5e5a;margin:8px 0 4px;font-weight:500">Available seats</p>
+    
+  </div>
+  <div class="side-card">
+    <p class="side-title">What's included</p>
+    <p style="font-size:13px;color:#5f5e5a;line-height:1.9">
+      ✓ Scientific lectures by KSAPS KOL<br>
+      ✓ Live device demonstrations<br>
+      ✓ Live surgery broadcast (Day 1)<br>
+      ✓ Hands-on tracks 1:5 (Day 2)<br>
+      ✓ K-Protocol Certificate<br>
+      ✓ KOL Network registration<br>
+      ✓ CME Certificate
+    </p>
+  </div>
+  <div class="side-card" style="margin-bottom:0">
+    <p class="side-title">Questions?</p>
+    <p class="contact-text">Jolly / Mai — Registration team<br><a href="mailto:congress@kbitassociation.com">congress@kbitassociation.com</a><br>Response within 1–2 business days</p>
+    <div class="noshow">
+      <p class="noshow-title">Can't make it?</p>
+      <p class="noshow-text">Please email us in advance so we can offer your spot to someone on the waitlist. Thank you!</p>
+    </div>
+  </div>
+</div>
+</div>
+<footer>
+  <div class="footer-brand">K-Beauty <span>MEETS</span></div>
+  <div class="footer-meta">Coordinated by KBIT · congress@kbitassociation.com</div>
+  <div class="footer-links"><span>Summit Oct 3–27</span><span>Congress Oct 24–25</span><span>KAT Oct 23</span></div>
+</footer>
+<div class="toast" id="toast"><span id="toast-msg"></span></div>
+
+<script src="js/supabase-config.js"></script>
+<script>
+async function submitRegistration() {
+  const btn = document.getElementById('submit-btn');
+  const agree = document.getElementById('agree');
+
+  if (!agree.checked) {
+    showToast('Please agree to the attendance policy', 'error');
+    return;
+  }
+
+  const fields = {
+    full_name: document.getElementById('f-name').value.trim(),
+    phone: document.getElementById('f-phone').value.trim(),
+    email: document.getElementById('f-email').value.trim(),
+    hospital: document.getElementById('f-hospital').value.trim(),
+  };
+
+  for (const [key, val] of Object.entries(fields)) {
+    if (!val) {
+      showToast('Please fill in all required fields', 'error');
+      return;
+    }
+  }
+
+  const topics = [];
+  document.querySelectorAll('.check-item input:checked').forEach(cb => {
+    topics.push(cb.parentElement.textContent.trim());
+  });
+
+  const data = {
+    ...fields,
+    cme_number: document.getElementById('f-cme').value.trim() || null,
+    city: document.getElementById('f-city').value,
+    specialty: document.getElementById('f-specialty').value,
+    years_experience: document.getElementById('f-experience').value,
+    topics: topics,
+    goals: document.getElementById('f-goals').value.trim() || null,
+    event: 'summit',
+  };
+
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  try {
+    const { data: result, error } = await supabase
+      .from('registrations')
+      .insert([data])
+      .select('code')
+      .single();
+
+    if (error) throw error;
+
+    document.getElementById('reg-code').textContent = result.code;
+    document.querySelectorAll('.card, .policy, .agree, .steps, #submit-btn').forEach(el => el.style.display = 'none');
+    document.getElementById('success-screen').style.display = 'block';
+    showToast('Registration successful!', 'success');
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Submit application →';
+    if (err.message && err.message.includes('duplicate')) {
+      showToast('This email is already registered', 'error');
+    } else {
+      showToast('Submission failed. Please try again or contact congress@kbitassociation.com', 'error');
+    }
+  }
+}
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.className = 'toast show toast-' + type;
+  document.getElementById('toast-msg').textContent = msg;
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+</script>
+</body>
+</html>

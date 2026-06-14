@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check-in System — K-Beauty MEETS 2026 · KBIT</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --teal:#0B6B54;--teal-l:#1A8F70;--teal-p:#E3F4EE;
+  --ink:#0F1512;--bg:#F7FAF8;--white:#fff;
+  --border:#E2EAE6;--gray:#6B7B74;--gray2:#9BA8A2;
+  --summit:#4A3FA8;--congress:#C44B28;--kat:#C97C14;
+  --fd:'Playfair Display',serif;--fb:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);background:var(--bg);color:var(--ink);font-size:15px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-logo{font-family:var(--fd);font-size:18px;color:#fff}.nav-logo em{color:#5DCBA8;font-style:italic}
+.nav-badge{font-size:11px;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);font-weight:500}
+
+/* TABS */
+.tabs{display:flex;background:var(--white);border-bottom:1px solid var(--border);padding:0 32px}
+.tab{padding:14px 20px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--gray2);border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--teal);border-bottom-color:var(--teal);font-weight:600}
+
+.main{padding:28px 32px;max-width:1200px;margin:0 auto}
+
+/* EVENT SELECTOR */
+.event-pills{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.ep{padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid transparent;transition:all .2s}
+.ep-all{background:var(--ink);color:#fff}
+.ep-summit{background:rgba(74,63,168,.1);color:var(--summit);border-color:rgba(74,63,168,.2)}
+.ep-summit.active,.ep-summit:hover{background:var(--summit);color:#fff;border-color:var(--summit)}
+.ep-kat{background:rgba(201,124,20,.1);color:var(--kat);border-color:rgba(201,124,20,.2)}
+.ep-kat.active,.ep-kat:hover{background:var(--kat);color:#fff;border-color:var(--kat)}
+.ep-congress{background:rgba(196,75,40,.1);color:var(--congress);border-color:rgba(196,75,40,.2)}
+.ep-congress.active,.ep-congress:hover{background:var(--congress);color:#fff;border-color:var(--congress)}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.sc-num{font-family:var(--fd);font-size:32px;font-weight:600;color:var(--ink);line-height:1}
+.sc-label{font-size:12px;color:var(--gray2);margin-top:4px}
+.sc-num.teal{color:var(--teal)}
+.sc-num.amber{color:var(--kat)}
+
+/* SEARCH + ACTIONS */
+.toolbar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.search-input{flex:1;min-width:200px;padding:9px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--fb);background:var(--white)}
+.search-input:focus{outline:none;border-color:var(--teal)}
+.btn{padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:var(--fb);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-teal{background:var(--teal);color:#fff}.btn-teal:hover{background:var(--teal-l)}
+.btn-outline{background:var(--white);color:var(--ink);border:1px solid var(--border)}.btn-outline:hover{border-color:var(--teal);color:var(--teal)}
+.btn-red{background:#FEF2F2;color:#991B1B;border:1px solid #FECACA}.btn-red:hover{background:#991B1B;color:#fff}
+
+/* TABLE */
+.table-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+thead{background:var(--bg)}
+th{padding:11px 14px;font-size:11px;font-weight:600;color:var(--gray2);text-align:left;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--border)}
+td{padding:13px 14px;font-size:13px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg)}
+.status-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600}
+.sb-pending{background:#FEF9C3;color:#854D0E}
+.sb-confirmed{background:var(--teal-p);color:var(--teal)}
+.sb-attended{background:#DCFCE7;color:#166534}
+.sb-noshow{background:#FEE2E2;color:#991B1B}
+.event-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
+.et-summit{background:rgba(74,63,168,.1);color:var(--summit)}
+.et-kat{background:rgba(201,124,20,.1);color:var(--kat)}
+.et-congress{background:rgba(196,75,40,.1);color:var(--congress)}
+.action-btn{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--white);cursor:pointer;font-family:var(--fb);transition:all .2s;margin-right:4px}
+.action-btn:hover{border-color:var(--teal);color:var(--teal)}
+.action-btn.checkin{background:var(--teal);color:#fff;border-color:var(--teal)}
+.action-btn.checkin:hover{background:var(--teal-l)}
+
+/* SCAN MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:500;display:none}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:16px;padding:32px;width:420px;max-width:90vw}
+.modal-title{font-family:var(--fd);font-size:20px;font-weight:600;margin-bottom:6px}
+.modal-sub{font-size:13px;color:var(--gray);margin-bottom:24px}
+.scan-area{border:2px dashed var(--border);border-radius:12px;padding:40px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);margin-bottom:16px}
+.scan-area:hover{border-color:var(--teal);background:var(--teal-p)}
+.scan-icon{font-size:48px;margin-bottom:12px}
+.scan-label{font-size:14px;font-weight:500;color:var(--gray)}
+.scan-sub{font-size:12px;color:var(--gray2);margin-top:4px}
+.manual-input{display:flex;gap:8px;margin-bottom:16px}
+.manual-input input{flex:1;padding:9px 13px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--fb)}
+.manual-input input:focus{outline:none;border-color:var(--teal)}
+
+/* QR PREVIEW MODAL */
+.qr-modal{background:var(--white);border-radius:16px;padding:32px;width:360px;max-width:90vw;text-align:center}
+.qr-name{font-family:var(--fd);font-size:20px;font-weight:600;margin-bottom:4px}
+.qr-meta{font-size:13px;color:var(--gray);margin-bottom:20px}
+#qrcode{display:flex;justify-content:center;margin-bottom:16px}
+.qr-id{font-size:11px;color:var(--gray2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+
+/* RESULT TOAST */
+.toast{position:fixed;bottom:24px;right:24px;padding:14px 20px;border-radius:10px;font-size:14px;font-weight:600;display:none;align-items:center;gap:10px;z-index:600;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.toast.show{display:flex}
+.toast-success{background:#DCFCE7;color:#166534;border:1px solid #86EFAC}
+.toast-error{background:#FEE2E2;color:#991B1B;border:1px solid #FECACA}
+
+/* GENERATE TICKET */
+.ticket-section{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px}
+.ticket-title{font-size:15px;font-weight:600;margin-bottom:16px}
+
+@media(max-width:768px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .main{padding:20px 16px}
+  .tabs{padding:0 16px;overflow-x:auto}
+}
+
+/* LOGIN OVERLAY */
+.login-overlay{position:fixed;inset:0;background:var(--ink);display:flex;align-items:center;justify-content:center;z-index:1000}
+.login-box{background:var(--white);border-radius:20px;padding:40px;width:380px;max-width:90vw;text-align:center}
+.login-box h1{font-family:var(--fd);font-size:22px;font-weight:600;margin-bottom:6px}
+.login-box p{font-size:13px;color:var(--gray);margin-bottom:24px}
+.login-field{margin-bottom:14px;text-align:left}
+.login-field label{display:block;font-size:12px;color:var(--gray);margin-bottom:5px;font-weight:500}
+.login-field input{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--fb)}
+.login-field input:focus{outline:none;border-color:var(--teal)}
+.login-btn{width:100%;padding:12px;background:var(--teal);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--fb);margin-top:8px}
+.login-btn:hover{background:var(--teal-l)}
+.login-btn:disabled{opacity:.6;cursor:not-allowed}
+.login-error{color:#991B1B;font-size:12px;margin-top:10px;display:none}
+.app-content{display:none}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-overlay" id="login-overlay">
+  <div class="login-box">
+    <div style="font-size:36px;margin-bottom:12px">🔐</div>
+    <h1>KBIT Admin</h1>
+    <p>Check-in System · K-Beauty MEETS 2026</p>
+    <div class="login-field">
+      <label>Email</label>
+      <input type="email" id="login-email" placeholder="admin@kbitassociation.com">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="login-btn" id="login-btn" onclick="doLogin()">Sign in</button>
+    <p class="login-error" id="login-error"></p>
+  </div>
+</div>
+
+<div class="app-content" id="app-content">
+<nav class="nav">
+  <div class="nav-logo"><a href="../index.html" style="text-decoration:none">K-Beauty <em>MEETS</em></a></div>
+  <span class="nav-badge">🔐 KBIT Admin · Check-in System</span>
+</nav>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('dashboard',this)">Dashboard</button>
+  <button class="tab" onclick="showTab('scan',this)">📷 Scan Check-in</button>
+  <button class="tab" onclick="showTab('delegates',this)">Delegates</button>
+  <button class="tab" onclick="showTab('generate',this)">Generate QR Tickets</button>
+  <button class="tab" onclick="showTab('export',this)">Export Report</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="tab-dashboard" class="main">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+    <div>
+      <h1 style="font-family:var(--fd);font-size:24px;font-weight:600;margin-bottom:4px">Check-in Dashboard</h1>
+      <p style="font-size:13px;color:var(--gray)">K-Beauty MEETS 2026 · Real-time attendance tracking</p>
+    </div>
+    <div class="event-pills">
+      <span class="ep ep-all active" onclick="filterEvent('all',this)">All Events</span>
+      <span class="ep ep-summit" onclick="filterEvent('summit',this)">Summit · Oct 3</span>
+      <span class="ep ep-kat" onclick="filterEvent('kat',this)">KAT · Oct 23</span>
+      <span class="ep ep-congress" onclick="filterEvent('congress',this)">Congress · Oct 24–25</span>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="sc-num" id="stat-registered">247</div><div class="sc-label">Total registered</div></div>
+    <div class="stat-card"><div class="sc-num teal" id="stat-confirmed">189</div><div class="sc-label">Confirmed</div></div>
+    <div class="stat-card"><div class="sc-num teal" id="stat-attended">0</div><div class="sc-label">Checked in today</div></div>
+    <div class="stat-card"><div class="sc-num amber" id="stat-pending">58</div><div class="sc-label">Pending review</div></div>
+  </div>
+
+  <!-- Per-event breakdown -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px">
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px;border-top:3px solid var(--summit)">
+      <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--summit);margin-bottom:10px">KSAPS Summit · Oct 3</p>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="color:var(--gray)">Registered</span><strong>82</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="color:var(--gray)">Confirmed</span><strong style="color:var(--teal)">74</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--gray)">Capacity</span><strong>100</strong></div>
+      <div style="height:4px;background:var(--bg);border-radius:2px;margin-top:10px;overflow:hidden"><div style="height:100%;width:74%;background:var(--summit);border-radius:2px"></div></div>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px;border-top:3px solid var(--kat)">
+      <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--kat);margin-bottom:10px">KAT Vietnam · Oct 23 (TBC)</p>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="color:var(--gray)">Registered</span><strong>65</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="color:var(--gray)">Confirmed</span><strong style="color:var(--teal)">48</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--gray)">Capacity</span><strong>TBC</strong></div>
+      <div style="height:4px;background:var(--bg);border-radius:2px;margin-top:10px;overflow:hidden"><div style="height:100%;width:48%;background:var(--kat);border-radius:2px"></div></div>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px;border-top:3px solid var(--congress)">
+      <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--congress);margin-bottom:10px">KSAPS Congress · Oct 24–25</p>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="color:var(--gray)">Registered</span><strong>100</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="color:var(--gray)">Confirmed</span><strong style="color:var(--teal)">67</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--gray)">Capacity</span><strong>~1,000</strong></div>
+      <div style="height:4px;background:var(--bg);border-radius:2px;margin-top:10px;overflow:hidden"><div style="height:100%;width:10%;background:var(--congress);border-radius:2px"></div></div>
+    </div>
+  </div>
+
+  <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px">
+    <p style="font-size:14px;font-weight:600;margin-bottom:14px">Quick actions</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-teal" onclick="showTab('scan',document.querySelectorAll('.tab')[1])">📷 Start scanning check-in</button>
+      <button class="btn btn-outline" onclick="showTab('generate',document.querySelectorAll('.tab')[3])">🎫 Generate QR tickets</button>
+      <button class="btn btn-outline" onclick="showTab('export',document.querySelectorAll('.tab')[4])">📊 Export attendance report</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCAN CHECK-IN -->
+<div id="tab-scan" class="main" style="display:none">
+  <h1 style="font-family:var(--fd);font-size:24px;font-weight:600;margin-bottom:6px">QR Scan Check-in</h1>
+  <p style="font-size:13px;color:var(--gray);margin-bottom:28px">Scan delegate QR code to check them in. Use a QR scanner connected to this device, or enter the code manually.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+    <div>
+      <!-- Scan area -->
+      <div class="scan-area" onclick="simulateScan()">
+        <div class="scan-icon">📷</div>
+        <p class="scan-label">Click to simulate scan</p>
+        <p class="scan-sub">Or connect a USB QR scanner — it will auto-detect</p>
+      </div>
+
+      <!-- Manual entry -->
+      <p style="font-size:12px;color:var(--gray2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em;font-weight:500">Or enter code manually</p>
+      <div class="manual-input">
+        <input type="text" id="manual-code" placeholder="e.g. KBM-2026-S-0042" oninput="this.value=this.value.toUpperCase()">
+        <button class="btn btn-teal" onclick="checkInManual()">Check in</button>
+      </div>
+
+      <!-- Result area -->
+      <div id="scan-result" style="display:none;padding:20px;border-radius:12px;margin-top:16px">
+      </div>
+    </div>
+
+    <div>
+      <p style="font-size:13px;font-weight:600;margin-bottom:12px">Recent check-ins today</p>
+      <div id="recent-checkins" style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:13px">
+          <div><p style="font-weight:600">Dr. Nguyễn Văn A</p><p style="font-size:11px;color:var(--gray2)">KBM-2026-S-0001 · Summit</p></div>
+          <span class="status-badge sb-attended">✓ Checked in</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:13px">
+          <div><p style="font-weight:600">Dr. Trần Thị B</p><p style="font-size:11px;color:var(--gray2)">KBM-2026-S-0002 · Summit</p></div>
+          <span class="status-badge sb-attended">✓ Checked in</span>
+        </div>
+        <p style="font-size:12px;color:var(--gray2);text-align:center;margin-top:8px">0 check-ins today (demo data)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DELEGATES -->
+<div id="tab-delegates" class="main" style="display:none">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+    <h1 style="font-family:var(--fd);font-size:24px;font-weight:600">Delegate List</h1>
+    <div class="event-pills">
+      <span class="ep ep-all active" style="font-size:11px">All</span>
+      <span class="ep ep-summit" style="font-size:11px">Summit</span>
+      <span class="ep ep-kat" style="font-size:11px">KAT</span>
+      <span class="ep ep-congress" style="font-size:11px">Congress</span>
+    </div>
+  </div>
+  <div class="toolbar">
+    <input type="text" class="search-input" placeholder="Search by name, hospital, code...">
+    <select style="padding:9px 13px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--fb);background:var(--white)">
+      <option>All statuses</option>
+      <option>Pending</option>
+      <option>Confirmed</option>
+      <option>Attended</option>
+      <option>No-show</option>
+    </select>
+    <button class="btn btn-teal">🎫 Generate selected QRs</button>
+    <button class="btn btn-outline">📧 Send confirmation emails</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" style="cursor:pointer"></th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Hospital / Clinic</th>
+          <th>Event</th>
+          <th>Specialty</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="delegate-table">
+        <tr>
+          <td><input type="checkbox"></td>
+          <td style="font-size:11px;color:var(--gray2);font-weight:600">KBM-2026-S-0001</td>
+          <td><p style="font-weight:600">Dr. Nguyễn Văn A</p><p style="font-size:11px;color:var(--gray2)">nguyenvana@clinic.vn</p></td>
+          <td style="font-size:12px">Thẩm Mỹ Viện ABC<br><span style="color:var(--gray2)">Ho Chi Minh City</span></td>
+          <td><span class="event-tag et-summit">Summit</span></td>
+          <td style="font-size:12px">Aesthetic Surgery</td>
+          <td><span class="status-badge sb-confirmed">● Confirmed</span></td>
+          <td><button class="action-btn checkin" onclick="quickCheckin(this,'Dr. Nguyễn Văn A')">✓ Check in</button><button class="action-btn" onclick="showQR('KBM-2026-S-0001','Dr. Nguyễn Văn A','KSAPS Summit · Oct 3')">QR</button></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td style="font-size:11px;color:var(--gray2);font-weight:600">KBM-2026-S-0002</td>
+          <td><p style="font-weight:600">Dr. Trần Thị B</p><p style="font-size:11px;color:var(--gray2)">tranthib@hosp.vn</p></td>
+          <td style="font-size:12px">Bệnh Viện XYZ<br><span style="color:var(--gray2)">Ho Chi Minh City</span></td>
+          <td><span class="event-tag et-summit">Summit</span></td>
+          <td style="font-size:12px">Dermatology</td>
+          <td><span class="status-badge sb-pending">● Pending</span></td>
+          <td><button class="action-btn" onclick="approveDelegate(this)">✓ Approve</button><button class="action-btn" onclick="showQR('KBM-2026-S-0002','Dr. Trần Thị B','KSAPS Summit · Oct 3')">QR</button></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td style="font-size:11px;color:var(--gray2);font-weight:600">KBM-2026-C-0001</td>
+          <td><p style="font-weight:600">Dr. Lê Văn C</p><p style="font-size:11px;color:var(--gray2)">levanc@clinic.vn</p></td>
+          <td style="font-size:12px">Clinic DEF<br><span style="color:var(--gray2)">Hanoi</span></td>
+          <td><span class="event-tag et-congress">Congress</span></td>
+          <td style="font-size:12px">Plastic Surgery</td>
+          <td><span class="status-badge sb-confirmed">● Confirmed</span></td>
+          <td><button class="action-btn checkin" onclick="quickCheckin(this,'Dr. Lê Văn C')">✓ Check in</button><button class="action-btn" onclick="showQR('KBM-2026-C-0001','Dr. Lê Văn C','KSAPS Congress · Oct 24–25')">QR</button></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td style="font-size:11px;color:var(--gray2);font-weight:600">KBM-2026-K-0001</td>
+          <td><p style="font-weight:600">Dr. Phạm Thị D</p><p style="font-size:11px;color:var(--gray2)">phamthid@hosp.vn</p></td>
+          <td style="font-size:12px">Bệnh Viện GHI<br><span style="color:var(--gray2)">Ho Chi Minh City</span></td>
+          <td><span class="event-tag et-kat">KAT</span></td>
+          <td style="font-size:12px">Dermatology</td>
+          <td><span class="status-badge sb-attended">✓ Attended</span></td>
+          <td><button class="action-btn" disabled style="opacity:.4;cursor:default">Checked in</button><button class="action-btn" onclick="showQR('KBM-2026-K-0001','Dr. Phạm Thị D','KAT Vietnam 2026 · Oct 23')">QR</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--gray2);margin-top:12px;text-align:center">Showing 4 of 247 delegates (demo data)</p>
+</div>
+
+<!-- GENERATE QR TICKETS -->
+<div id="tab-generate" class="main" style="display:none">
+  <h1 style="font-family:var(--fd);font-size:24px;font-weight:600;margin-bottom:6px">Generate QR Tickets</h1>
+  <p style="font-size:13px;color:var(--gray);margin-bottom:28px">Generate individual QR code tickets for confirmed delegates. Each QR code is unique and tied to one delegate + event. Send via email or print.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+    <div>
+      <div class="ticket-section">
+        <p class="ticket-title">Generate single ticket</p>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div>
+            <label style="font-size:12px;color:var(--gray);display:block;margin-bottom:5px;font-weight:500">Delegate name</label>
+            <input type="text" id="gen-name" placeholder="Dr. Nguyen Van A" style="width:100%;padding:9px 13px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--fb)">
+          </div>
+          <div>
+            <label style="font-size:12px;color:var(--gray);display:block;margin-bottom:5px;font-weight:500">Ticket code</label>
+            <input type="text" id="gen-code" placeholder="KBM-2026-S-0042" style="width:100%;padding:9px 13px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--fb)">
+          </div>
+          <div>
+            <label style="font-size:12px;color:var(--gray);display:block;margin-bottom:5px;font-weight:500">Event</label>
+            <select id="gen-event" style="width:100%;padding:9px 13px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--fb);background:var(--white)">
+              <option value="KSAPS Summit · October 3, 2026 · Kangnam Aesthetic Hospital, HCMC">KSAPS Summit · Oct 3</option>
+              <option value="KAT Vietnam 2026 · October 23, 2026 (TBC) · Ho Chi Minh City">KAT Vietnam 2026 · Oct 23 (TBC)</option>
+              <option value="KSAPS Congress 2026 · October 24–25, 2026 · 108 Military Central Hospital, Hanoi">KSAPS Congress · Oct 24–25</option>
+            </select>
+          </div>
+          <button class="btn btn-teal" onclick="generateTicket()" style="width:100%;justify-content:center">🎫 Generate QR Ticket</button>
+        </div>
+      </div>
+
+      <div class="ticket-section">
+        <p class="ticket-title">Bulk generate</p>
+        <p style="font-size:13px;color:var(--gray);margin-bottom:14px">Generate QR tickets for all confirmed delegates of an event at once.</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button class="btn btn-outline" style="justify-content:space-between"><span>Summit · 74 confirmed</span><span>→</span></button>
+          <button class="btn btn-outline" style="justify-content:space-between"><span>KAT · 48 confirmed</span><span>→</span></button>
+          <button class="btn btn-outline" style="justify-content:space-between"><span>Congress · 67 confirmed</span><span>→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div id="ticket-preview" style="background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center">
+      <p style="font-size:12px;color:var(--gray2);margin-bottom:20px;text-transform:uppercase;letter-spacing:.1em">Ticket preview</p>
+      <div style="border:2px solid var(--border);border-radius:12px;padding:28px;margin-bottom:16px;background:var(--bg)">
+        <p style="font-family:var(--fd);font-size:18px;font-weight:600;margin-bottom:4px" id="preview-name">—</p>
+        <p style="font-size:12px;color:var(--gray);margin-bottom:20px" id="preview-event">Select event above</p>
+        <div id="qrcode-preview" style="display:flex;justify-content:center;margin-bottom:16px">
+          <div style="width:160px;height:160px;background:var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--gray2);font-size:12px">QR will appear here</div>
+        </div>
+        <p style="font-size:11px;color:var(--gray2);letter-spacing:.1em;text-transform:uppercase" id="preview-code">—</p>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center">
+        <button class="btn btn-teal" id="btn-download" onclick="downloadTicket()" style="display:none">⬇ Download</button>
+        <button class="btn btn-outline" id="btn-print" onclick="window.print()" style="display:none">🖨 Print</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORT -->
+<div id="tab-export" class="main" style="display:none">
+  <h1 style="font-family:var(--fd);font-size:24px;font-weight:600;margin-bottom:6px">Export Reports</h1>
+  <p style="font-size:13px;color:var(--gray);margin-bottom:28px">Export attendance and registration data for KBIT records, KHIDI reporting, and CME certificate issuance.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px">
+      <div style="font-size:28px;margin-bottom:12px">📊</div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:6px">Attendance Report</p>
+      <p style="font-size:12px;color:var(--gray);margin-bottom:16px;line-height:1.6">Full list of delegates who checked in — name, hospital, specialty, event, check-in time.</p>
+      <select style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--fb);background:var(--white);margin-bottom:10px">
+        <option>All events</option>
+        <option>KSAPS Summit</option>
+        <option>KAT Vietnam</option>
+        <option>KSAPS Congress</option>
+      </select>
+      <button class="btn btn-teal" style="width:100%;justify-content:center" onclick="exportCSV('all')">Export CSV</button>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px">
+      <div style="font-size:28px;margin-bottom:12px">🎓</div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:6px">CME Certificate List</p>
+      <p style="font-size:12px;color:var(--gray);margin-bottom:16px;line-height:1.6">List of delegates eligible for CME certificate — attended only. For KSAPS & KBIT certificate issuance.</p>
+      <select style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--fb);background:var(--white);margin-bottom:10px">
+        <option>All events</option>
+        <option>KSAPS Summit</option>
+        <option>KAT Vietnam</option>
+        <option>KSAPS Congress Day 1</option>
+        <option>KSAPS Congress Day 2</option>
+      </select>
+      <button class="btn btn-teal" style="width:100%;justify-content:center" onclick="exportCSV('attended')">Export CME List</button>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px">
+      <div style="font-size:28px;margin-bottom:12px">⚠️</div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:6px">No-show Report</p>
+      <p style="font-size:12px;color:var(--gray);margin-bottom:16px;line-height:1.6">Delegates who were confirmed but did not check in. For KBIT priority tracking at future events.</p>
+      <select style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--fb);background:var(--white);margin-bottom:10px">
+        <option>All events</option>
+        <option>KSAPS Summit</option>
+        <option>KAT Vietnam</option>
+        <option>KSAPS Congress</option>
+      </select>
+      <button class="btn btn-red" style="width:100%;justify-content:center" onclick="exportCSV('noshow')">Export No-show List</button>
+    </div>
+  </div>
+
+  <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px">
+    <p style="font-size:14px;font-weight:600;margin-bottom:12px">KHIDI Report Package</p>
+    <p style="font-size:13px;color:var(--gray);margin-bottom:16px">Export complete post-event report package for KHIDI submission — attendance statistics, delegate breakdown by specialty, event summary, and CME totals.</p>
+    <button class="btn btn-teal" onclick="exportCSV('all')">📦 Generate KHIDI Report Package</button>
+  </div>
+</div>
+
+<!-- QR MODAL -->
+<div class="modal-overlay" id="qr-modal-overlay" onclick="closeQRModal(event)">
+  <div class="qr-modal" onclick="event.stopPropagation()">
+    <p class="qr-name" id="modal-name">Dr. Name</p>
+    <p class="qr-meta" id="modal-event">Event · Date · Venue</p>
+    <div id="qrcode"></div>
+    <p class="qr-id" id="modal-code">CODE</p>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <button class="btn btn-teal" onclick="downloadQR()">⬇ Download QR</button>
+      <button class="btn btn-outline" onclick="closeQRModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span id="toast-icon">✓</span>
+  <span id="toast-msg"></span>
+</div>
+
+</div><!-- /app-content -->
+
+<script src="../js/supabase-config.js"></script>
+<script>
+let allDelegates = [];
+let currentFilter = 'all';
+
+// ── Auth ──
+async function doLogin() {
+  const btn = document.getElementById('login-btn');
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  if (!email || !pass) { showLoginError('Please enter email and password'); return; }
+  btn.disabled = true; btn.textContent = 'Signing in...';
+  const { error } = await supabase.auth.signInWithPassword({ email, password: pass });
+  if (error) { showLoginError(error.message); btn.disabled = false; btn.textContent = 'Sign in'; return; }
+  showApp();
+}
+
+function showLoginError(msg) {
+  const el = document.getElementById('login-error');
+  el.textContent = msg; el.style.display = 'block';
+}
+
+async function showApp() {
+  document.getElementById('login-overlay').style.display = 'none';
+  document.getElementById('app-content').style.display = 'block';
+  await loadDashboard();
+  await loadDelegates();
+  subscribeRealtime();
+}
+
+// Check existing session on load
+supabase.auth.getSession().then(({ data: { session } }) => {
+  if (session) showApp();
+});
+
+// ── Dashboard ──
+async function loadDashboard() {
+  const { data } = await supabase.from('registrations').select('event, status');
+  if (!data) return;
+  const stats = { total: data.length, confirmed: 0, attended: 0, pending: 0 };
+  const byEvent = { summit: { reg: 0, conf: 0 }, kat: { reg: 0, conf: 0 }, congress: { reg: 0, conf: 0 } };
+  data.forEach(r => {
+    if (r.status === 'confirmed') stats.confirmed++;
+    if (r.status === 'attended') { stats.attended++; stats.confirmed++; }
+    if (r.status === 'pending') stats.pending++;
+    if (byEvent[r.event]) {
+      byEvent[r.event].reg++;
+      if (r.status === 'confirmed' || r.status === 'attended') byEvent[r.event].conf++;
+    }
+  });
+  document.getElementById('stat-registered').textContent = stats.total;
+  document.getElementById('stat-confirmed').textContent = stats.confirmed;
+  document.getElementById('stat-attended').textContent = stats.attended;
+  document.getElementById('stat-pending').textContent = stats.pending;
+}
+
+// ── Delegates ──
+async function loadDelegates() {
+  const { data, error } = await supabase
+    .from('registrations')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) { showToast('Failed to load delegates', 'error'); return; }
+  allDelegates = data || [];
+  renderDelegates();
+}
+
+function renderDelegates(filter) {
+  filter = filter || currentFilter;
+  currentFilter = filter;
+  const tbody = document.getElementById('delegate-table');
+  const filtered = filter === 'all' ? allDelegates : allDelegates.filter(d => d.event === filter);
+  if (filtered.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--gray2);padding:40px">No delegates found</td></tr>';
+    return;
+  }
+  tbody.innerHTML = filtered.map(d => {
+    const statusClass = { pending: 'sb-pending', confirmed: 'sb-confirmed', attended: 'sb-attended', noshow: 'sb-noshow', cancelled: 'sb-noshow' }[d.status] || 'sb-pending';
+    const statusLabel = { pending: '● Pending', confirmed: '● Confirmed', attended: '✓ Attended', noshow: '✗ No-show', cancelled: '✗ Cancelled' }[d.status] || d.status;
+    const eventClass = { summit: 'et-summit', congress: 'et-congress', kat: 'et-kat' }[d.event] || '';
+    const eventLabel = { summit: 'Summit', congress: 'Congress', kat: 'KAT' }[d.event] || d.event;
+    const actions = d.status === 'pending'
+      ? `<button class="action-btn" onclick="approveDelegate('${d.id}')">✓ Approve</button>`
+      : d.status === 'confirmed'
+      ? `<button class="action-btn checkin" onclick="quickCheckin('${d.id}')">✓ Check in</button>`
+      : `<button class="action-btn" disabled style="opacity:.4">Done</button>`;
+    return `<tr>
+      <td><input type="checkbox" data-id="${d.id}"></td>
+      <td style="font-size:11px;color:var(--gray2);font-weight:600">${d.code || '—'}</td>
+      <td><p style="font-weight:600">${escHtml(d.full_name)}</p><p style="font-size:11px;color:var(--gray2)">${escHtml(d.email)}</p></td>
+      <td style="font-size:12px">${escHtml(d.hospital)}<br><span style="color:var(--gray2)">${escHtml(d.city)}</span></td>
+      <td><span class="event-tag ${eventClass}">${eventLabel}</span></td>
+      <td style="font-size:12px">${escHtml(d.specialty)}</td>
+      <td><span class="status-badge ${statusClass}">${statusLabel}</span></td>
+      <td>${actions}<button class="action-btn" onclick="showQR('${d.code}','${escAttr(d.full_name)}','${eventLabel}')">QR</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function escHtml(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+function escAttr(s) { return (s || '').replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+
+// ── Actions ──
+async function approveDelegate(id) {
+  const { error } = await supabase.from('registrations').update({ status: 'confirmed' }).eq('id', id);
+  if (error) { showToast('Failed to approve', 'error'); return; }
+  const d = allDelegates.find(r => r.id === id);
+  if (d) d.status = 'confirmed';
+  renderDelegates();
+  showToast('Delegate approved', 'success');
+}
+
+async function quickCheckin(id) {
+  const { error } = await supabase.from('registrations').update({ status: 'attended', checked_in_at: new Date().toISOString() }).eq('id', id);
+  if (error) { showToast('Check-in failed', 'error'); return; }
+  const d = allDelegates.find(r => r.id === id);
+  if (d) { d.status = 'attended'; d.checked_in_at = new Date().toISOString(); }
+  renderDelegates();
+  addRecentCheckin(d);
+  loadDashboard();
+  showToast((d ? d.full_name : 'Delegate') + ' checked in', 'success');
+}
+
+function addRecentCheckin(d) {
+  if (!d) return;
+  const container = document.getElementById('recent-checkins');
+  const html = `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:13px">
+    <div><p style="font-weight:600">${escHtml(d.full_name)}</p><p style="font-size:11px;color:var(--gray2)">${d.code} · ${d.event}</p></div>
+    <span class="status-badge sb-attended">✓ Checked in</span>
+  </div>`;
+  container.insertAdjacentHTML('afterbegin', html);
+}
+
+// ── Scan check-in ──
+async function checkInManual() {
+  const code = document.getElementById('manual-code').value.trim().toUpperCase();
+  if (!code) return;
+  await processCheckin(code);
+  document.getElementById('manual-code').value = '';
+}
+
+function simulateScan() {
+  const code = prompt('Enter or scan QR code:');
+  if (code) processCheckin(code.toUpperCase());
+}
+
+async function processCheckin(code) {
+  const result = document.getElementById('scan-result');
+  const { data, error } = await supabase.from('registrations').select('*').eq('code', code).single();
+
+  result.style.display = 'block';
+  if (error || !data) {
+    result.style.background = '#FEE2E2';
+    result.style.border = '1px solid #FECACA';
+    result.innerHTML = `<p style="font-size:14px;font-weight:600;color:#991B1B;margin-bottom:4px">Code not found</p><p style="font-size:13px;color:#991B1B">Code: ${escHtml(code)}</p>`;
+    showToast('Invalid code', 'error');
+    return;
+  }
+  if (data.status === 'attended') {
+    result.style.background = '#FEF9C3';
+    result.style.border = '1px solid #FDE68A';
+    result.innerHTML = `<p style="font-size:14px;font-weight:600;color:#854D0E;margin-bottom:4px">Already checked in</p><p style="font-size:13px;color:#854D0E">${escHtml(data.full_name)} · ${data.code}</p>`;
+    showToast('Already checked in', 'error');
+    return;
+  }
+
+  await supabase.from('registrations').update({ status: 'attended', checked_in_at: new Date().toISOString() }).eq('id', data.id);
+  result.style.background = '#DCFCE7';
+  result.style.border = '1px solid #86EFAC';
+  result.innerHTML = `<p style="font-size:14px;font-weight:600;color:#166534;margin-bottom:4px">Check-in successful</p><p style="font-size:13px;color:#166534">${escHtml(data.full_name)}<br>Code: ${data.code} · ${data.event}</p>`;
+  showToast('Checked in: ' + data.full_name, 'success');
+  addRecentCheckin(data);
+  loadDashboard();
+  loadDelegates();
+}
+
+// ── Search ──
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.querySelector('.search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      const filtered = allDelegates.filter(d =>
+        (d.full_name || '').toLowerCase().includes(q) ||
+        (d.hospital || '').toLowerCase().includes(q) ||
+        (d.code || '').toLowerCase().includes(q) ||
+        (d.email || '').toLowerCase().includes(q)
+      );
+      const tbody = document.getElementById('delegate-table');
+      if (q && filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--gray2);padding:40px">No results</td></tr>';
+      } else if (q) {
+        allDelegates = filtered;
+        renderDelegates();
+        allDelegates = filtered; // restore after render
+      } else {
+        loadDelegates();
+      }
+    });
+  }
+});
+
+// ── Realtime ──
+function subscribeRealtime() {
+  supabase.channel('registrations-changes')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'registrations' }, () => {
+      loadDashboard();
+      loadDelegates();
+    })
+    .subscribe();
+}
+
+// ── Tab switching ──
+function showTab(id, btn) {
+  document.querySelectorAll('[id^="tab-"]').forEach(t => t.style.display = 'none');
+  document.getElementById('tab-' + id).style.display = 'block';
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+// ── QR Code ──
+function showQR(code, name, event) {
+  document.getElementById('modal-name').textContent = name;
+  document.getElementById('modal-event').textContent = event;
+  document.getElementById('modal-code').textContent = code;
+  const container = document.getElementById('qrcode');
+  container.innerHTML = '';
+  new QRCode(container, {
+    text: JSON.stringify({ code, name, event }),
+    width: 200, height: 200,
+    colorDark: '#0F1512', colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  document.getElementById('qr-modal-overlay').classList.add('open');
+}
+
+function closeQRModal(e) {
+  if (!e || e.target === document.getElementById('qr-modal-overlay'))
+    document.getElementById('qr-modal-overlay').classList.remove('open');
+}
+
+function downloadQR() {
+  const canvas = document.querySelector('#qrcode canvas');
+  if (!canvas) return;
+  const a = document.createElement('a');
+  a.href = canvas.toDataURL('image/png');
+  a.download = document.getElementById('modal-code').textContent + '.png';
+  a.click();
+  showToast('QR downloaded', 'success');
+}
+
+function generateTicket() {
+  const name = document.getElementById('gen-name').value.trim() || 'Dr. Name';
+  const code = document.getElementById('gen-code').value.trim() || 'KBM-2026-X-0000';
+  const event = document.getElementById('gen-event').value;
+  document.getElementById('preview-name').textContent = name;
+  document.getElementById('preview-event').textContent = event.split('·')[0].trim();
+  document.getElementById('preview-code').textContent = code;
+  const container = document.getElementById('qrcode-preview');
+  container.innerHTML = '';
+  new QRCode(container, { text: JSON.stringify({ code, name, event }), width: 160, height: 160, colorDark: '#0F1512', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.H });
+  document.getElementById('btn-download').style.display = 'inline-flex';
+  document.getElementById('btn-print').style.display = 'inline-flex';
+  showToast('QR generated for ' + name, 'success');
+}
+
+function downloadTicket() {
+  const canvas = document.querySelector('#qrcode-preview canvas');
+  if (!canvas) return;
+  const a = document.createElement('a'); a.href = canvas.toDataURL();
+  a.download = (document.getElementById('preview-code').textContent || 'ticket') + '.png';
+  a.click();
+}
+
+function filterEvent(type, el) {
+  document.querySelectorAll('.ep').forEach(e => e.classList.remove('active'));
+  el.classList.add('active');
+  renderDelegates(type);
+}
+
+// ── Export ──
+async function exportCSV(type) {
+  const { data } = await supabase.from('registrations').select('*').order('created_at');
+  if (!data || !data.length) { showToast('No data to export', 'error'); return; }
+  let filtered = data;
+  if (type === 'attended') filtered = data.filter(d => d.status === 'attended');
+  if (type === 'noshow') filtered = data.filter(d => d.status === 'confirmed');
+  const headers = ['code','full_name','email','phone','hospital','city','specialty','event','status','checked_in_at','created_at'];
+  const csv = [headers.join(','), ...filtered.map(r => headers.map(h => '"' + (r[h] || '') + '"').join(','))].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'kbmeets-' + type + '-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+  showToast('Exported ' + filtered.length + ' records', 'success');
+}
+
+// ── Toast ──
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  const icon = document.getElementById('toast-icon');
+  t.className = 'toast show toast-' + type;
+  icon.textContent = type === 'success' ? '✓' : '✗';
+  document.getElementById('toast-msg').textContent = msg;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>

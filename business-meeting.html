@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Meeting Registration — K-Beauty MEETS 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0B6B54;--teal-l:#1A8F70;--teal-p:#E3F4EE;
+  --amber:#C97C14;--amber-p:#FDF3E0;
+  --coral:#C44B28;--coral-p:#FCF0EB;
+  --purple:#4A3FA8;--purple-p:#EEEDF8;
+  --gold:#B8942A;--gold-p:#FBF4E0;
+  --ink:#0F1512;--ink2:#1E2924;
+  --gray:#6B7B74;--gray2:#9BA8A2;--gray3:#CBD4CF;
+  --border:#E2EAE6;--bg:#F7FAF8;
+  --fd:'Playfair Display',Georgia,serif;--fb:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--fb);color:var(--ink);background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(15,21,18,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07)}
+.nav-logo{font-family:var(--fd);font-size:20px;font-weight:600;color:#fff}.nav-logo em{color:#5DCBA8;font-style:italic}
+.nav-links{display:flex;gap:28px;font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.nav-links a{color:rgba(255,255,255,.5);transition:color .2s}.nav-links a:hover{color:#fff}
+.nav-links a.active{color:#F0C060}
+.nav-cta{font-size:12px;font-weight:600;padding:8px 18px;background:var(--gold);color:#fff;border-radius:6px;letter-spacing:.04em;text-transform:uppercase}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#0A0C08 0%,#141A10 40%,#1A2418 100%);padding:130px 40px 72px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(184,148,42,0.15),transparent 60%);pointer-events:none}
+.hero-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#F0C060;margin-bottom:14px}
+.hero-title{font-family:var(--fd);font-size:clamp(36px,5vw,60px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:14px;letter-spacing:-.02em}
+.hero-title em{color:#F0C060;font-style:italic}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:32px;font-weight:300;max-width:620px}
+.hero-events{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.he{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);font-size:13px;color:rgba(255,255,255,.7)}
+.he-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.hed-summit{background:#AFA9EC}
+.hed-congress{background:#F0A090}
+.hed-kat{background:#F0C060}
+.hero-cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--gold);color:#fff;border-radius:8px;font-size:14px;font-weight:600;transition:all .2s}
+.btn-gold:hover{background:#9A7A20;transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:transparent;color:rgba(255,255,255,.65);border-radius:8px;font-size:14px;font-weight:500;border:1px solid rgba(255,255,255,.18);transition:all .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5);color:#fff}
+
+/* WHAT IS BIZ MEETING */
+.what-s{background:var(--bg);padding:80px 40px}
+.si{max-width:1160px;margin:0 auto}
+.eyb{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.h2{font-family:var(--fd);font-size:clamp(26px,3.2vw,40px);font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:14px}
+.h2 em{color:var(--gold);font-style:italic}
+.lead{font-size:15px;color:var(--gray);line-height:1.85;font-weight:300;max-width:600px;margin-bottom:48px}
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.wcard{background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px;transition:all .25s;position:relative;overflow:hidden}
+.wcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.wc-gold::before{background:linear-gradient(90deg,var(--gold),#E0B840)}
+.wc-teal::before{background:linear-gradient(90deg,var(--teal),var(--teal-l))}
+.wc-purple::before{background:linear-gradient(90deg,var(--purple),#7B70D0)}
+.wcard:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
+.wcard-icon{font-size:28px;margin-bottom:14px}
+.wcard-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.wcard-desc{font-size:13px;color:var(--gray);line-height:1.75}
+
+/* EVENTS BIZ */
+.events-s{background:#fff;padding:80px 40px}
+.event-biz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.eb-card{border-radius:16px;overflow:hidden;border:1px solid var(--border);transition:all .25s}
+.eb-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
+.eb-top{padding:28px 24px 20px;position:relative;overflow:hidden}
+.eb-summit .eb-top{background:linear-gradient(135deg,#1E1548,#2D2266)}
+.eb-congress .eb-top{background:linear-gradient(135deg,#2A0D06,#4A1808)}
+.eb-kat .eb-top{background:linear-gradient(135deg,#3A2200,#5E3800)}
+.eb-glow{position:absolute;bottom:-40px;right:-30px;width:120px;height:120px;border-radius:50%;opacity:.25}
+.eb-summit .eb-glow{background:radial-gradient(circle,#7B70E0,transparent)}
+.eb-congress .eb-glow{background:radial-gradient(circle,#E05030,transparent)}
+.eb-kat .eb-glow{background:radial-gradient(circle,#E09020,transparent)}
+.eb-badge{display:inline-block;font-size:10px;padding:3px 10px;border-radius:20px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+.eb-summit .eb-badge{background:rgba(123,112,224,.2);color:#B0A8F8;border:1px solid rgba(123,112,224,.3)}
+.eb-congress .eb-badge{background:rgba(224,80,48,.2);color:#F0A090;border:1px solid rgba(224,80,48,.3)}
+.eb-kat .eb-badge{background:rgba(224,144,32,.2);color:#F0C070;border:1px solid rgba(224,144,32,.3)}
+.eb-name{font-family:var(--fd);font-size:20px;font-weight:600;color:#fff;margin-bottom:4px}
+.eb-date{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:4px}
+.eb-venue{font-size:12px;color:rgba(255,255,255,.35);margin-bottom:16px}
+.eb-slots{display:flex;flex-direction:column;gap:6px}
+.eb-slot{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.6)}
+.eb-slot-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4);flex-shrink:0}
+.eb-body{padding:18px 24px 20px;background:var(--bg)}
+.eb-avail-label{font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.slot-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.slot-row:last-child{border:none;padding-bottom:0}
+.slot-name{color:var(--ink);font-weight:500}
+.slot-avail{font-size:11px;font-weight:600}
+.sa-open{color:var(--teal)}
+.sa-limited{color:var(--amber)}
+.sa-full{color:var(--coral)}
+
+/* COMPANIES */
+.companies-s{background:var(--bg);padding:80px 40px}
+.co-intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:48px}
+.co-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.co-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;transition:all .2s;cursor:pointer}
+.co-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.co-card.selected{border:2px solid var(--gold);background:var(--gold-p)}
+.co-name{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.co-product{font-size:11px;color:var(--gray2);line-height:1.4;margin-bottom:8px}
+.co-type{display:inline-block;font-size:9px;padding:2px 7px;border-radius:20px;font-weight:600}
+.ct-hifu{background:var(--purple-p);color:var(--purple)}
+.ct-rf{background:var(--teal-p);color:var(--teal)}
+.ct-thread{background:var(--coral-p);color:var(--coral)}
+.ct-filler{background:var(--purple-p);color:var(--purple)}
+.ct-bio{background:#EDF7EE;color:#2A7A30}
+.ct-cool{background:#EDF5FC;color:#1A70A8}
+.ct-tbd{background:var(--bg);color:var(--gray2)}
+.co-check{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin-top:8px;transition:all .2s;font-size:10px;color:transparent}
+.co-card.selected .co-check{background:var(--gold);border-color:var(--gold);color:#fff}
+
+/* REGISTER FORM */
+.form-s{background:#fff;padding:80px 40px}
+.form-layout{display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:start}
+.form-main{}
+.steps{display:flex;margin-bottom:32px}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative}
+.step::after{content:'';position:absolute;top:15px;left:50%;right:-50%;height:1px;background:var(--border)}
+.step:last-child::after{display:none}
+.step-dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;z-index:1;background:#fff}
+.s-done{background:var(--teal);color:#fff;border:2px solid var(--teal)}
+.s-active{background:var(--gold-p);color:#7A5810;border:2px solid var(--gold)}
+.s-todo{background:var(--bg);color:var(--gray2);border:2px solid var(--border)}
+.step-label{font-size:11px;color:var(--gray2);text-align:center}
+.step-label.active{color:#7A5810;font-weight:600}
+
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:18px}
+.card-title{font-size:15px;font-weight:600;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.card-sub{font-size:12px;color:var(--gray2);font-weight:400;margin-left:8px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;color:var(--gray);margin-bottom:6px;font-weight:500}
+.req{color:#E24B4A}
+.field input,.field select,.field textarea{width:100%;padding:9px 13px;border:1px solid var(--gray3);border-radius:8px;font-size:14px;background:#fff;color:var(--ink);font-family:var(--fb);transition:border-color .15s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.field input::placeholder,.field textarea::placeholder{color:var(--gray3)}
+.field textarea{resize:vertical;min-height:80px;line-height:1.6}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* Event checkboxes */
+.event-check-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.event-check-opt{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .15s}
+.event-check-opt:hover{border-color:var(--gold)}
+.event-check-opt.sel{border:2px solid var(--gold);background:var(--gold-p)}
+.eco-checkbox{width:18px;height:18px;border-radius:4px;border:2px solid var(--gray3);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .15s}
+.event-check-opt.sel .eco-checkbox{background:var(--gold);border-color:var(--gold);color:#fff}
+.eco-info{}
+.eco-name{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.eco-meta{font-size:12px;color:var(--gray2)}
+.eco-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;margin-top:4px;font-weight:500}
+.eco-b-summit{background:var(--purple-p);color:var(--purple)}
+.eco-b-congress{background:var(--coral-p);color:var(--coral)}
+.eco-b-kat{background:var(--amber-p);color:var(--amber)}
+
+/* Meeting types */
+.meeting-types{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mt-opt{border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:all .15s}
+.mt-opt:hover{border-color:var(--gold)}
+.mt-opt.sel{border:2px solid var(--gold);background:var(--gold-p)}
+.mt-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.mt-desc{font-size:11px;color:var(--gray);line-height:1.5}
+
+.policy-box{background:var(--gold-p);border-radius:10px;padding:16px;margin-bottom:18px;border-left:3px solid var(--gold)}
+.policy-title{font-size:13px;font-weight:600;color:#7A5810;margin-bottom:8px}
+.policy-item{display:flex;gap:8px;font-size:12px;color:#9A7020;margin-bottom:6px;line-height:1.6}
+.policy-item:last-child{margin-bottom:0}
+.p-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);margin-top:6px;flex-shrink:0}
+
+.agree{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--gray);margin-bottom:18px;line-height:1.6}
+.agree input{width:16px;height:16px;margin-top:2px;cursor:pointer;accent-color:var(--gold);flex-shrink:0}
+.submit-btn{width:100%;padding:14px;background:var(--gold);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--fb);transition:background .15s}
+.submit-btn:hover{background:#9A7820}
+
+/* SIDEBAR */
+.side-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:14px}
+.side-title{font-size:14px;font-weight:600;margin-bottom:14px}
+.info-row{display:flex;gap:12px;margin-bottom:10px}
+.info-row:last-child{margin-bottom:0}
+.info-icon{width:32px;height:32px;border-radius:8px;background:var(--gold-p);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.info-label{font-size:11px;color:var(--gray2);margin-bottom:2px}
+.info-val{font-size:13px;font-weight:600}
+.info-sub{font-size:11px;color:var(--gray2)}
+.kbit-badge{display:flex;align-items:center;gap:10px;background:var(--teal-p);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+.kbit-icon{width:32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.kbit-title{font-size:13px;font-weight:600;color:#085041}
+.kbit-sub{font-size:11px;color:var(--teal)}
+.contact-text{font-size:12px;color:var(--gray);line-height:1.8}
+.contact-text a{color:var(--teal)}
+
+footer{background:var(--ink);padding:40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.ft-logo{font-family:var(--fd);font-size:18px;font-weight:600;color:#fff}.ft-logo em{color:#5DCBA8;font-style:italic}
+.ft-links{display:flex;gap:24px;font-size:13px;color:rgba(255,255,255,.4)}.ft-links a:hover{color:#fff}
+.ft-contact{font-size:12px;color:rgba(255,255,255,.3)}.ft-contact a{color:#5DCBA8}
+
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.fade-up.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  .what-grid,.event-biz-grid,.co-grid{grid-template-columns:1fr 1fr}
+  .form-layout{grid-template-columns:1fr}
+  .co-intro{grid-template-columns:1fr}
+  .hero,.what-s,.events-s,.companies-s,.form-s{padding-left:20px;padding-right:20px}
+  .meeting-types,.row2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
+  <div class="nav-links">
+    <a href="summit.html">Summit</a>
+    <a href="congress.html">Congress</a>
+    <a href="kat.html">KAT</a>
+    <a href="speakers.html">Speakers</a>
+    <a class="active">Business</a>
+  </div>
+  <a href="#register" class="nav-cta">Register Meeting</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-inner">
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase">Supported by</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KHIDI</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">Korea Ministry of Health &amp; Welfare</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase">Organized by</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KSAPS</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">SNUBH</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">VSAPS</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KBIT</span>
+    </div>
+  </div>
+    <p class="hero-eyebrow">K-Beauty MEETS 2026 · Business Program</p>
+    <h1 class="hero-title">Meet the decision-makers.<br><em>Close the deal.</em></h1>
+    <p class="hero-sub">K-Beauty MEETS 2026 brings 1,000+ Vietnamese aesthetic physicians and clinic decision-makers to three events across Ho Chi Minh City and Hanoi. Register your company for a structured 1:1 Business Meeting — KBIT will facilitate the connection.</p>
+    <div class="hero-events">
+      <div class="he"><div class="he-dot hed-summit"></div>KSAPS Summit · Oct 3 · HCMC</div>
+      <div class="he"><div class="he-dot hed-kat"></div>KAT Vietnam · Oct 23 · HCMC</div>
+      <div class="he"><div class="he-dot hed-congress"></div>KSAPS Congress · Oct 24–25 · Hanoi</div>
+    </div>
+    <div class="hero-cta-row">
+      <a href="#register" class="btn-gold">Register for Business Meeting →</a>
+      <a href="#events" class="btn-ghost">View event formats ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS BUSINESS MEETING -->
+<section class="what-s">
+  <div class="si">
+    <p class="eyb fade-up">Business Meeting Program</p>
+    <h2 class="h2 fade-up">Structured access to<br>Vietnam's <em>top aesthetic clinics</em></h2>
+    <p class="lead fade-up">The Business Meeting Program gives Korean medical device companies direct, scheduled 1:1 sessions with Vietnamese hospital directors, clinic owners, and purchasing managers attending K-Beauty MEETS events. KBIT facilitates the matching and scheduling.</p>
+    <div class="what-grid">
+      <div class="wcard wc-gold fade-up">
+        <div class="wcard-icon">🤝</div>
+        <h3 class="wcard-title">Facilitated 1:1 Matching</h3>
+        <p class="wcard-desc">KBIT reviews your company profile and meeting objectives, then matches you with pre-qualified Vietnamese buyers — hospital directors, clinic owners, and medical equipment purchasing managers actively attending the event.</p>
+      </div>
+      <div class="wcard wc-teal fade-up d1">
+        <div class="wcard-icon">📋</div>
+        <h3 class="wcard-title">Scheduled & Pre-confirmed</h3>
+        <p class="wcard-desc">30-minute dedicated sessions during lunch breaks and coffee breaks at each event. All meetings pre-confirmed by both parties. Dedicated interpreter available. On-site LOI signing facilitated for serious purchase intent.</p>
+      </div>
+      <div class="wcard wc-purple fade-up d2">
+        <div class="wcard-icon">🌏</div>
+        <h3 class="wcard-title">3 Events · 2 Cities</h3>
+        <p class="wcard-desc">Register for one, two, or all three events. Each event reaches a different segment of Vietnam's aesthetic medical market — HCMC specialists at Summit and KAT, Hanoi and nationwide delegates at Congress.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-s" id="events">
+  <div class="si">
+    <p class="eyb fade-up">Meeting slots by event</p>
+    <h2 class="h2 fade-up">Choose your <em>event(s)</em></h2>
+    <p style="font-size:15px;color:var(--gray);line-height:1.8;max-width:560px;margin-bottom:0;font-weight:300" class="fade-up">Each event has a different scale and audience. Meeting slots are limited — early registration is recommended.</p>
+    <div class="event-biz-grid">
+
+      <div class="eb-card eb-summit fade-up">
+        <div class="eb-top">
+          <div class="eb-glow"></div>
+          <span class="eb-badge">HCMC · Specialist</span>
+          <h3 class="eb-name">KSAPS Summit</h3>
+          <p class="eb-date">October 3, 2026 · 1 day</p>
+          <p class="eb-venue">📍 Kangnam Aesthetic Hospital, Ho Chi Minh City</p>
+          <div class="eb-slots">
+            <div class="eb-slot"><div class="eb-slot-dot"></div>100 specialist doctors (plastic surgery, dermatology)</div>
+            <div class="eb-slot"><div class="eb-slot-dot"></div>Press conference + Lecture + Live Device Demo</div>
+            <div class="eb-slot"><div class="eb-slot-dot"></div>High-value, decision-maker focused audience</div>
+          </div>
+        </div>
+        <div class="eb-body">
+          <p class="eb-avail-label">Meeting slots available</p>
+          <div class="slot-row"><span class="slot-name">1:1 Business Meeting (30 min)</span><span class="slot-avail sa-limited">6 slots left</span></div>
+          <div class="slot-row"><span class="slot-name">LOI Facilitation</span><span class="slot-avail sa-open">Available</span></div>
+          <div class="slot-row"><span class="slot-name">Device Demo Slot</span><span class="slot-avail sa-limited">3 slots left</span></div>
+        </div>
+      </div>
+
+      <div class="eb-card eb-kat fade-up d1">
+        <div class="eb-top">
+          <div class="eb-glow"></div>
+          <span class="eb-badge">HCMC · Hands-on</span>
+          <h3 class="eb-name">KAT Vietnam 2026</h3>
+          <p class="eb-date">October 23, 2026 (TBC)</p>
+          <p class="eb-venue">📍 Ho Chi Minh City</p>
+          <div class="eb-slots">
+            <div class="eb-slot"><div class="eb-slot-dot"></div>Aesthetic doctors seeking hands-on training</div>
+            <div class="eb-slot"><div class="eb-slot-dot"></div>Live Device Demo · Botox &amp; Filler Live</div>
+            <div class="eb-slot"><div class="eb-slot-dot"></div>Direct device experience in clinical setting</div>
+          </div>
+        </div>
+        <div class="eb-body">
+          <p class="eb-avail-label">Meeting slots available</p>
+          <div class="slot-row"><span class="slot-name">1:1 Business Meeting (30 min)</span><span class="slot-avail sa-open">Available</span></div>
+          <div class="slot-row"><span class="slot-name">LOI Facilitation</span><span class="slot-avail sa-open">Available</span></div>
+          <div class="slot-row"><span class="slot-name">Device Demo Slot</span><span class="slot-avail sa-open">Available</span></div>
+        </div>
+      </div>
+
+      <div class="eb-card eb-congress fade-up d2">
+        <div class="eb-top">
+          <div class="eb-glow"></div>
+          <span class="eb-badge">Hanoi · Flagship</span>
+          <h3 class="eb-name">KSAPS Congress</h3>
+          <p class="eb-date">October 24–25, 2026 · 2 days</p>
+          <p class="eb-venue">📍 108 Military Central Hospital, Hanoi</p>
+          <div class="eb-slots">
+            <div class="eb-slot"><div class="eb-slot-dot"></div>~1,000 delegates nationwide + international</div>
+            <div class="eb-slot"><div class="eb-slot-dot"></div>Exhibition booths + Industry Symposia</div>
+            <div class="eb-slot"><div class="eb-slot-dot"></div>VIP Gala Dinner · Maximum B2B exposure</div>
+          </div>
+        </div>
+        <div class="eb-body">
+          <p class="eb-avail-label">Meeting slots available</p>
+          <div class="slot-row"><span class="slot-name">1:1 Business Meeting (30 min)</span><span class="slot-avail sa-open">Available</span></div>
+          <div class="slot-row"><span class="slot-name">Exhibition Booth</span><span class="slot-avail sa-limited">4 booths left</span></div>
+          <div class="slot-row"><span class="slot-name">Industry Symposium (30 min)</span><span class="slot-avail sa-limited">3 slots left</span></div>
+          <div class="slot-row"><span class="slot-name">Gala Dinner Table</span><span class="slot-avail sa-limited">Limited</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMPANIES LIST -->
+<section class="companies-s">
+  <div class="si">
+    <div class="co-intro">
+      <div class="fade-up">
+        <p class="eyb">Participating companies</p>
+        <h2 class="h2">10 Korean companies<br><em>already confirmed</em></h2>
+        <p style="font-size:15px;color:var(--gray);line-height:1.85;font-weight:300">These companies have confirmed participation. If your company is not listed, you can still register — KBIT will review and add qualified Korean medical device companies to the program.</p>
+      </div>
+      <div class="fade-up d1" style="background:var(--ink);border-radius:16px;padding:24px">
+        <p style="font-size:11px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px">Why register early</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:10px;font-size:13px;color:rgba(255,255,255,.6)"><span style="color:#F0C060;flex-shrink:0">→</span>Meeting slots are limited per event</div>
+          <div style="display:flex;gap:10px;font-size:13px;color:rgba(255,255,255,.6)"><span style="color:#F0C060;flex-shrink:0">→</span>KBIT matching is first-come, best-matched</div>
+          <div style="display:flex;gap:10px;font-size:13px;color:rgba(255,255,255,.6)"><span style="color:#F0C060;flex-shrink:0">→</span>Industry Symposium slots at Congress are filling</div>
+          <div style="display:flex;gap:10px;font-size:13px;color:rgba(255,255,255,.6)"><span style="color:#F0C060;flex-shrink:0">→</span>Exhibition booth at Congress: 4 spots remaining</div>
+        </div>
+      </div>
+    </div>
+    <div class="co-grid">
+      <div class="co-card fade-up"><p class="co-name">하이로닉 Hironic</p><p class="co-product">DOUBLO · V-RO</p><span class="co-type ct-hifu">HIFU</span><div class="co-check">✓</div></div>
+      <div class="co-card fade-up d1"><p class="co-name">원텍 Wontech</p><p class="co-product">Oligio · Picocare</p><span class="co-type ct-rf">RF + Laser</span><div class="co-check">✓</div></div>
+      <div class="co-card fade-up d2"><p class="co-name">네오닥터 Neodoctors</p><p class="co-product">JAMBER</p><span class="co-type ct-thread">Thread</span><div class="co-check">✓</div></div>
+      <div class="co-card fade-up"><p class="co-name">에스테팜 Aestheform</p><p class="co-product">QTFILL</p><span class="co-type ct-filler">Filler</span><div class="co-check">✓</div></div>
+      <div class="co-card fade-up d1"><p class="co-name">로즈랩 Roselab</p><p class="co-product">BIOSTER</p><span class="co-type ct-bio">Bio-filler</span><div class="co-check">✓</div></div>
+      <div class="co-card fade-up d2"><p class="co-name">삼양바이오팜</p><p class="co-product">라풀렌 · 크로키</p><span class="co-type ct-filler">PCL + Thread</span><div class="co-check">✓</div></div>
+      <div class="co-card fade-up"><p class="co-name">리센스메디컬</p><p class="co-product">TargetCool · Ocu-Cool</p><span class="co-type ct-cool">Cooling</span><div class="co-check">✓</div></div>
+      <div class="co-card fade-up d1"><p class="co-name">메타약품</p><p class="co-product">TBC</p><span class="co-type ct-tbd">Confirmed</span><div class="co-check">✓</div></div>
+      <div class="co-card fade-up d2"><p class="co-name">안티그래비티</p><p class="co-product">TBC</p><span class="co-type ct-tbd">Confirmed</span><div class="co-check">✓</div></div>
+      <div class="co-card fade-up"><p class="co-name">오스템파마 Osstem</p><p class="co-product">Sutures · Materials</p><span class="co-type ct-tbd">Confirmed</span><div class="co-check">✓</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRATION FORM -->
+<section class="form-s" id="register">
+  <div class="si">
+    <p class="eyb fade-up">Business Meeting Registration</p>
+    <h2 class="h2 fade-up">Register your company</h2>
+    <p class="lead fade-up">Fill in your company details and select which events you want to attend. KBIT will review your registration and confirm your meeting schedule within 3–5 business days.</p>
+    <div class="form-layout">
+      <div>
+        <div class="steps">
+          <div class="step"><div class="step-dot s-done">1</div><span class="step-label">Events</span></div>
+          <div class="step"><div class="step-dot s-active">2</div><span class="step-label active">Company</span></div>
+          <div class="step"><div class="step-dot s-todo">3</div><span class="step-label">Objectives</span></div>
+          <div class="step"><div class="step-dot s-todo">4</div><span class="step-label">Confirm</span></div>
+        </div>
+
+        <!-- Event selection -->
+        <div class="card">
+          <p class="card-title">Select events to attend <span class="card-sub">— choose one or more</span></p>
+          <div class="event-check-grid">
+            <div class="event-check-opt sel" onclick="this.classList.toggle('sel');toggleCheck(this)">
+              <div class="eco-checkbox">✓</div>
+              <div class="eco-info">
+                <p class="eco-name">KSAPS Summit</p>
+                <p class="eco-meta">October 3 · Kangnam Aesthetic Hospital · Ho Chi Minh City</p>
+                <span class="eco-badge eco-b-summit">100 doctors · Press Conference · Live Demo</span>
+              </div>
+            </div>
+            <div class="event-check-opt" onclick="this.classList.toggle('sel');toggleCheck(this)">
+              <div class="eco-checkbox"></div>
+              <div class="eco-info">
+                <p class="eco-name">KAT Vietnam 2026</p>
+                <p class="eco-meta">October 23 (TBC) · Ho Chi Minh City</p>
+                <span class="eco-badge eco-b-kat">Live Demo · Botox &amp; Filler · Live Surgery</span>
+              </div>
+            </div>
+            <div class="event-check-opt sel" onclick="this.classList.toggle('sel');toggleCheck(this)">
+              <div class="eco-checkbox">✓</div>
+              <div class="eco-info">
+                <p class="eco-name">KSAPS Congress 2026</p>
+                <p class="eco-meta">October 24–25 · 108 Military Central Hospital · Hanoi</p>
+                <span class="eco-badge eco-b-congress">~1,000 delegates · Exhibition · Industry Symposium</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Company info -->
+        <div class="card">
+          <p class="card-title">Company information</p>
+          <div class="row2">
+            <div class="field"><label>Company name <span class="req">*</span></label><input type="text" placeholder="e.g. Hironic Co., Ltd."></div>
+            <div class="field"><label>Country <span class="req">*</span></label><select><option>Korea</option><option>Vietnam</option><option>Other</option></select></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label>Contact person <span class="req">*</span></label><input type="text" placeholder="Full name"></div>
+            <div class="field"><label>Position / Title <span class="req">*</span></label><input type="text" placeholder="e.g. Export Manager"></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label>Email <span class="req">*</span></label><input type="email" placeholder="contact@company.com"></div>
+            <div class="field"><label>Phone / WhatsApp <span class="req">*</span></label><input type="text" placeholder="+82 10 XXXX XXXX"></div>
+          </div>
+          <div class="field"><label>Main product(s) / Category <span class="req">*</span></label><input type="text" placeholder="e.g. HIFU device, HA filler, thread lifting"></div>
+          <div class="field"><label>Website</label><input type="text" placeholder="https://"></div>
+        </div>
+
+        <!-- Meeting type -->
+        <div class="card">
+          <p class="card-title">Type of meeting requested <span class="card-sub">— select all that apply</span></p>
+          <div class="meeting-types">
+            <div class="mt-opt sel" onclick="this.classList.toggle('sel')">
+              <p class="mt-title">1:1 Business Meeting</p>
+              <p class="mt-desc">30-min scheduled session with Vietnamese hospital/clinic buyer. KBIT-matched and pre-confirmed.</p>
+            </div>
+            <div class="mt-opt" onclick="this.classList.toggle('sel')">
+              <p class="mt-title">Device Demo Slot</p>
+              <p class="mt-desc">Live demonstration of your device in the event's dedicated demo area. KOL-supported optional.</p>
+            </div>
+            <div class="mt-opt" onclick="this.classList.toggle('sel')">
+              <p class="mt-title">Industry Symposium</p>
+              <p class="mt-desc">30-min dedicated session in Room A at Congress (Hanoi). Full audience + Q&A.</p>
+            </div>
+            <div class="mt-opt" onclick="this.classList.toggle('sel')">
+              <p class="mt-title">Exhibition Booth</p>
+              <p class="mt-desc">Dedicated booth at KSAPS Congress (Hanoi). Open throughout both days.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Objectives -->
+        <div class="card">
+          <p class="card-title">Meeting objectives &amp; target buyers</p>
+          <div class="field">
+            <label>Who do you want to meet? <span class="req">*</span></label>
+            <select>
+              <option>Hospital directors / Clinic owners</option>
+              <option>Purchasing managers</option>
+              <option>Distributors / Importers</option>
+              <option>Aesthetic surgeons</option>
+              <option>All of the above</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Meeting objectives / What do you hope to achieve? <span class="req">*</span></label>
+            <textarea placeholder="e.g. Find a local distributor for our RF device. Demonstrate clinical outcomes to 3–5 hospital buyers. Sign LOI for product trial at 2 HCMC clinics."></textarea>
+          </div>
+          <div class="field">
+            <label>Any specific companies or clinics you want to meet?</label>
+            <textarea placeholder="Optional — if you have specific targets, we will try to arrange." style="min-height:60px"></textarea>
+          </div>
+        </div>
+
+        <div class="policy-box">
+          <p class="policy-title">Business Meeting Policy</p>
+          <div class="policy-item"><div class="p-dot"></div><span>KBIT reviews all registrations and confirms participation within 3–5 business days.</span></div>
+          <div class="policy-item"><div class="p-dot"></div><span>Meeting matches are facilitated by KBIT — you will receive a confirmed schedule before each event.</span></div>
+          <div class="policy-item"><div class="p-dot"></div><span>Interpretation support provided at all meetings (Korean ↔ Vietnamese).</span></div>
+          <div class="policy-item"><div class="p-dot"></div><span>KBIT does not guarantee specific buyer attendance — all meetings are pre-confirmed with both parties.</span></div>
+        </div>
+
+        <div class="agree">
+          <input type="checkbox" id="agree">
+          <label for="agree">I have read and agree to the Business Meeting Policy. I understand that KBIT will review my registration before confirmation.</label>
+        </div>
+
+        <button class="submit-btn">Submit Business Meeting Registration →</button>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div>
+        <div class="kbit-badge">
+          <div class="kbit-icon">K</div>
+          <div><p class="kbit-title">Facilitated by KBIT</p><p class="kbit-sub">Korea Business &amp; Industry Training</p></div>
+        </div>
+
+        <div class="side-card">
+          <p class="side-title">3 Events · 2 Cities</p>
+          <div class="info-row"><div class="info-icon">📍</div><div><p class="info-label">Summit + KAT</p><p class="info-val">Ho Chi Minh City</p><p class="info-sub">Oct 3 + Oct 23 (TBC)</p></div></div>
+          <div class="info-row"><div class="info-icon">📍</div><div><p class="info-label">Congress</p><p class="info-val">Hanoi</p><p class="info-sub">Oct 24–25 · 108 Military Hospital</p></div></div>
+          <div class="info-row"><div class="info-icon">👥</div><div><p class="info-label">Total reach</p><p class="info-val">1,200+ medical professionals</p><p class="info-sub">Across all 3 events</p></div></div>
+        </div>
+
+        <div class="side-card">
+          <p class="side-title">What KBIT provides</p>
+          <p style="font-size:13px;color:var(--gray);line-height:1.9">
+            ✓ Buyer matching &amp; pre-scheduling<br>
+            ✓ Korean ↔ Vietnamese interpretation<br>
+            ✓ Meeting room / space at venue<br>
+            ✓ LOI documentation support<br>
+            ✓ Post-event follow-up facilitation<br>
+            ✓ Export consultation report
+          </p>
+        </div>
+
+        <div class="side-card">
+          <p class="side-title">Questions?</p>
+          <p class="contact-text">Mint / Mai — Business Program<br><a href="mailto:congress@kbitassociation.com">congress@kbitassociation.com</a><br>Response within 1–2 business days</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-logo"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
+  <div class="ft-links">
+    <a href="summit.html">Summit Oct 3</a>
+    <a href="kat.html">KAT Oct 23</a>
+    <a href="congress.html">Congress Oct 24–25</a>
+  </div>
+  <div class="ft-contact"><a href="mailto:congress@kbitassociation.com">congress@kbitassociation.com</a> · KBIT</div>
+</footer>
+
+<script>
+function toggleCheck(el){
+  const cb = el.querySelector('.eco-checkbox');
+  cb.textContent = el.classList.contains('sel') ? '✓' : '';
+}
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

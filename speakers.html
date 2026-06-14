@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speakers — K-Beauty MEETS 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0B6B54;--teal-light:#1A8F70;--teal-pale:#E3F4EE;
+  --purple:#4A3FA8;--purple-pale:#EEEDF8;
+  --coral:#C44B28;--coral-pale:#FCF0EB;
+  --amber:#C97C14;--amber-pale:#FDF3E0;
+  --ink:#0F1512;--ink-2:#1E2924;
+  --gray:#6B7B74;--gray-2:#9BA8A2;--gray-3:#CBD4CF;
+  --border:#E2EAE6;--bg:#F7FAF8;--white:#FFFFFF;
+  --font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--font-b);color:var(--ink);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(15,21,18,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07)}
+.nav-logo{font-family:var(--font-d);font-size:20px;font-weight:600;color:#fff}.nav-logo em{color:#5DCBA8;font-style:italic}
+.nav-links{display:flex;gap:28px;font-size:13px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase}
+.nav-links a{color:rgba(255,255,255,0.5);transition:color 0.2s}.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-cta{font-size:12px;font-weight:600;padding:8px 18px;background:var(--teal);color:#fff;border-radius:6px;letter-spacing:0.04em;text-transform:uppercase;transition:background 0.2s}
+.nav-cta:hover{background:var(--teal-light)}
+
+/* HERO */
+.hero{background:var(--ink);padding:130px 40px 64px;text-align:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(11,107,84,0.2),transparent 60%);pointer-events:none}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#5DCBA8;margin-bottom:14px}
+.hero-title{font-family:var(--font-d);font-size:clamp(36px,5vw,60px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:14px}
+.hero-title em{color:#5DCBA8;font-style:italic}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.45);line-height:1.75;margin-bottom:36px;font-weight:300}
+.hero-orgs{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-org{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04)}
+.hero-org-indicator{width:10px;height:10px;border-radius:50%}
+.oi-teal{background:#5DCBA8}
+.oi-purple{background:#AFA9EC}
+.hero-org-name{font-size:13px;font-weight:600;color:#fff}
+.hero-org-full{font-size:11px;color:rgba(255,255,255,0.35);margin-left:2px}
+
+/* FILTER */
+.filter-bar{background:var(--white);border-bottom:1px solid var(--border);padding:0 40px;display:flex;gap:4px;overflow-x:auto;position:sticky;top:64px;z-index:200}
+.filter-btn{padding:16px 18px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--gray-2);white-space:nowrap;border-bottom:3px solid transparent;transition:all 0.2s}
+.filter-btn:hover{color:var(--ink)}
+.filter-btn.active{color:var(--teal);border-bottom-color:var(--teal);font-weight:600}
+.filter-count{font-size:10px;padding:2px 7px;border-radius:20px;background:var(--bg);margin-left:5px;font-weight:500}
+.filter-btn.active .filter-count{background:var(--teal-pale);color:var(--teal)}
+
+/* MAIN KOL GRID */
+.kol-section{padding:56px 40px}
+.kol-inner{max-width:1200px;margin:0 auto}
+.kol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.kol-card{background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:all 0.25s;cursor:pointer}
+.kol-card:hover{border-color:var(--teal);transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,0.09)}
+.kol-card-header{padding:28px 28px 20px;position:relative;overflow:hidden}
+.kch-teal{background:linear-gradient(135deg,#0A2016,#0B6B54)}
+.kch-purple{background:linear-gradient(135deg,#1A1648,#2D2260)}
+.kch-coral{background:linear-gradient(135deg,#3A1208,#5C1E0E)}
+.kol-card-glow{position:absolute;bottom:-40px;right:-30px;width:120px;height:120px;border-radius:50%;pointer-events:none;opacity:0.3}
+.kcg-teal{background:radial-gradient(circle,#5DCBA8,transparent)}
+.kcg-purple{background:radial-gradient(circle,#AFA9EC,transparent)}
+.kcg-coral{background:radial-gradient(circle,#F0A090,transparent)}
+.kol-av{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:22px;font-weight:600;color:#fff;margin-bottom:14px}
+.kol-card-name{font-size:16px;font-weight:600;color:#fff;margin-bottom:2px}
+.kol-card-roman{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:6px}
+.kol-card-position{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;margin-bottom:10px}
+.kol-inst-badges{display:flex;gap:6px;flex-wrap:wrap}
+.kib{display:inline-block;font-size:10px;padding:3px 9px;border-radius:20px;font-weight:600}
+.kib-ksaps{background:rgba(93,203,168,0.15);color:#5DCBA8;border:1px solid rgba(93,203,168,0.2)}
+.kib-snubh{background:rgba(174,169,236,0.15);color:#AFA9EC;border:1px solid rgba(174,169,236,0.2)}
+.kol-card-body{padding:20px 28px 24px}
+.kcb-div{height:1px;background:var(--border);margin-bottom:16px}
+.kcb-spec-label{font-size:10px;color:var(--gray-2);text-transform:uppercase;letter-spacing:0.1em;font-weight:500;margin-bottom:8px}
+.kcb-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.kcb-tag{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--bg);color:var(--gray);border:1px solid var(--border)}
+.kcb-ev-label{font-size:10px;color:var(--gray-2);text-transform:uppercase;letter-spacing:0.1em;font-weight:500;margin-bottom:8px}
+.kcb-events{display:flex;gap:6px;flex-wrap:wrap}
+.kce{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
+.kce-summit{background:var(--purple-pale);color:var(--purple)}
+.kce-congress{background:var(--coral-pale);color:var(--coral)}
+.kce-kat{background:var(--amber-pale);color:var(--amber)}
+
+/* VSAPS BLOCK */
+.vsaps-section{background:var(--ink-2);padding:80px 40px}
+.vsaps-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.vsaps-copy .eyebrow{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#5DCBA8;margin-bottom:12px}
+.vsaps-copy h2{font-family:var(--font-d);font-size:clamp(26px,3vw,38px);font-weight:600;color:#fff;line-height:1.2;margin-bottom:16px}
+.vsaps-copy h2 em{color:#5DCBA8;font-style:italic}
+.vsaps-copy p{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:14px;font-weight:300}
+.vsaps-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.vstats{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:16px}
+.vstats-num{font-family:var(--font-d);font-size:28px;font-weight:600;color:#fff;line-height:1}
+.vstats-label{font-size:11px;color:rgba(255,255,255,0.35);margin-top:4px;line-height:1.4}
+.vsaps-right{}
+.vsaps-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px;margin-bottom:14px;transition:border-color 0.2s}
+.vsaps-card:hover{border-color:rgba(93,203,168,0.3)}
+.vsaps-card-name{font-size:15px;font-weight:600;color:#fff;margin-bottom:3px}
+.vsaps-card-role{font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:8px}
+.vsaps-card-desc{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7}
+
+/* CTA */
+.cta-section{background:var(--teal);padding:72px 40px;text-align:center}
+.cta-inner{max-width:640px;margin:0 auto}
+.cta-eyebrow{font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:12px}
+.cta-title{font-family:var(--font-d);font-size:clamp(28px,3.5vw,42px);font-weight:600;color:#fff;line-height:1.2;margin-bottom:12px}
+.cta-sub{font-size:15px;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:32px;font-weight:300}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-white{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:#fff;color:var(--teal);border-radius:8px;font-size:14px;font-weight:600;transition:all 0.2s}
+.btn-white:hover{background:var(--teal-pale);transform:translateY(-1px)}
+.btn-white-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:transparent;color:rgba(255,255,255,0.7);border-radius:8px;font-size:14px;font-weight:500;border:1px solid rgba(255,255,255,0.25);transition:all 0.2s}
+.btn-white-ghost:hover{border-color:rgba(255,255,255,0.6);color:#fff}
+
+footer{background:var(--ink);padding:40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.ft-logo{font-family:var(--font-d);font-size:18px;font-weight:600;color:#fff}.ft-logo em{color:#5DCBA8;font-style:italic}
+.ft-links{display:flex;gap:24px;font-size:13px;color:rgba(255,255,255,0.4)}.ft-links a:hover{color:#fff}
+.ft-contact{font-size:12px;color:rgba(255,255,255,0.3)}.ft-contact a{color:#5DCBA8}
+
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity 0.6s,transform 0.6s}
+.fade-up.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .kol-grid{grid-template-columns:1fr 1fr}
+  .vsaps-inner{grid-template-columns:1fr}
+  .vsaps-stats{grid-template-columns:1fr 1fr}
+  .kol-section,.vsaps-section{padding:40px 20px}
+  .filter-bar{padding:0 20px}
+  .hero{padding:100px 20px 48px}
+  .cta-section{padding:56px 20px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
+  <div class="nav-links">
+    <a href="summit.html">Summit</a>
+    <a href="congress.html">Congress</a>
+    <a href="kat.html">KAT</a>
+    <a class="active">Speakers</a>
+  </div>
+  <a href="register.html" class="nav-cta">Register Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase">Supported by</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KHIDI</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">Korea Ministry of Health &amp; Welfare</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase">Organized by</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KSAPS</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">SNUBH</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">VSAPS</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KBIT</span>
+    </div>
+  </div>
+    <p class="hero-eyebrow">K-Beauty MEETS 2026</p>
+    <h1 class="hero-title">15 Korean <em>KOL</em><br>coming to Vietnam</h1>
+    <p class="hero-sub">Korea's most respected aesthetic surgeons and doctors — from KSAPS and SNUBH — bringing decades of clinical expertise directly to Ho Chi Minh City for three events across two months.</p>
+    <div class="hero-orgs">
+      <div class="hero-org"><div class="hero-org-indicator oi-teal"></div><span class="hero-org-name">KSAPS</span><span class="hero-org-full">Korean Society of Aesthetic Plastic Surgery</span></div>
+      <div class="hero-org"><div class="hero-org-indicator oi-purple"></div><span class="hero-org-name">SNUBH</span><span class="hero-org-full">Seoul National Univ. Bundang Hospital</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterKOL('all',this)">All KOL <span class="filter-count">15</span></button>
+  <button class="filter-btn" onclick="filterKOL('summit',this)">Summit <span class="filter-count">4+</span></button>
+  <button class="filter-btn" onclick="filterKOL('congress',this)">Congress <span class="filter-count">8+</span></button>
+  <button class="filter-btn" onclick="filterKOL('kat',this)">KAT <span class="filter-count">8+</span></button>
+  <button class="filter-btn" onclick="filterKOL('snubh',this)">SNUBH</button>
+  <button class="filter-btn" onclick="filterKOL('ksaps',this)">KSAPS</button>
+  <button class="filter-btn" onclick="filterKOL('surgery',this)">Surgery</button>
+  <button class="filter-btn" onclick="filterKOL('devices',this)">Devices</button>
+</div>
+
+<!-- KOL GRID -->
+<section class="kol-section">
+  <div class="kol-inner">
+    <div class="kol-grid" id="kolGrid">
+
+      <div class="kol-card fade-up" data-events="summit congress kat" data-inst="ksaps snubh" data-spec="surgery devices">
+        <div class="kol-card-header kch-teal"><div class="kol-card-glow kcg-teal"></div><div class="kol-av">허</div><p class="kol-card-name">Prof. 허찬영</p><p class="kol-card-roman">Heo Chan-yeong</p><p class="kol-card-position">Next President, Korean Society of Aesthetic Plastic Surgery<br>Head, Dept. of Plastic Surgery · SNUBH</p><div class="kol-inst-badges"><span class="kib kib-ksaps">KSAPS</span><span class="kib kib-snubh">SNUBH</span></div></div>
+        <div class="kol-card-body"><div class="kcb-div"></div><p class="kcb-spec-label">Specialty &amp; topics</p><div class="kcb-tags"><span class="kcb-tag">Rhinoplasty</span><span class="kcb-tag">Facelift</span><span class="kcb-tag">EBD Master Class</span><span class="kcb-tag">Program Lead</span></div><p class="kcb-ev-label">Participating events</p><div class="kcb-events"><span class="kce kce-summit">Summit</span><span class="kce kce-congress">Congress</span><span class="kce kce-kat">KAT</span></div></div>
+      </div>
+
+      <div class="kol-card fade-up d1" data-events="summit congress kat" data-inst="snubh" data-spec="surgery devices">
+        <div class="kol-card-header kch-teal"><div class="kol-card-glow kcg-teal"></div><div class="kol-av">김</div><p class="kol-card-name">Prof. 김백규</p><p class="kol-card-roman">Kim Baek-gyu</p><p class="kol-card-position">Professor, Dept. of Plastic Surgery<br>Seoul National Univ. Bundang Hospital</p><div class="kol-inst-badges"><span class="kib kib-snubh">SNUBH</span></div></div>
+        <div class="kol-card-body"><div class="kcb-div"></div><p class="kcb-spec-label">Specialty &amp; topics</p><div class="kcb-tags"><span class="kcb-tag">HIFU · RF Lifting</span><span class="kcb-tag">Blepharoplasty</span><span class="kcb-tag">EBD Master Class</span></div><p class="kcb-ev-label">Participating events</p><div class="kcb-events"><span class="kce kce-summit">Summit</span><span class="kce kce-congress">Congress</span><span class="kce kce-kat">KAT</span></div></div>
+      </div>
+
+      <div class="kol-card fade-up d2" data-events="summit congress" data-inst="ksaps" data-spec="devices">
+        <div class="kol-card-header kch-purple"><div class="kol-card-glow kcg-purple"></div><div class="kol-av">박</div><p class="kol-card-name">Dr. 박영진</p><p class="kol-card-roman">Park Young-jin</p><p class="kol-card-position">Clinical Director · KSAPS Member<br>Thread lifting &amp; filler specialist</p><div class="kol-inst-badges"><span class="kib kib-ksaps">KSAPS</span></div></div>
+        <div class="kol-card-body"><div class="kcb-div"></div><p class="kcb-spec-label">Specialty &amp; topics</p><div class="kcb-tags"><span class="kcb-tag">Thread lifting</span><span class="kcb-tag">HA Filler</span><span class="kcb-tag">JAMBER · QTFILL</span></div><p class="kcb-ev-label">Participating events</p><div class="kcb-events"><span class="kce kce-summit">Summit</span><span class="kce kce-congress">Congress</span></div></div>
+      </div>
+
+      <div class="kol-card fade-up" data-events="summit congress kat" data-inst="snubh" data-spec="surgery">
+        <div class="kol-card-header kch-teal"><div class="kol-card-glow kcg-teal"></div><div class="kol-av">박</div><p class="kol-card-name">Prof. 박은수</p><p class="kol-card-roman">Park Eun-su</p><p class="kol-card-position">Professor, Dept. of Plastic Surgery<br>Seoul National Univ. Bundang Hospital</p><div class="kol-inst-badges"><span class="kib kib-snubh">SNUBH</span></div></div>
+        <div class="kol-card-body"><div class="kcb-div"></div><p class="kcb-spec-label">Specialty &amp; topics</p><div class="kcb-tags"><span class="kcb-tag">Bio-filler · BIOSTER</span><span class="kcb-tag">SVF · Fat grafting</span><span class="kcb-tag">Mini Facelift</span></div><p class="kcb-ev-label">Participating events</p><div class="kcb-events"><span class="kce kce-summit">Summit</span><span class="kce kce-congress">Congress</span><span class="kce kce-kat">KAT</span></div></div>
+      </div>
+
+      <div class="kol-card fade-up d1" data-events="congress" data-inst="ksaps" data-spec="devices">
+        <div class="kol-card-header kch-purple"><div class="kol-card-glow kcg-purple"></div><div class="kol-av">서</div><p class="kol-card-name">Prof. 서보미</p><p class="kol-card-roman">Seo Bo-mi</p><p class="kol-card-position">International Exchange, KSAPS<br>Dermatology · Laser specialist</p><div class="kol-inst-badges"><span class="kib kib-ksaps">KSAPS</span></div></div>
+        <div class="kol-card-body"><div class="kcb-div"></div><p class="kcb-spec-label">Specialty &amp; topics</p><div class="kcb-tags"><span class="kcb-tag">Pico laser</span><span class="kcb-tag">CO₂ Fractional</span><span class="kcb-tag">EBD Master Class</span></div><p class="kcb-ev-label">Participating events</p><div class="kcb-events"><span class="kce kce-congress">Congress</span></div></div>
+      </div>
+
+      <div class="kol-card fade-up d2" data-events="congress" data-inst="ksaps" data-spec="devices">
+        <div class="kol-card-header kch-purple"><div class="kol-card-glow kcg-purple"></div><div class="kol-av">최</div><p class="kol-card-name">Prof. 최장연</p><p class="kol-card-roman">Choi Jang-yeon</p><p class="kol-card-position">KSAPS Member<br>Bio-stimulator &amp; regenerative medicine</p><div class="kol-inst-badges"><span class="kib kib-ksaps">KSAPS</span></div></div>
+        <div class="kol-card-body"><div class="kcb-div"></div><p class="kcb-spec-label">Specialty &amp; topics</p><div class="kcb-tags"><span class="kcb-tag">Bio-stimulator</span><span class="kcb-tag">BIOSTER</span><span class="kcb-tag">Regenerative medicine</span></div><p class="kcb-ev-label">Participating events</p><div class="kcb-events"><span class="kce kce-congress">Congress</span></div></div>
+      </div>
+
+      <div class="kol-card fade-up" data-events="congress kat" data-inst="snubh" data-spec="devices">
+        <div class="kol-card-header kch-teal"><div class="kol-card-glow kcg-teal"></div><div class="kol-av">김</div><p class="kol-card-name">Prof. 김종호</p><p class="kol-card-roman">Kim Jong-ho</p><p class="kol-card-position">Head of Participation · SNUBH<br>Bio-filler clinical research lead</p><div class="kol-inst-badges"><span class="kib kib-snubh">SNUBH</span></div></div>
+        <div class="kol-card-body"><div class="kcb-div"></div><p class="kcb-spec-label">Specialty &amp; topics</p><div class="kcb-tags"><span class="kcb-tag">Bio-filler</span><span class="kcb-tag">PCL filler</span><span class="kcb-tag">Collagen induction</span></div><p class="kcb-ev-label">Participating events</p><div class="kcb-events"><span class="kce kce-congress">Congress</span><span class="kce kce-kat">KAT</span></div></div>
+      </div>
+
+      <div class="kol-card fade-up d1" data-events="congress kat" data-inst="ksaps" data-spec="surgery devices">
+        <div class="kol-card-header kch-coral"><div class="kol-card-glow kcg-coral"></div><div class="kol-av">이</div><p class="kol-card-name">Dr. 이우성</p><p class="kol-card-roman">Lee Woo-sung</p><p class="kol-card-position">KSAPS Member<br>Aesthetic surgery &amp; protocol</p><div class="kol-inst-badges"><span class="kib kib-ksaps">KSAPS</span></div></div>
+        <div class="kol-card-body"><div class="kcb-div"></div><p class="kcb-spec-label">Specialty &amp; topics</p><div class="kcb-tags"><span class="kcb-tag">Surgical protocol</span><span class="kcb-tag">Filler</span><span class="kcb-tag">Facial contouring</span></div><p class="kcb-ev-label">Participating events</p><div class="kcb-events"><span class="kce kce-congress">Congress</span><span class="kce kce-kat">KAT</span></div></div>
+      </div>
+
+      <div class="kol-card fade-up d2" data-events="summit congress kat" data-inst="ksaps snubh" data-spec="surgery devices">
+        <div class="kol-card-header" style="background:linear-gradient(135deg,#1A1648,#1E2924);padding:28px 28px 20px"><div class="kol-av" style="background:rgba(255,255,255,0.08);font-size:16px;font-family:var(--font-b)">+7</div><p class="kol-card-name">7 Additional KOL</p><p class="kol-card-roman">Hands-on track instructors</p><p class="kol-card-position">KSAPS &amp; SNUBH members<br>Summit Day 2 tracks · KAT hands-on</p><div class="kol-inst-badges"><span class="kib kib-ksaps">KSAPS</span><span class="kib kib-snubh">SNUBH</span></div></div>
+        <div class="kol-card-body"><div class="kcb-div"></div><p class="kcb-spec-label">Coverage</p><div class="kcb-tags"><span class="kcb-tag">Hands-on Track A</span><span class="kcb-tag">Track B</span><span class="kcb-tag">Track C</span><span class="kcb-tag">Live surgery</span></div><p class="kcb-ev-label">Participating events</p><div class="kcb-events"><span class="kce kce-summit">Summit Day 2</span><span class="kce kce-kat">KAT</span></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VSAPS -->
+<section class="vsaps-section">
+  <div class="vsaps-inner">
+    <div class="vsaps-copy fade-up">
+      <p class="eyebrow">Vietnamese partner</p>
+      <h2>VSAPS — <em>The gateway</em><br>to Vietnam's aesthetic surgeons</h2>
+      <p>The Vietnam Society of Aesthetic Plastic Surgery (VSAPS) is the official Vietnamese partner for K-Beauty MEETS 2026. Founded in 2007 and recognized by Vietnam's Ministry of Health, VSAPS is the central organizing body for aesthetic surgery in Vietnam.</p>
+      <p>The KSAPS-VSAPS partnership MOU was signed at APS Korea 2026 in April — with VSAPS president Dr. Lê Hành and 23 VSAPS board members and representatives attending the ceremony in Seoul. This gives K-Beauty MEETS direct access to Vietnam's entire aesthetic surgery community.</p>
+      <div class="vsaps-stats">
+        <div class="vstats"><div class="vstats-num">90%+</div><div class="vstats-label">of Vietnam's aesthetic surgeons are VSAPS members</div></div>
+        <div class="vstats"><div class="vstats-num">800+</div><div class="vstats-label">Active member doctors — all clinical decision-makers</div></div>
+        <div class="vstats"><div class="vstats-num">2007</div><div class="vstats-label">Founded · Vietnam Ministry of Health recognized</div></div>
+        <div class="vstats"><div class="vstats-num">10th</div><div class="vstats-label">Annual congress milestone — 2026</div></div>
+      </div>
+    </div>
+    <div class="vsaps-right fade-up d1">
+      <div class="vsaps-card">
+        <p class="vsaps-card-name">Dr. Lê Hành</p>
+        <p class="vsaps-card-role">President, VSAPS</p>
+        <p class="vsaps-card-desc">Actively co-initiated the K-Beauty MEETS partnership. Signed the KSAPS-VSAPS MOU at APS Korea 2026 in April. Committed to integrating Korean academic sessions as dedicated tracks within the VSAPS annual congress framework.</p>
+      </div>
+      <div class="vsaps-card">
+        <p class="vsaps-card-name">Dr. Richard Huy</p>
+        <p class="vsaps-card-role">Program Coordinator, VSAPS · K-Beauty MEETS Liaison</p>
+        <p class="vsaps-card-desc">Manages day-to-day coordination between VSAPS and KBIT for the 2026 K-Beauty MEETS series. Oversees delegate outreach to VSAPS members, co-manages the academic program for KSAPS sessions, and handles CME credit registration through VSAPS.</p>
+      </div>
+      <div class="vsaps-card">
+        <p class="vsaps-card-name">108 Military Central Hospital</p>
+        <p class="vsaps-card-role">Host venue · KSAPS Congress + KAT Vietnam 2026</p>
+        <p class="vsaps-card-desc">One of Vietnam's most prestigious military hospitals. Purpose-built for events at this scale — 3 conference rooms, full OR suites with live broadcast, a large exhibition hall, and experienced staff in international medical events. Located in Ho Chi Minh City.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="cta-eyebrow">K-Beauty MEETS 2026</p>
+    <h2 class="cta-title">Meet these doctors<br>in Ho Chi Minh City</h2>
+    <p class="cta-sub">15 Korean KOL presenting, demonstrating, and teaching across three events — all free to attend for Vietnamese medical professionals.</p>
+    <div class="cta-btns">
+      <a href="register.html" class="btn-white">Register Summit</a>
+      <a href="register.html" class="btn-white">Register Congress</a>
+      <a href="register.html" class="btn-white-ghost">Register KAT</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-logo"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
+  <div class="ft-links"><a href="summit.html">Summit</a><a href="congress.html">Congress</a><a href="kat.html">KAT</a></div>
+  <div class="ft-contact"><a href="mailto:congress@kbitassociation.com">congress@kbitassociation.com</a> · KBIT</div>
+</footer>
+
+<script>
+function filterKOL(type,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.kol-card').forEach(card=>{
+    if(type==='all'){card.style.display='';return}
+    const ev=card.dataset.events||'',inst=card.dataset.inst||'',spec=card.dataset.spec||'';
+    card.style.display=(ev.includes(type)||inst.includes(type)||spec.includes(type))?'':'none';
+  });
+}
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

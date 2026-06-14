@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAT Vietnam 2026 — K-Beauty Advanced Skills Training · K-Beauty MEETS</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --amber:#C97C14;--amber-deep:#7A4800;--amber-mid:#A86010;--amber-pale:#FDF3E0;--amber-glow:rgba(201,124,20,0.2);
+  --teal:#0B6B54;--teal-pale:#E3F4EE;
+  --purple:#4A3FA8;--purple-pale:#EEEDF8;
+  --coral:#C44B28;--coral-pale:#FCF0EB;
+  --ink:#0F1512;--ink-2:#1A1200;--ink-3:#2A1E00;
+  --gray:#6B7B74;--gray-2:#9BA8A2;--gray-3:#CBD4CF;
+  --border:#E2EAE6;--bg:#F7FAF8;--white:#FFFFFF;
+  --font-d:'Playfair Display',Georgia,serif;--font-b:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--font-b);color:var(--ink);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(15,21,18,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07)}
+.nav-logo{font-family:var(--font-d);font-size:20px;font-weight:600;color:#fff}.nav-logo em{color:#5DCBA8;font-style:italic}
+.nav-links{display:flex;gap:28px;font-size:13px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase}
+.nav-links a{color:rgba(255,255,255,0.5);transition:color 0.2s}.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-cta{font-size:12px;font-weight:600;padding:8px 18px;background:var(--amber-mid);color:#fff;border-radius:6px;letter-spacing:0.04em;text-transform:uppercase;transition:background 0.2s}
+.nav-cta:hover{background:var(--amber)}
+
+/* HERO */
+.hero{min-height:90vh;background:linear-gradient(160deg,#0F0800 0%,#1E1200 35%,#3A2200 65%,#5A3800 100%);padding:140px 40px 80px;display:flex;align-items:flex-end;position:relative;overflow:hidden}
+.hero-fire{position:absolute;bottom:0;left:0;right:0;height:60%;background:radial-gradient(ellipse 80% 60% at 50% 120%,rgba(201,124,20,0.25),transparent);pointer-events:none}
+.hero-stars{position:absolute;inset:0;background-image:radial-gradient(rgba(255,200,80,0.4) 1px,transparent 1px);background-size:40px 40px;opacity:0.15;pointer-events:none}
+.hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:flex-end;position:relative;z-index:2}
+.hero-series-tag{display:inline-flex;align-items:center;gap:10px;font-size:11px;padding:6px 16px;border-radius:20px;background:rgba(201,124,20,0.15);color:#F0C060;border:1px solid rgba(201,124,20,0.25);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:20px}
+.series-pulse{width:7px;height:7px;border-radius:50%;background:#F0C060;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.4)}}
+.hero-title{font-family:var(--font-d);font-size:clamp(44px,5.5vw,76px);font-weight:700;color:#fff;line-height:1.0;margin-bottom:18px;letter-spacing:-0.02em}
+.hero-title em{color:#F0C060;font-style:italic}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:28px;font-weight:300;max-width:480px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px}
+.hero-meta-item{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.05);padding:7px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.08)}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-amber{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:#FAEEDA;color:var(--amber-deep);border-radius:8px;font-size:14px;font-weight:600;transition:all 0.2s}
+.btn-amber:hover{background:#F5D8A0;transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:transparent;color:rgba(255,255,255,0.65);border-radius:8px;font-size:14px;font-weight:500;border:1px solid rgba(255,255,255,0.18);transition:all 0.2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff}
+.hero-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px;backdrop-filter:blur(10px)}
+.hcard-label{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:18px}
+.hcard-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.hcard-stat{background:rgba(255,255,255,0.05);border-radius:10px;padding:14px 16px}
+.hcard-num{font-family:var(--font-d);font-size:28px;font-weight:600;color:#fff;line-height:1}
+.hcard-desc{font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px}
+.hcard-divider{height:1px;background:rgba(255,255,255,0.07);margin:0 0 16px}
+.hcard-includes-label{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
+.hcard-item{display:flex;gap:10px;font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:8px;line-height:1.4}
+.hcheck{width:16px;height:16px;border-radius:4px;background:var(--amber-mid);display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;flex-shrink:0;margin-top:1px}
+
+/* SECTIONS */
+section.pad{padding:100px 40px}
+.sec-inner{max-width:1200px;margin:0 auto}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+.h2{font-family:var(--font-d);font-size:clamp(28px,3.5vw,44px);font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:16px}
+.h2 em{color:var(--amber);font-style:italic}
+.lead{font-size:15px;color:var(--gray);line-height:1.85;font-weight:300;max-width:580px;margin-bottom:56px}
+
+/* WHAT MAKES KAT */
+.what-section{background:var(--ink)}
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.what-card{border-radius:16px;overflow:hidden;transition:transform 0.25s}
+.what-card:hover{transform:translateY(-4px)}
+.wc-top{padding:36px 28px 28px;position:relative;overflow:hidden}
+.wc-1-top{background:linear-gradient(150deg,#1A1200,#3A2200)}
+.wc-2-top{background:linear-gradient(150deg,#1A1648,#2D2660)}
+.wc-3-top{background:linear-gradient(150deg,#0A2016,#0B6B54)}
+.wc-glow{position:absolute;bottom:-40px;right:-40px;width:150px;height:150px;border-radius:50%;pointer-events:none}
+.wc-1-glow{background:radial-gradient(circle,rgba(201,124,20,0.3),transparent)}
+.wc-2-glow{background:radial-gradient(circle,rgba(123,112,216,0.3),transparent)}
+.wc-3-glow{background:radial-gradient(circle,rgba(11,107,84,0.3),transparent)}
+.wc-icon{font-size:32px;margin-bottom:16px}
+.wc-title{font-family:var(--font-d);font-size:20px;font-weight:600;color:#fff;margin-bottom:10px;line-height:1.3}
+.wc-desc{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.75}
+.wc-bottom{padding:20px 28px;background:rgba(255,255,255,0.03);border-top:1px solid rgba(255,255,255,0.06)}
+.wc-highlight{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.6;font-style:italic}
+
+/* 2 ROOMS */
+.rooms-section{background:var(--bg)}
+.rooms-intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:56px}
+.rooms-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.room-block{background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:box-shadow 0.25s}
+.room-block:hover{box-shadow:0 20px 48px rgba(0,0,0,0.09)}
+.rb-top{padding:36px 32px 26px;position:relative;overflow:hidden}
+.rb-a-top{background:linear-gradient(135deg,#3A2200,#5A3800)}
+.rb-b-top{background:linear-gradient(135deg,#3A1208,#5C1E0E)}
+.rb-num{font-family:var(--font-d);font-size:88px;font-weight:700;position:absolute;right:-8px;bottom:-24px;color:rgba(255,255,255,0.07);line-height:1}
+.rb-badge{display:inline-block;font-size:10px;padding:4px 12px;border-radius:20px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px}
+.rb-a .rb-badge{background:rgba(201,124,20,0.2);color:#F0C060;border:1px solid rgba(201,124,20,0.3)}
+.rb-b .rb-badge{background:rgba(196,75,40,0.2);color:#F0A090;border:1px solid rgba(196,75,40,0.3)}
+.rb-title{font-family:var(--font-d);font-size:22px;font-weight:600;color:#fff;margin-bottom:6px}
+.rb-sub{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5}
+.rb-body{padding:24px 32px}
+.rb-desc{font-size:14px;color:var(--gray);line-height:1.8;margin-bottom:20px}
+.rb-sessions{display:flex;flex-direction:column;gap:0}
+.rb-session{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.rb-session:last-child{border:none;padding-bottom:0}
+.rbs-time{font-size:11px;color:var(--gray-2);width:72px;flex-shrink:0;padding-top:1px}
+.rbs-content{}
+.rbs-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.rbs-desc{font-size:11px;color:var(--gray-2);line-height:1.5}
+.rbs-tag{display:inline-block;font-size:9px;padding:2px 7px;border-radius:20px;margin-top:4px;font-weight:600}
+.t-demo{background:var(--amber-pale);color:var(--amber)}
+.t-surg{background:var(--coral-pale);color:var(--coral)}
+.t-hands{background:var(--teal-pale);color:var(--teal)}
+.t-brk{background:var(--bg);color:var(--gray-2)}
+.closing-strip{background:var(--ink);border-radius:12px;padding:20px 28px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.cs-text p:first-child{font-size:14px;font-weight:600;color:#fff}
+.cs-text p:last-child{font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px}
+
+/* SERIES SECTION */
+.series-section{background:var(--ink)}
+.series-split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.series-right{}
+.series-track-visual{position:relative;padding:40px 0 20px}
+.stv-line{position:absolute;left:28px;top:40px;bottom:20px;width:2px;background:linear-gradient(180deg,var(--gray-3),var(--amber),var(--teal),rgba(255,255,255,0.08))}
+.stv-stop{display:flex;gap:24px;margin-bottom:40px;position:relative}
+.stv-node{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1}
+.sn-done{background:var(--gray-3);color:#fff}
+.sn-soon{background:var(--purple-pale);color:var(--purple);border:2px solid rgba(74,63,168,0.3)}
+.sn-open{background:var(--amber);color:#fff;box-shadow:0 0 24px var(--amber-glow)}
+.sn-future{background:transparent;border:2px dashed rgba(255,255,255,0.15);color:rgba(255,255,255,0.2)}
+.stv-content{padding-top:8px}
+.stv-name{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
+.stv-detail{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.6}
+.stv-badge{display:inline-block;font-size:10px;padding:3px 10px;border-radius:20px;font-weight:500;margin-top:6px}
+.sb-done{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.35)}
+.sb-soon{background:rgba(74,63,168,0.15);color:#AFA9EC}
+.sb-open{background:rgba(201,124,20,0.2);color:#F0C060}
+.sb-future{background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.2)}
+
+/* PROOF */
+.proof-section{background:var(--amber);padding:80px 40px}
+.proof-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.proof-right h2{font-family:var(--font-d);font-size:clamp(24px,3vw,38px);font-weight:600;color:#fff;margin-bottom:12px;line-height:1.2}
+.proof-right p{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.8;font-weight:300;margin-bottom:20px}
+.proof-quote{padding:20px 24px;background:rgba(255,255,255,0.12);border-radius:10px;border-left:3px solid rgba(255,255,255,0.4)}
+.pq-text{font-size:14px;color:rgba(255,255,255,0.85);line-height:1.7;font-style:italic}
+.pq-cite{font-size:11px;color:rgba(255,255,255,0.5);margin-top:8px}
+.proof-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ps{background:rgba(255,255,255,0.15);border-radius:14px;padding:24px 20px;text-align:center;border:1px solid rgba(255,255,255,0.1)}
+.ps-num{font-family:var(--font-d);font-size:40px;font-weight:700;color:#fff;line-height:1}
+.ps-label{font-size:12px;color:rgba(255,255,255,0.65);margin-top:6px;line-height:1.5}
+
+/* POLICY + CTA */
+.bottom-section{background:var(--amber-pale);padding:80px 40px}
+.bottom-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.policy-box{background:var(--white);border-radius:16px;padding:36px;border:1px solid rgba(201,124,20,0.15)}
+.pb-title{font-family:var(--font-d);font-size:20px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.pb-lead{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:16px}
+.pb-items{display:flex;flex-direction:column;gap:10px}
+.pbi{display:flex;gap:12px;font-size:13px;color:var(--gray);line-height:1.6}
+.pbi-dot{width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:8px;flex-shrink:0}
+.cta-box{text-align:center}
+.cta-title{font-family:var(--font-d);font-size:32px;font-weight:600;color:var(--ink);margin-bottom:10px;line-height:1.2}
+.cta-sub{font-size:14px;color:var(--gray);line-height:1.8;margin-bottom:28px}
+.btn-amber-full{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;background:var(--amber);color:#fff;border-radius:10px;font-size:15px;font-weight:600;transition:all 0.2s}
+.btn-amber-full:hover{background:var(--amber-deep);transform:translateY(-2px)}
+
+footer{background:var(--ink);padding:40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.ft-logo{font-family:var(--font-d);font-size:18px;font-weight:600;color:#fff}.ft-logo em{color:#5DCBA8;font-style:italic}
+.ft-links{display:flex;gap:24px;font-size:13px;color:rgba(255,255,255,0.4)}.ft-links a:hover{color:#fff}
+.ft-contact{font-size:12px;color:rgba(255,255,255,0.3)}.ft-contact a{color:#5DCBA8}
+
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity 0.6s,transform 0.6s}
+.fade-up.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .hero-inner,.rooms-intro,.rooms-grid,.series-split,.proof-inner,.bottom-inner{grid-template-columns:1fr}
+  .what-grid{grid-template-columns:1fr}
+  .proof-stats{grid-template-columns:1fr 1fr}
+  section.pad{padding:64px 20px}.proof-section,.bottom-section{padding:64px 20px}
+  .hero{padding:110px 20px 60px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
+  <div class="nav-links">
+    <a href="summit.html">Summit</a>
+    <a href="congress.html">Congress</a>
+    <a class="active">KAT</a>
+    <a href="speakers.html">Speakers</a>
+    <a href="business-meeting.html">Business</a>
+  </div>
+  <a href="register.html" class="nav-cta">Register Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-fire"></div>
+  <div class="hero-stars"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-series-tag"><span class="series-pulse"></span>KAT · K-Beauty Advanced Skills Training</div>
+      <h1 class="hero-title">KAT<br><em>Vietnam</em><br>2026</h1>
+      <p class="hero-sub"> — the most practical training day of the series. No lectures. Pure Korean techniques transferred directly to Vietnamese doctors — through live surgery, live device demos, and live observation and Q&A at 1:5.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">📅 October 23, 2026 (date TBC)</span>
+        <span class="hero-meta-item">📍 Ho Chi Minh City</span>
+        <span class="hero-meta-item">👥 Independent event</span>
+        <span class="hero-meta-item">🏥 4 Live surgery cases</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="register.html" class="btn-amber">Register now — Free</a>
+        <a href="#rooms" class="btn-ghost">View schedule ↓</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <p class="hcard-label">At a glance</p>
+      <div class="hcard-stats">
+        <div class="hcard-stat"><div class="hcard-num">500</div><div class="hcard-desc">Doctors</div></div>
+        <div class="hcard-stat"><div class="hcard-num">2</div><div class="hcard-desc">Parallel rooms</div></div>
+        <div class="hcard-stat"><div class="hcard-num">4</div><div class="hcard-desc">Live surgery cases</div></div>
+        <div class="hcard-stat"><div class="hcard-num">1:5</div><div class="hcard-desc">KOL to doctor</div></div>
+      </div>
+      <div class="hcard-divider"></div>
+      <p class="hcard-includes-label">What you'll get</p>
+      <div class="hcard-item"><div class="hcheck">✓</div>Room A: RF, HIFU, Pico Laser live demos</div>
+      <div class="hcard-item"><div class="hcheck">✓</div>Botox &amp; filler hands-on (with direct Korean KOL guidance)</div>
+      <div class="hcard-item"><div class="hcheck">✓</div>Room B: Live Rhinoplasty, Blepharoplasty, SVF</div>
+      <div class="hcard-item"><div class="hcheck">✓</div>KAT 2026 Certificate — KSAPS + KBIT</div>
+      <div class="hcard-item"><div class="hcheck">✓</div>CME Certificate issued</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT MAKES KAT -->
+<section class="pad what-section">
+  <div class="sec-inner">
+    <p class="eyebrow fade-up" style="color:#F0C060">What makes KAT different</p>
+    <h2 class="h2 fade-up" style="color:#fff">Skills, not <em style="color:#F0C060">slides.</em></h2>
+    <p class="lead fade-up" style="color:rgba(255,255,255,0.45);margin-bottom:48px">KAT Vietnam 2026 is deliberately different from the Congress happening the day before. Where Congress delivers academic breadth across three rooms, KAT goes deep in one direction: you leave having done it — not just having heard about it.</p>
+    <div class="what-grid">
+      <div class="what-card fade-up">
+        <div class="wc-top wc-1-top"><div class="wc-glow wc-1-glow"></div><div class="wc-icon">🏥</div><h3 class="wc-title">Live surgery in real time</h3><p class="wc-desc">Room B broadcasts 4 live plastic surgery cases directly from the OR. Each case has step-by-step commentary from the operating Korean surgeon, with real-time Q&amp;A from the audience. You're not watching a recording — you're watching it happen.</p></div>
+        <div class="wc-bottom"><p class="wc-highlight">Rhinoplasty · Blepharoplasty · SVF &amp; Fat Grafting · Mini Facelift — all with OR live broadcast</p></div>
+      </div>
+      <div class="what-card fade-up d1">
+        <div class="wc-top wc-2-top"><div class="wc-glow wc-2-glow"></div><div class="wc-icon">💉</div><h3 class="wc-title">Hands-on at with direct Korean KOL guidance</h3><p class="wc-desc">Room A runs small-group hands-on sessions throughout the day — one Korean KOL for every five Vietnamese doctors. Each group gets direct parameter guidance for RF/HIFU devices and hands-on Botox and filler injection on models. Not demonstration — actual practice.</p></div>
+        <div class="wc-bottom"><p class="wc-highlight">The same 1:5 format used in KAT 2025 — recognized by Vietnam's Ministry of Health as a model of Korea-Vietnam medical cooperation</p></div>
+      </div>
+      <div class="what-card fade-up d2">
+        <div class="wc-top wc-3-top"><div class="wc-glow wc-3-glow"></div><div class="wc-icon">🔗</div><h3 class="wc-title">Day 2 of a 2-day journey</h3><p class="wc-desc">KAT Vietnam is designed as the direct follow-on to KSAPS Congress (Oct 24–25). Doctors who attend both leave with two days of the most concentrated Korean aesthetic education available in Vietnam — separate CME certificates for each event.</p></div>
+        <div class="wc-bottom"><p class="wc-highlight">Congress + KAT combo registrants receive higher review priority and separate CME certificates for both events</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 ROOMS -->
+<section class="pad rooms-section" id="rooms">
+  <div class="sec-inner">
+    <div class="rooms-intro">
+      <div class="fade-up">
+        <p class="eyebrow">The program</p>
+        <h2 class="h2">Two rooms running<br>in parallel — <em>all day.</em></h2>
+        <p style="font-size:15px;color:var(--gray);line-height:1.85;font-weight:300">Delegates choose one room or move freely between both. Room A is a procedure training room. Room B is a full OR suite with UHD cameras broadcasting to large screens. Both run all day with only a lunch break.</p>
+      </div>
+      <div class="fade-up d1" style="background:var(--ink);border-radius:16px;padding:28px">
+        <p style="font-size:11px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:16px">Room summary</p>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="padding:16px;background:rgba(201,124,20,0.1);border-radius:10px;border-left:2px solid var(--amber)"><p style="font-size:13px;font-weight:600;color:#fff;margin-bottom:4px">Room A — Live Demo &amp; Hands-on</p><p style="font-size:12px;color:rgba(255,255,255,0.45)">RF · HIFU · Pico Laser · Skin Booster<br>Botox &amp; Filler injection · 1:5 hands-on groups</p></div>
+          <div style="padding:16px;background:rgba(196,75,40,0.1);border-radius:10px;border-left:2px solid var(--coral)"><p style="font-size:13px;font-weight:600;color:#fff;margin-bottom:4px">Room B — Live Plastic Surgery</p><p style="font-size:12px;color:rgba(255,255,255,0.45)">Rhinoplasty · Blepharoplasty · SVF · Mini Facelift<br>UHD OR broadcast · Step-by-step discussion</p></div>
+        </div>
+        <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:14px;line-height:1.6">Both rooms run simultaneously 09:00–16:30. Morning and afternoon sessions in each room with coffee breaks in between.</p>
+      </div>
+    </div>
+    <div class="rooms-grid">
+      <div class="room-block rb-a fade-up">
+        <div class="rb-top rb-a-top">
+          <div class="rb-num">A</div>
+          <span class="rb-badge">Room A</span>
+          <h3 class="rb-title">Live Demo &amp; Hands-on</h3>
+          <p class="rb-sub">Device demos · Botox · Filler · Small-group practice</p>
+        </div>
+        <div class="rb-body">
+          <p class="rb-desc">Live device demonstrations followed by direct small-group live observation and Q&A. One Korean KOL guides every 5 Vietnamese doctors through each technique. Participants leave with real operational knowledge — not just product awareness.</p>
+          <div class="rb-sessions">
+            <div class="rb-session"><div class="rbs-time">09:00</div><div><p class="rbs-title">Demo A1 — Energy Devices</p><p class="rbs-desc">RF monopolar &amp; bipolar · HIFU Doublo 2.0 depth control · Small-group hands-on</p><span class="rbs-tag t-demo">Live Demo</span><span class="rbs-tag t-hands">Hands-on</span></div></div>
+            <div class="rb-session"><div class="rbs-time">10:30</div><div><p class="rbs-title">Coffee Break + Free Practice</p><span class="rbs-tag t-brk">Break</span></div></div>
+            <div class="rb-session"><div class="rbs-time">11:00</div><div><p class="rbs-title">Demo A2 — Laser + Botox &amp; Filler Live</p><p class="rbs-desc">Pico laser skin rejuvenation demo · Botox live injection: forehead, glabella, crow's feet · Skin booster protocol</p><span class="rbs-tag t-demo">Live Demo</span><span class="rbs-tag t-hands">Hands-on</span></div></div>
+            <div class="rb-session"><div class="rbs-time">12:00</div><div><p class="rbs-title">Lunch · Devices open for free practice</p><span class="rbs-tag t-brk">Break</span></div></div>
+            <div class="rb-session"><div class="rbs-time">13:00</div><div><p class="rbs-title">Demo A3 — Filler Live &amp; Thread</p><p class="rbs-desc">Filler live injection: midface, nasolabial fold, lip augmentation · PCL thread lifting demo</p><span class="rbs-tag t-demo">Demo</span><span class="rbs-tag t-hands">Hands-on</span></div></div>
+            <div class="rb-session"><div class="rbs-time">14:30</div><div><p class="rbs-title">Break</p><span class="rbs-tag t-brk">Break</span></div></div>
+            <div class="rb-session"><div class="rbs-time">15:00</div><div><p class="rbs-title">Demo A4 — Combination + Body</p><p class="rbs-desc">Combined Laser + Filler + RF protocol · Cryolipolysis / EMSculpt · Room A wrap-up</p><span class="rbs-tag t-demo">Demo</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="room-block rb-b fade-up d1">
+        <div class="rb-top rb-b-top">
+          <div class="rb-num">B</div>
+          <span class="rb-badge">Room B</span>
+          <h3 class="rb-title">Live Plastic Surgery</h3>
+          <p class="rb-sub">4 surgeries · UHD OR broadcast · Real-time Q&A</p>
+        </div>
+        <div class="rb-body">
+          <p class="rb-desc">Four live surgery cases broadcast directly from the operating room. UHD cameras cover every detail. Each case begins with a patient and case presentation, then the surgery, with step-by-step commentary and audience Q&A throughout.</p>
+          <div class="rb-sessions">
+            <div class="rb-session"><div class="rbs-time">09:00</div><div><p class="rbs-title">Live Surgery B1 — Rhinoplasty</p><p class="rbs-desc">Korean-standard rhinoplasty · OR live broadcast · Step-by-step + Q&A</p><span class="rbs-tag t-surg">Live Surgery</span></div></div>
+            <div class="rb-session"><div class="rbs-time">10:30</div><div><p class="rbs-title">Live Surgery B2 — Blepharoplasty</p><p class="rbs-desc">Advanced double eyelid · Korean incision design · Live Q&A</p><span class="rbs-tag t-surg">Live Surgery</span></div></div>
+            <div class="rb-session"><div class="rbs-time">12:00</div><div><p class="rbs-title">Lunch · Speaker debrief</p><span class="rbs-tag t-brk">Break</span></div></div>
+            <div class="rb-session"><div class="rbs-time">13:00</div><div><p class="rbs-title">Live Surgery B3 — SVF &amp; Fat Grafting</p><p class="rbs-desc">SVF stem cell isolation · Fat grafting for facial rejuvenation · Clinical discussion</p><span class="rbs-tag t-surg">Live Surgery</span></div></div>
+            <div class="rb-session"><div class="rbs-time">14:30</div><div><p class="rbs-title">Break</p><span class="rbs-tag t-brk">Break</span></div></div>
+            <div class="rb-session"><div class="rbs-time">15:00</div><div><p class="rbs-title">Live Surgery B4 — Mini Facelift / Revision</p><p class="rbs-desc">Korean minimal-incision technique · Panel: Complications &amp; prevention · Room B wrap-up</p><span class="rbs-tag t-surg">Live Surgery</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="closing-strip fade-up">
+      <div class="cs-text"><p>16:30 – 17:00 · Closing Ceremony</p><p>KAT Vietnam 2026 Certificate · KAT 2027 announcement · Group photo</p></div>
+      <a href="register.html" class="btn-amber">Register to attend →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERIES TIMELINE -->
+<section class="pad series-section">
+  <div class="sec-inner">
+    <div class="series-split">
+      <div class="fade-up">
+        <p class="eyebrow" style="color:#F0C060">KAT</p>
+        <h2 class="h2" style="color:#fff">Korea's medical<br>training network — <em style="color:#F0C060">expanding across Asia</em></h2>
+        <p style="font-size:15px;color:rgba(255,255,255,0.45);line-height:1.85;font-weight:300;margin-bottom:24px">KAT is not a one-time event. Each year, a new Asian city is added to the network — building a continent-wide community of Korean-trained aesthetic professionals and opening new markets for Korean medical technology.</p>
+        <p style="font-size:15px;color:rgba(255,255,255,0.45);line-height:1.85;font-weight:300;margin-bottom:32px">KAT 2025 Vietnam set the standard. KAT China 2026 expands the series. KAT Vietnam 2026 deepens the Vietnamese network. KAT 2027 continues the mission in a new city.</p>
+        <a href="register.html" class="btn-amber">Register for KAT Vietnam 2026 →</a>
+      </div>
+      <div class="series-right fade-up d1">
+        <div class="series-track-visual">
+          <div class="stv-line"></div>
+          <div class="stv-stop"><div class="stv-node sn-done">✓</div><div class="stv-content"><p class="stv-name">KAT Vietnam 2025</p><p class="stv-detail">Le Van Thinh Hospital, HCMC<br>350 doctors · $1.34M export consultations<br>Vietnam MoH recognition</p><span class="stv-badge sb-done">Completed</span></div></div>
+          <div class="stv-stop"><div class="stv-node sn-soon">CN</div><div class="stv-content"><p class="stv-name">KAT China 2026</p><p class="stv-detail">China · Details to be announced<br>Series expanding to new market</p><span class="stv-badge sb-soon">Coming soon</span></div></div>
+          <div class="stv-stop"><div class="stv-node sn-open">VN</div><div class="stv-content"><p class="stv-name">KAT Vietnam 2026</p><p class="stv-detail">Kangnam Aesthetic Hospital area, HCMC · HCMC<br>Independent event · Oct 4, 2026</p><span class="stv-badge sb-open">Registration open</span></div></div>
+          <div class="stv-stop"><div class="stv-node sn-future">?</div><div class="stv-content"><p class="stv-name">KAT 2027</p><p class="stv-detail">Next Asian city to be announced<br>Growing the network</p><span class="stv-badge sb-future">Stay tuned</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof-section">
+  <div class="proof-inner">
+    <div class="proof-stats fade-up">
+      <div class="ps"><div class="ps-num">350</div><div class="ps-label">Doctors trained hands-on in a single KAT event</div></div>
+      <div class="ps"><div class="ps-num">$1.34M</div><div class="ps-label">Export consultations achieved in one day</div></div>
+      <div class="ps"><div class="ps-num">7</div><div class="ps-label">Distributors requested follow-up meetings</div></div>
+      <div class="ps"><div class="ps-num">5</div><div class="ps-label">Hospitals requested formal partnership</div></div>
+    </div>
+    <div class="proof-right fade-up d1">
+      <p style="font-size:11px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:10px">KAT 2025 — Proven results</p>
+      <h2>Last year's KAT set the benchmark</h2>
+      <p>The first Korea–Vietnam KAT workshop at Le Van Thinh Hospital, HCMC — covered by HTV and national media. Vietnam's Ministry of Health recognized it as a model of bilateral medical cooperation focused on genuine skills transfer.</p>
+      <div class="proof-quote">
+        <p class="pq-text">"A model case of Korea-Vietnam medical cooperation — focused on genuine, practical skills transfer rather than product showcase."</p>
+        <p class="pq-cite">— Vietnam Ministry of Health official evaluation, 2025</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLICY + CTA -->
+<section class="bottom-section">
+  <div class="bottom-inner">
+    <div class="policy-box fade-up">
+      <h3 class="pb-title">Attendance Policy</h3>
+      <p class="pb-lead">KAT Vietnam 2026 is free for all qualified Vietnamese medical professionals. Supported by KHIDI and organized by KSAPS, SNUBH, VSAPS, and KBIT.</p>
+      <div class="pb-items">
+        <div class="pbi"><div class="pbi-dot"></div><span><strong>500 seats</strong> — reviewed by KBIT. Priority to specialist physicians and Congress combo registrants.</span></div>
+        <div class="pbi"><div class="pbi-dot"></div><span><strong>3–5 business days</strong> confirmation after application.</span></div>
+        <div class="pbi"><div class="pbi-dot"></div><span>Cannot attend? Email <strong>congress@kbitassociation.com</strong> in advance.</span></div>
+        <div class="pbi"><div class="pbi-dot"></div><span>No-shows without notice affect <strong>priority at KAT 2027</strong>.</span></div>
+      </div>
+    </div>
+    <div class="cta-box fade-up d1">
+      <h2 class="cta-title">The most hands-on day<br>of K-Beauty MEETS</h2>
+      <p class="cta-sub">Independent event. 4 live OR surgeries. Botox &amp; filler at 1:5.<br>October 4 at Ho Chi Minh City.</p>
+      <a href="register.html" class="btn-amber-full">Register now — It's free →</a>
+      <p style="font-size:12px;color:var(--gray-2);margin-top:16px">Coming the day before? <a href="register.html" style="color:var(--amber);font-weight:600">Register for Congress Oct 24–25 →</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-logo"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
+  <div class="ft-links"><a href="summit.html">Summit</a><a href="congress.html">Congress</a><a href="speakers.html">Speakers</a></div>
+  <div class="ft-contact"><a href="mailto:congress@kbitassociation.com">congress@kbitassociation.com</a> · KBIT</div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
