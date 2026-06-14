@@ -77,7 +77,9 @@ a{text-decoration:none;color:inherit}
 .side-title{font-size:14px;font-weight:600;margin-bottom:14px}
 .info-row{display:flex;gap:12px;margin-bottom:12px}
 .info-row:last-child{margin-bottom:0}
-.info-icon{width:32px;height:32px;border-radius:8px;background:#EEEDFE;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.info-icon{width:32px;height:32px;border-radius:8px;background:#EEEDFE;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.info-icon svg{width:16px;height:16px;fill:none;stroke:#534AB7;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hero-meta svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:2px}
 .info-label{font-size:11px;color:#888780;margin-bottom:2px}
 .info-val{font-size:13px;font-weight:600}
 .info-sub{font-size:11px;color:#888780}
@@ -116,9 +118,9 @@ footer{padding:24px 32px;border-top:1px solid #e8e6e0;display:flex;justify-conte
   <span class="badge">Korea Meets VSAPS · KSAPS Summit 2026</span>
   <h1>Register for KSAPS Summit 2026</h1>
   <div class="hero-meta">
-    <span>📅 October 3, 2026</span>
-    <span>📍 Kangnam Aesthetic Hospital Aesthetic Hospital, HCMC</span>
-    <span>👥 100 doctors · 1 day · Free to attend</span>
+    <span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>October 3, 2026</span>
+    <span><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Kangnam Aesthetic Hospital, HCMC</span>
+    <span><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>100 doctors · 1 day · Free to attend</span>
     <span>Lecture + Live Demo + Live Surgery + Hands-on</span>
   </div>
 </div>
@@ -201,7 +203,7 @@ footer{padding:24px 32px;border-top:1px solid #e8e6e0;display:flex;justify-conte
     <p class="policy-title">Attendance policy — please read before submitting</p>
     <div class="policy-item"><div class="policy-dot"></div><span>Free to attend — 100 seats. Registration does not guarantee a spot. <strong>Registration deadline: September 26, 2026.</strong></span></div>
     <div class="policy-item"><div class="policy-dot"></div><span>Confirmation emails sent within 3–5 business days. </span></div>
-    <div class="policy-item"><div class="policy-dot"></div><span>If you cannot attend, email congress@kbitassociation.com in advance.</span></div>
+    <div class="policy-item"><div class="policy-dot"></div><span>If you cannot attend, email secretary@kbitassociation.com in advance.</span></div>
     <div class="policy-item"><div class="policy-dot"></div><span>No-shows without notice will affect priority for future KSAPS events.</span></div>
   </div>
   <div class="agree">
@@ -210,7 +212,7 @@ footer{padding:24px 32px;border-top:1px solid #e8e6e0;display:flex;justify-conte
   </div>
   <button class="submit-btn" id="submit-btn" onclick="submitRegistration()">Submit application →</button>
   <div id="success-screen" class="success-screen" style="display:none">
-    <div style="font-size:48px;margin-bottom:16px">✅</div>
+    <div style="margin-bottom:16px"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="#E1F5EE" stroke="#0F6E56" stroke-width="2"/><path d="M15 24l6 6 12-12" stroke="#0F6E56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <h2>Registration submitted!</h2>
     <p>Your registration code:</p>
     <div class="success-code" id="reg-code">—</div>
@@ -220,20 +222,20 @@ footer{padding:24px 32px;border-top:1px solid #e8e6e0;display:flex;justify-conte
 </div>
 <div>
   <div class="free-badge">
-    <div class="free-icon">✓</div>
+    <div class="free-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E1F5EE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
     <div><p class="free-title">Free to attend</p><p class="free-sub">Supported by KHIDI · Korean Government</p></div>
   </div>
   <div class="side-card">
     <p class="side-title">Day 1 — October 3</p>
-    <div class="info-row"><div class="info-icon">🏥</div><div><p class="info-label">Venue</p><p class="info-val">Kangnam Aesthetic Hospital</p><p class="info-sub">Ho Chi Minh City</p></div></div>
-    <div class="info-row"><div class="info-icon">🕐</div><div><p class="info-label">Time</p><p class="info-val">08:00 – 18:00</p></div></div>
+    <div class="info-row"><div class="info-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><p class="info-label">Venue</p><p class="info-val">Kangnam Aesthetic Hospital</p><p class="info-sub">Ho Chi Minh City</p></div></div>
+    <div class="info-row"><div class="info-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><p class="info-label">Time</p><p class="info-val">08:00 – 18:00</p></div></div>
     <p style="font-size:12px;color:#5f5e5a;margin:8px 0 4px;font-weight:500">Available seats</p>
     
   </div>
   <div class="side-card">
     <p class="side-title">Day 2 — October 4</p>
-    <div class="info-row"><div class="info-icon">🏥</div><div><p class="info-label">Venue</p><p class="info-val">Kangnam Aesthetic Hospital</p><p class="info-sub">Ho Chi Minh City</p></div></div>
-    <div class="info-row"><div class="info-icon">🕐</div><div><p class="info-label">Time</p><p class="info-val">08:00 – 17:30</p></div></div>
+    <div class="info-row"><div class="info-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><p class="info-label">Venue</p><p class="info-val">Kangnam Aesthetic Hospital</p><p class="info-sub">Ho Chi Minh City</p></div></div>
+    <div class="info-row"><div class="info-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><p class="info-label">Time</p><p class="info-val">08:00 – 17:30</p></div></div>
     <p style="font-size:12px;color:#5f5e5a;margin:8px 0 4px;font-weight:500">Available seats</p>
     
   </div>
@@ -251,7 +253,7 @@ footer{padding:24px 32px;border-top:1px solid #e8e6e0;display:flex;justify-conte
   </div>
   <div class="side-card" style="margin-bottom:0">
     <p class="side-title">Questions?</p>
-    <p class="contact-text">Jolly / Mai — Registration team<br><a href="mailto:congress@kbitassociation.com">congress@kbitassociation.com</a><br>Response within 1–2 business days</p>
+    <p class="contact-text">Registration team<br><a href="mailto:secretary@kbitassociation.com">secretary@kbitassociation.com</a><br>Response within 1–2 business days</p>
     <div class="noshow">
       <p class="noshow-title">Can't make it?</p>
       <p class="noshow-text">Please email us in advance so we can offer your spot to someone on the waitlist. Thank you!</p>
@@ -261,7 +263,7 @@ footer{padding:24px 32px;border-top:1px solid #e8e6e0;display:flex;justify-conte
 </div>
 <footer>
   <div class="footer-brand">K-Beauty <span>MEETS</span></div>
-  <div class="footer-meta">Coordinated by KBIT · congress@kbitassociation.com</div>
+  <div class="footer-meta">Coordinated by KBIT · secretary@kbitassociation.com</div>
   <div class="footer-links"><span>Summit Oct 3–27</span><span>Congress Oct 17–18</span><span>KAT Oct 23</span></div>
 </footer>
 <div class="toast" id="toast"><span id="toast-msg"></span></div>
@@ -329,7 +331,7 @@ async function submitRegistration() {
     if (err.message && err.message.includes('duplicate')) {
       showToast('This email is already registered', 'error');
     } else {
-      showToast('Submission failed. Please try again or contact congress@kbitassociation.com', 'error');
+      showToast('Submission failed. Please try again or contact secretary@kbitassociation.com', 'error');
     }
   }
 }

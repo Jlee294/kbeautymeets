@@ -63,7 +63,11 @@ a{text-decoration:none;color:inherit}
 .wc-teal::before{background:linear-gradient(90deg,var(--teal),var(--teal-l))}
 .wc-purple::before{background:linear-gradient(90deg,var(--purple),#7B70D0)}
 .wcard:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
-.wcard-icon{font-size:28px;margin-bottom:14px}
+.wcard-icon{margin-bottom:14px}
+.wcard-icon svg{width:28px;height:28px;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.wc-gold .wcard-icon svg{stroke:var(--gold)}
+.wc-teal .wcard-icon svg{stroke:var(--teal)}
+.wc-purple .wcard-icon svg{stroke:var(--purple)}
 .wcard-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px}
 .wcard-desc{font-size:13px;color:var(--gray);line-height:1.75}
 
@@ -186,7 +190,9 @@ a{text-decoration:none;color:inherit}
 .side-title{font-size:14px;font-weight:600;margin-bottom:14px}
 .info-row{display:flex;gap:12px;margin-bottom:10px}
 .info-row:last-child{margin-bottom:0}
-.info-icon{width:32px;height:32px;border-radius:8px;background:var(--gold-p);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.info-icon{width:32px;height:32px;border-radius:8px;background:var(--gold-p);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.info-icon svg{width:16px;height:16px;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.eb-venue svg{width:12px;height:12px;fill:none;stroke:rgba(255,255,255,.35);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-1px;margin-right:2px}
 .info-label{font-size:11px;color:var(--gray2);margin-bottom:2px}
 .info-val{font-size:13px;font-weight:600}
 .info-sub{font-size:11px;color:var(--gray2)}
@@ -272,17 +278,17 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
     <p class="lead fade-up">The Business Meeting Program gives Korean medical device companies direct, scheduled 1:1 sessions with Vietnamese hospital directors, clinic owners, and purchasing managers attending K-Beauty MEETS events. KBIT facilitates the matching and scheduling.</p>
     <div class="what-grid">
       <div class="wcard wc-gold fade-up">
-        <div class="wcard-icon">🤝</div>
+        <div class="wcard-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3 class="wcard-title">Facilitated 1:1 Matching</h3>
         <p class="wcard-desc">KBIT reviews your company profile and meeting objectives, then matches you with pre-qualified Vietnamese buyers — hospital directors, clinic owners, and medical equipment purchasing managers actively attending the event.</p>
       </div>
       <div class="wcard wc-teal fade-up d1">
-        <div class="wcard-icon">📋</div>
+        <div class="wcard-icon"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></svg></div>
         <h3 class="wcard-title">Scheduled & Pre-confirmed</h3>
         <p class="wcard-desc">30-minute dedicated sessions during lunch breaks and coffee breaks at each event. All meetings pre-confirmed by both parties. Dedicated interpreter available. On-site LOI signing facilitated for serious purchase intent.</p>
       </div>
       <div class="wcard wc-purple fade-up d2">
-        <div class="wcard-icon">🌏</div>
+        <div class="wcard-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
         <h3 class="wcard-title">3 Events · 2 Cities</h3>
         <p class="wcard-desc">Register for one, two, or all three events. Each event reaches a different segment of Vietnam's aesthetic medical market — HCMC specialists at Summit and KAT, Hanoi and nationwide delegates at Congress.</p>
       </div>
@@ -304,7 +310,7 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
           <span class="eb-badge">HCMC · Specialist</span>
           <h3 class="eb-name">KSAPS Summit</h3>
           <p class="eb-date">October 3, 2026 · 1 day</p>
-          <p class="eb-venue">📍 Kangnam Aesthetic Hospital, Ho Chi Minh City</p>
+          <p class="eb-venue"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Kangnam Aesthetic Hospital, Ho Chi Minh City</p>
           <div class="eb-slots">
             <div class="eb-slot"><div class="eb-slot-dot"></div>100 specialist doctors (plastic surgery, dermatology)</div>
             <div class="eb-slot"><div class="eb-slot-dot"></div>Press conference + Lecture + Live Device Demo</div>
@@ -325,7 +331,7 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
           <span class="eb-badge">HCMC · Hands-on</span>
           <h3 class="eb-name">KAT Vietnam 2026</h3>
           <p class="eb-date">October 23, 2026 (TBC)</p>
-          <p class="eb-venue">📍 Ho Chi Minh City</p>
+          <p class="eb-venue"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Ho Chi Minh City</p>
           <div class="eb-slots">
             <div class="eb-slot"><div class="eb-slot-dot"></div>Aesthetic doctors seeking hands-on training</div>
             <div class="eb-slot"><div class="eb-slot-dot"></div>Live Device Demo · Botox &amp; Filler Live</div>
@@ -346,7 +352,7 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
           <span class="eb-badge">Hanoi · Flagship</span>
           <h3 class="eb-name">KSAPS Congress</h3>
           <p class="eb-date">October 17–18, 2026 · 2 days</p>
-          <p class="eb-venue">📍 108 Military Central Hospital, Hanoi</p>
+          <p class="eb-venue"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>108 Military Central Hospital, Hanoi</p>
           <div class="eb-slots">
             <div class="eb-slot"><div class="eb-slot-dot"></div>~1,000 delegates nationwide + international</div>
             <div class="eb-slot"><div class="eb-slot-dot"></div>Exhibition booths + Industry Symposia</div>
@@ -536,9 +542,9 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
 
         <div class="side-card">
           <p class="side-title">3 Events · 2 Cities</p>
-          <div class="info-row"><div class="info-icon">📍</div><div><p class="info-label">Summit + KAT</p><p class="info-val">Ho Chi Minh City</p><p class="info-sub">Oct 3 + Oct 23 (TBC)</p></div></div>
-          <div class="info-row"><div class="info-icon">📍</div><div><p class="info-label">Congress</p><p class="info-val">Hanoi</p><p class="info-sub">Oct 17–18 · 108 Military Hospital</p></div></div>
-          <div class="info-row"><div class="info-icon">👥</div><div><p class="info-label">Total reach</p><p class="info-val">1,200+ medical professionals</p><p class="info-sub">Across all 3 events</p></div></div>
+          <div class="info-row"><div class="info-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><p class="info-label">Summit + KAT</p><p class="info-val">Ho Chi Minh City</p><p class="info-sub">Oct 3 + Oct 23 (TBC)</p></div></div>
+          <div class="info-row"><div class="info-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><p class="info-label">Congress</p><p class="info-val">Hanoi</p><p class="info-sub">Oct 17–18 · 108 Military Hospital</p></div></div>
+          <div class="info-row"><div class="info-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><p class="info-label">Total reach</p><p class="info-val">1,200+ medical professionals</p><p class="info-sub">Across all 3 events</p></div></div>
         </div>
 
         <div class="side-card">
@@ -555,7 +561,7 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
 
         <div class="side-card">
           <p class="side-title">Questions?</p>
-          <p class="contact-text">Mint / Mai — Business Program<br><a href="mailto:congress@kbitassociation.com">congress@kbitassociation.com</a><br>Response within 1–2 business days</p>
+          <p class="contact-text">Registration team<br><a href="mailto:secretary@kbitassociation.com">secretary@kbitassociation.com</a><br>Response within 1–2 business days</p>
         </div>
       </div>
     </div>
@@ -569,7 +575,7 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
     <a href="kat.html">KAT Oct 23</a>
     <a href="congress.html">Congress Oct 17–18</a>
   </div>
-  <div class="ft-contact"><a href="mailto:congress@kbitassociation.com">congress@kbitassociation.com</a> · KBIT</div>
+  <div class="ft-contact"><a href="mailto:secretary@kbitassociation.com">secretary@kbitassociation.com</a> · KBIT</div>
 </footer>
 
 <script>
