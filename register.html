@@ -255,7 +255,6 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
               <p class="ev-date">October 3, 2026 · Kangnam Aesthetic Hospital, Ho Chi Minh City</p>
               <div class="ev-tags">
                 <span class="ev-tag et-summit">Korea Meets VSAPS</span>
-                <span class="ev-tag et-cme">CME Certificate (350,000₫)</span>
                 <span class="ev-tag" style="background:var(--bg);color:var(--gray)">Limited 100</span>
               </div>
             </div>
@@ -266,7 +265,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
             <div style="font-size:12px;color:var(--gray);line-height:1.9">
               09:00 Opening · 09:30 <strong>Press Conference</strong> · 10:00 Scientific Lectures (×4)<br>
               13:00 Live Device Demo (3 companies × 60 min) · 16:00 <strong>Live Surgery — Rhinoplasty</strong><br>
-              17:30 Closing + CME Certificate
+              17:30 Closing + Certificate Presentation
             </div>
           </div>
         </div>
@@ -280,7 +279,6 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
               <p class="ev-date">October 4, 2026 · Ho Chi Minh City</p>
               <div class="ev-tags">
                 <span class="ev-tag et-kat">K-Beauty Advanced Skills Training</span>
-                <span class="ev-tag et-cme">CME Certificate (350,000₫)</span>
               </div>
             </div>
             <span class="ev-badge eb-kat">1 day</span>
@@ -326,6 +324,17 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
               <div class="gala-toggle active" id="gala-no" onclick="toggleGala('no')">
                 <div class="gt-radio" style="background:var(--congress);border-color:var(--congress)"></div>
                 <div><p style="font-size:13px;font-weight:500">No, daytime only</p></div>
+              </div>
+            </div>
+            <p class="ev-options-title" style="margin-top:14px">CME Certificate <span style="font-weight:400;text-transform:none;color:var(--gray2);font-size:10px">(optional — 350,000₫/person)</span></p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div class="gala-toggle" id="cme-yes" onclick="toggleCME('yes')">
+                <div class="gt-radio"></div>
+                <div><p style="font-size:13px;font-weight:500">Yes, I'd like a CME Certificate</p><p style="font-size:11px;color:var(--gray2)">350,000₫ · Issued by KSAPS &amp; KBIT after the event</p></div>
+              </div>
+              <div class="gala-toggle active" id="cme-no" onclick="toggleCME('no')">
+                <div class="gt-radio" style="background:var(--congress);border-color:var(--congress)"></div>
+                <div><p style="font-size:13px;font-weight:500">No, I don't need a CME Certificate</p></div>
               </div>
             </div>
           </div>
@@ -511,10 +520,10 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
     <p class="side-title">All events include</p>
     <p style="font-size:13px;color:var(--gray);line-height:1.9">
       ✓ Free to attend<br>
-      ✓ CME Certificate (350,000₫/person)<br>
       ✓ QR ticket for entry<br>
       ✓ Korean KOL speakers<br>
-      ✓ KSAPS + KBIT organized
+      ✓ KSAPS + KBIT organized<br>
+      <span style="color:var(--congress)">★ CME Certificate — Congress only (350,000₫)</span>
     </p>
   </div>
 
@@ -539,7 +548,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
 
 <script>
 // ── State ──
-const state = { summit: true, kat: false, congress: false, katRoom: null, congressRooms: [], gala: false };
+const state = { summit: true, kat: false, congress: false, katRoom: null, congressRooms: [], gala: false, cme: false };
 function syncLang(){ if(window.I18N) window.I18N.apply(window.I18N.get()); }
 function msg(en){ return window.I18N && window.I18N.get()==='ko' ? ((window.KO_TEXT||{})[en] || en) : en; }
 
@@ -579,6 +588,24 @@ function toggleGala(choice) {
   state.gala = choice === 'yes';
   ['yes','no'].forEach(c => {
     const el = document.getElementById('gala-' + c);
+    const radio = el.querySelector('.gt-radio');
+    if (c === choice) {
+      el.classList.add('active');
+      radio.style.background = 'var(--congress)';
+      radio.style.borderColor = 'var(--congress)';
+    } else {
+      el.classList.remove('active');
+      radio.style.background = '';
+      radio.style.borderColor = 'var(--border)';
+    }
+  });
+}
+
+// ── CME toggle ──
+function toggleCME(choice) {
+  state.cme = choice === 'yes';
+  ['yes','no'].forEach(c => {
+    const el = document.getElementById('cme-' + c);
     const radio = el.querySelector('.gt-radio');
     if (c === choice) {
       el.classList.add('active');
@@ -636,9 +663,15 @@ function buildConfirmScreen() {
   container.innerHTML = events.map(ev => `
     <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;background:var(--bg);border:1px solid var(--border)">
       <div style="width:10px;height:10px;border-radius:50%;background:${ev.color};flex-shrink:0"></div>
-      <div><p style="font-size:13px;font-weight:600">${ev.name}</p><p style="font-size:11px;color:var(--gray2)">${ev.date} · ${ev.venue} · CME Certificate (350,000₫)</p></div>
+      <div><p style="font-size:13px;font-weight:600">${ev.name}</p><p style="font-size:11px;color:var(--gray2)">${ev.date} · ${ev.venue}</p></div>
       <div style="margin-left:auto;font-size:11px;padding:3px 10px;border-radius:20px;background:var(--teal-p);color:var(--teal);font-weight:600">🎫 QR ticket</div>
     </div>`).join('');
+  if (state.congress && state.cme) {
+    container.innerHTML += `<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;background:var(--congress-p);border:1px solid var(--congress)">
+      <div style="font-size:16px">📜</div>
+      <div><p style="font-size:13px;font-weight:600">CME Certificate</p><p style="font-size:11px;color:var(--gray2)">350,000₫ · Issued after KSAPS Congress</p></div>
+    </div>`;
+  }
   syncLang();
 
   document.getElementById('confirm-name').textContent = document.getElementById('f-name').value || '—';
@@ -674,6 +707,9 @@ function submitForm() {
       <div class="ecr-dot" style="background:${ev.color}"></div>
       <div><p class="ecr-name">${ev.name}</p><p class="ecr-meta">${ev.date} · QR ticket will be emailed</p></div>
     </div>`).join('');
+  if (state.congress && state.cme) {
+    list.innerHTML += `<div class="ecr"><div class="ecr-dot" style="background:var(--congress)"></div><div><p class="ecr-name">CME Certificate</p><p class="ecr-meta">350,000₫ · Issued after Congress</p></div></div>`;
+  }
   syncLang();
 
   document.getElementById('success-screen').style.display = 'block';
