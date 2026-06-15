@@ -277,7 +277,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
             <div class="ev-checkbox" id="chk-kat"></div>
             <div class="ev-info">
               <p class="ev-name">KAT Vietnam 2026</p>
-              <p class="ev-date">October 23, 2026 (TBC) · Ho Chi Minh City</p>
+              <p class="ev-date">October 4, 2026 · Ho Chi Minh City</p>
               <div class="ev-tags">
                 <span class="ev-tag et-kat">K-Beauty Advanced Skills Training</span>
                 <span class="ev-tag et-cme">CME Certificate</span>
@@ -433,7 +433,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
       <div class="pb-item"><div class="pb-dot"></div><span>All events are <strong>free to attend</strong> — limited seats, reviewed by KBIT Organizing Committee.</span></div>
       <div class="pb-item"><div class="pb-dot"></div><span>Confirmation and QR tickets sent within <strong>3–5 business days</strong> after submission.</span></div>
       <div class="pb-item"><div class="pb-dot"></div><span>One QR ticket generated per event selected. Each QR is unique to you.</span></div>
-      <div class="pb-item"><div class="pb-dot"></div><span><strong>Registration deadlines:</strong> Summit Sep 26 · KAT Oct 16 (TBC) · Congress Oct 17.</span></div>
+      <div class="pb-item"><div class="pb-dot"></div><span><strong>Registration deadlines:</strong> Summit Sep 26 · KAT Sep 27 · Congress Oct 17.</span></div>
       <div class="pb-item"><div class="pb-dot"></div><span>Cannot attend? Email <strong>congress@kbitassociation.com</strong> in advance. No-shows without notice affect priority at future events.</span></div>
       <div class="pb-item"><div class="pb-dot"></div><span><strong>Data:</strong> Your information is shared only with KSAPS, SNUBH, VSAPS, KBIT, and KHIDI for registration and CME purposes. Not shared with any other party.</span></div>
     </div>
@@ -491,7 +491,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
       </div>
       <div class="ep-item" id="sidebar-kat">
         <div class="ep-dot ep-dot-kat"></div>
-        <div><p class="ep-info-name">KAT Vietnam 2026</p><p class="ep-info-meta">Oct 23 (TBC) · HCMC</p></div>
+        <div><p class="ep-info-name">KAT Vietnam 2026</p><p class="ep-info-meta">Oct 4 · HCMC</p></div>
       </div>
       <div class="ep-item" id="sidebar-congress">
         <div class="ep-dot ep-dot-congress"></div>
@@ -503,7 +503,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
   <div class="side-card">
     <p class="side-title">Registration deadlines</p>
     <div class="deadline-row"><span class="deadline-event">KSAPS Summit</span><span class="deadline-date">Sep 26, 2026</span></div>
-    <div class="deadline-row"><span class="deadline-event">KAT Vietnam</span><span class="deadline-date">Oct 16 (TBC)</span></div>
+    <div class="deadline-row"><span class="deadline-event">KAT Vietnam</span><span class="deadline-date">Sep 27, 2026</span></div>
     <div class="deadline-row"><span class="deadline-event">KSAPS Congress</span><span class="deadline-date">Oct 17, 2026</span></div>
   </div>
 
@@ -627,7 +627,7 @@ function goStep(n) {
 function buildConfirmScreen() {
   const events = [];
   if (state.summit) events.push({ name:'KSAPS Summit', date:'Oct 3, 2026', venue:'Kangnam AH, HCMC', color:'var(--summit)' });
-  if (state.kat) events.push({ name:'KAT Vietnam 2026', date:'Oct 23, 2026 (TBC)', venue:'Ho Chi Minh City', color:'var(--kat)' });
+  if (state.kat) events.push({ name:'KAT Vietnam 2026', date:'Oct 4, 2026', venue:'Ho Chi Minh City', color:'var(--kat)' });
   if (state.congress) events.push({ name:'KSAPS Congress', date:'Oct 24–25, 2026', venue:'108 MCH, Hanoi', color:'var(--congress)' });
 
   const container = document.getElementById('confirm-events');
@@ -658,7 +658,7 @@ function submitForm() {
   }
   const events = [];
   if (state.summit) events.push({ name:'KSAPS Summit', date:'Oct 3, 2026', code:'Summit', color:'var(--summit)' });
-  if (state.kat) events.push({ name:'KAT Vietnam 2026', date:'Oct 23 (TBC)', code:'KAT', color:'var(--kat)' });
+  if (state.kat) events.push({ name:'KAT Vietnam 2026', date:'Oct 4', code:'KAT', color:'var(--kat)' });
   if (state.congress) events.push({ name:'KSAPS Congress', date:'Oct 24–25, 2026', code:'Congress', color:'var(--congress)' });
 
   ['page-1','page-2','page-3','page-4'].forEach(p => document.getElementById(p).style.display = 'none');

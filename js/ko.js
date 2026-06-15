@@ -21,7 +21,7 @@ window.KO={
 'ft.reg.kat':'KAT 등록',
 'ft.reg.congress':'학술대회 등록',
 'ft.ev.summit':'KSAPS 서밋 · 10월 3일 · 호치민시',
-'ft.ev.kat':'KAT 베트남 2026 · 10월 23일 · 호치민시 (미정)',
+'ft.ev.kat':'KAT 베트남 2026 · 10월 4일 · 호치민시 ',
 'ft.ev.congress':'KSAPS 학술대회 · 10월 17–18일 · 하노이',
 
 // ===== INDEX PAGE =====
@@ -83,7 +83,7 @@ window.KO={
 'idx.ec.learn':'자세히 보기',
 'idx.ec.kat.badge':'KAT · 호치민시',
 'idx.ec.kat.theme':'"당신의 손. 한국의 기술."',
-'idx.ec.kat.meta':'2026년 10월 23일 (미정) · 호치민시',
+'idx.ec.kat.meta':'2026년 10월 4일  · 호치민시',
 'idx.ec.kat.b1':'독립 행사 2일차',
 'idx.ec.kat.b2':'라이브 기기 시연 · 보톡스 & 필러 라이브 · 라이브 성형수술',
 'idx.ec.kat.b3':'라이브 성형수술',
@@ -113,7 +113,7 @@ window.KO={
 'idx.kat.china.detail':'중국 · 상세 내용 추후 공개',
 'idx.kat.coming':'출시 예정',
 'idx.kat.2026':'KAT 베트남 2026',
-'idx.kat.2026.detail':'10월 23일 (미정) · 호치민시<br>호치민시',
+'idx.kat.2026.detail':'10월 4일  · 호치민시<br>호치민시',
 'idx.kat.regopen':'등록 진행 중',
 'idx.kat.2027':'KAT 2027',
 'idx.kat.2027.detail':'다음 개최지 — 추후 공개',
@@ -322,12 +322,12 @@ window.KO={
 'con.cta.desc':'10월 17일 · 108 중앙군사병원<br>호치민시, 베트남<br>무료 참가 · 좌석 한정 · 심사 기반',
 'con.cta.btn':'지금 등록 — 무료 →',
 'con.cta.also':'다음 날 참가하시나요?',
-'con.cta.also2':'KAT 베트남 10월 23일 등록 →',
+'con.cta.also2':'KAT 베트남 10월 4일 등록 →',
 
 // ===== KAT PAGE =====
 'kat.tag':'KAT · K-Beauty Advanced Skills Training',
 'kat.subtitle':'— 시리즈 중 가장 실용적인 교육의 날. 강연 없음. 순수 한국 기술을 베트남 의사에게 직접 전수 — 라이브 수술, 라이브 기기 시연, 1:5 라이브 관찰 및 Q&A.',
-'kat.meta.date':'2026년 10월 23일 (미정)',
+'kat.meta.date':'2026년 10월 4일 ',
 'kat.meta.venue':'호치민시',
 'kat.meta.type':'독립 행사',
 'kat.meta.surgery':'라이브 수술 4건',
