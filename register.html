@@ -260,7 +260,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
             </div>
             <span class="ev-badge eb-summit">1 day</span>
           </div>
-          <div class="ev-options ev-opt-summit-extra">
+          <div class="ev-options ev-opt-summit-extra" onclick="event.stopPropagation()">
             <p class="ev-options-title">Summit program</p>
             <div style="font-size:12px;color:var(--gray);line-height:1.9">
               09:00 Opening · 09:30 <strong>Press Conference</strong> · 10:00 Scientific Lectures (×4)<br>
@@ -283,7 +283,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
             </div>
             <span class="ev-badge eb-kat">1 day</span>
           </div>
-          <div class="ev-options ev-opt-kat-extra">
+          <div class="ev-options ev-opt-kat-extra" onclick="event.stopPropagation()">
             <p class="ev-options-title">Select preferred room</p>
             <div class="room-choices">
               <div class="rc" id="kat-roomA" onclick="toggleRoom(event,'kat','A')">Room A — Live Device Demo + Botox &amp; Filler Live</div>
@@ -308,7 +308,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
             </div>
             <span class="ev-badge eb-congress">2 days</span>
           </div>
-          <div class="ev-options ev-opt-congress-extra">
+          <div class="ev-options ev-opt-congress-extra" onclick="event.stopPropagation()">
             <p class="ev-options-title">Preferred rooms (Day 1 parallel sessions)</p>
             <div class="room-choices" style="margin-bottom:12px">
               <div class="rc" id="congress-roomA" onclick="toggleRoom(event,'congress','A')">Room A — Medical Devices</div>
