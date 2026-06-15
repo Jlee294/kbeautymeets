@@ -301,7 +301,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
             <div class="ev-checkbox" id="chk-congress"></div>
             <div class="ev-info">
               <p class="ev-name">KSAPS Congress 2026</p>
-              <p class="ev-date">October 24–25, 2026 · 108 Military Central Hospital, Hanoi</p>
+              <p class="ev-date">October 17–18, 2026 · 108 Military Central Hospital, Hanoi</p>
               <div class="ev-tags">
                 <span class="ev-tag et-congress">Korea Meets VSAPS</span>
                 <span class="ev-tag et-cme">CME Certificate</span>
@@ -317,7 +317,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
               <div class="rc" id="congress-roomB" onclick="toggleRoom(event,'congress','B')">Room B — Aesthetic Surgery</div>
               <div class="rc" id="congress-roomC" onclick="toggleRoom(event,'congress','C')">Room C — Korean Protocols</div>
             </div>
-            <p class="ev-options-title" style="margin-top:8px">VIP Gala Dinner — Evening Oct 24 <span style="font-weight:400;text-transform:none;color:var(--gray2);font-size:10px">(optional, limited)</span></p>
+            <p class="ev-options-title" style="margin-top:8px">VIP Gala Dinner — Evening Oct 17 <span style="font-weight:400;text-transform:none;color:var(--gray2);font-size:10px">(optional, limited)</span></p>
             <div style="display:flex;flex-direction:column;gap:6px">
               <div class="gala-toggle" id="gala-yes" onclick="toggleGala('yes')">
                 <div class="gt-radio"></div>
@@ -495,7 +495,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
       </div>
       <div class="ep-item" id="sidebar-congress">
         <div class="ep-dot ep-dot-congress"></div>
-        <div><p class="ep-info-name">KSAPS Congress</p><p class="ep-info-meta">Oct 24–25 · 108 MCH · Hanoi</p></div>
+        <div><p class="ep-info-name">KSAPS Congress</p><p class="ep-info-meta">Oct 17–18 · 108 MCH · Hanoi</p></div>
       </div>
     </div>
   </div>
@@ -628,7 +628,7 @@ function buildConfirmScreen() {
   const events = [];
   if (state.summit) events.push({ name:'KSAPS Summit', date:'Oct 3, 2026', venue:'Kangnam AH, HCMC', color:'var(--summit)' });
   if (state.kat) events.push({ name:'KAT Vietnam 2026', date:'Oct 4, 2026', venue:'Ho Chi Minh City', color:'var(--kat)' });
-  if (state.congress) events.push({ name:'KSAPS Congress', date:'Oct 24–25, 2026', venue:'108 MCH, Hanoi', color:'var(--congress)' });
+  if (state.congress) events.push({ name:'KSAPS Congress', date:'Oct 17–18, 2026', venue:'108 MCH, Hanoi', color:'var(--congress)' });
 
   const container = document.getElementById('confirm-events');
   container.innerHTML = events.map(ev => `
@@ -659,7 +659,7 @@ function submitForm() {
   const events = [];
   if (state.summit) events.push({ name:'KSAPS Summit', date:'Oct 3, 2026', code:'Summit', color:'var(--summit)' });
   if (state.kat) events.push({ name:'KAT Vietnam 2026', date:'Oct 4', code:'KAT', color:'var(--kat)' });
-  if (state.congress) events.push({ name:'KSAPS Congress', date:'Oct 24–25, 2026', code:'Congress', color:'var(--congress)' });
+  if (state.congress) events.push({ name:'KSAPS Congress', date:'Oct 17–18, 2026', code:'Congress', color:'var(--congress)' });
 
   ['page-1','page-2','page-3','page-4'].forEach(p => document.getElementById(p).style.display = 'none');
   document.getElementById('stepper').style.display = 'none';
