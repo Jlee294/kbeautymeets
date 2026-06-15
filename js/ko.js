@@ -6,6 +6,7 @@ window.KO={
 'nav.speakers':'연사진',
 'nav.business':'비즈니스',
 'nav.register':'무료 등록',
+'nav.reg':'등록',
 'nav.regmeet':'미팅 등록',
 
 // ===== SHARED FOOTER =====
