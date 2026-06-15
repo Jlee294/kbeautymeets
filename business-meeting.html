@@ -26,6 +26,10 @@ a{text-decoration:none;color:inherit}
 .nav-links{display:flex;gap:28px;font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
 .nav-links a{color:rgba(255,255,255,.5);transition:color .2s}.nav-links a:hover{color:#fff}
 .nav-links a.active{color:#F0C060}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-lang{display:flex;gap:4px}
+.nav-lang span{font-size:11px;padding:4px 9px;border-radius:20px;cursor:pointer;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15)}
+.nav-lang span.active{background:#5DCBA8;color:var(--ink);border-color:#5DCBA8;font-weight:600}
 .nav-cta{font-size:12px;font-weight:600;padding:8px 18px;background:var(--gold);color:#fff;border-radius:6px;letter-spacing:.04em;text-transform:uppercase}
 
 /* HERO */
@@ -227,13 +231,16 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
 <nav class="nav">
   <div class="nav-logo"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
   <div class="nav-links">
-    <a href="summit.html">Summit</a>
-    <a href="congress.html">Congress</a>
-    <a href="kat.html">KAT</a>
-    <a href="speakers.html">Speakers</a>
-    <a class="active">Business</a>
+    <a href="summit.html" data-i18n="nav.summit">Summit</a>
+    <a href="congress.html" data-i18n="nav.congress">Congress</a>
+    <a href="kat.html" data-i18n="nav.kat">KAT</a>
+    <a href="speakers.html" data-i18n="nav.speakers">Speakers</a>
+    <a class="active" data-i18n="nav.business">Business</a>
   </div>
-  <a href="#register" class="nav-cta">Register Meeting</a>
+  <div class="nav-right">
+    <div class="nav-lang"><span>KR</span><span class="active">EN</span></div>
+    <a href="#register" class="nav-cta">Register Meeting</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -586,5 +593,7 @@ function toggleCheck(el){
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 </script>
+<script src="js/ko.js"></script>
+<script src="js/i18n.js"></script>
 </body>
 </html>

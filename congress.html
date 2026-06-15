@@ -15,6 +15,10 @@ a{text-decoration:none;color:inherit}
 .nav-logo{font-family:var(--font-display);font-size:20px;font-weight:600;color:#fff;letter-spacing:0.02em}.nav-logo em{color:#5DCBA8;font-style:italic}
 .nav-links{display:flex;gap:28px;font-size:13px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase}
 .nav-links a{color:rgba(255,255,255,0.55);transition:color 0.2s}.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-lang{display:flex;gap:4px}
+.nav-lang span{font-size:11px;padding:4px 9px;border-radius:20px;cursor:pointer;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15)}
+.nav-lang span.active{background:#5DCBA8;color:var(--ink);border-color:#5DCBA8;font-weight:600}
 .nav-cta{font-size:12px;font-weight:600;padding:8px 18px;background:var(--coral);color:#fff;border-radius:6px;letter-spacing:0.04em;text-transform:uppercase;transition:background 0.2s}
 .nav-cta:hover{background:var(--coral-light)}
 
@@ -154,13 +158,16 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
 <nav class="nav">
   <div class="nav-logo"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
   <div class="nav-links">
-    <a href="summit.html">Summit</a>
-    <a class="active">Congress</a>
-    <a href="kat.html">KAT</a>
-    <a href="speakers.html">Speakers</a>
-    <a href="business-meeting.html">Business</a>
+    <a href="summit.html" data-i18n="nav.summit">Summit</a>
+    <a class="active" data-i18n="nav.congress">Congress</a>
+    <a href="kat.html" data-i18n="nav.kat">KAT</a>
+    <a href="speakers.html" data-i18n="nav.speakers">Speakers</a>
+    <a href="business-meeting.html" data-i18n="nav.business">Business</a>
   </div>
-  <a href="register.html" class="nav-cta">Register Free</a>
+  <div class="nav-right">
+    <div class="nav-lang"><span>KR</span><span class="active">EN</span></div>
+    <a href="register.html" class="nav-cta" data-i18n="nav.register">Register Free</a>
+  </div>
 </nav>
 
 <section class="hero">
@@ -182,19 +189,19 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
           <span style="font-size:11px;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.13);font-weight:500">KBIT</span>
         </div>
       </div>
-      <span class="hero-badge">Korea Meets VSAPS · KSAPS Congress 2026</span>
-      <h1 class="hero-title">The Flagship<br><em>Congress</em> of<br>K-Beauty MEETS</h1>
-      <p class="hero-desc">Vietnam's largest Korea–Vietnam aesthetic medical exchange. Three parallel rooms, 1,000+ delegates, 15 Korean KOL, K-Innovation Pavilion, and a VIP Gala Dinner — all in one day at 108 Military Central Hospital.</p>
+      <span class="hero-badge" data-i18n="con.badge">Korea Meets VSAPS · KSAPS Congress 2026</span>
+      <h1 class="hero-title" data-i18n="con.title">The Flagship<br><em>Congress</em> of<br>K-Beauty MEETS</h1>
+      <p class="hero-desc" data-i18n="con.desc">Vietnam's largest Korea–Vietnam aesthetic medical exchange. Three parallel rooms, 1,000+ delegates, 15 Korean KOL, K-Innovation Pavilion, and a VIP Gala Dinner — all in one day at 108 Military Central Hospital.</p>
       <div class="hero-ctas">
-        <a href="register.html" class="btn-coral">Register now — Free</a>
-        <a href="#program" class="btn-ghost-white">View program</a>
+        <a href="register.html" class="btn-coral" data-i18n="con.btn.register">Register now — Free</a>
+        <a href="#program" class="btn-ghost-white" data-i18n="con.btn.program">View program</a>
       </div>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-num">1,000+</div><div class="hero-stat-label">Delegates</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">Parallel rooms all day</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">15</div><div class="hero-stat-label">Korean KOL presenting</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">15+</div><div class="hero-stat-label">Exhibition booths</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">1,000+</div><div class="hero-stat-label" data-i18n="con.stat.delegates">Delegates</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label" data-i18n="con.stat.rooms">Parallel rooms all day</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">15</div><div class="hero-stat-label" data-i18n="con.stat.kol">Korean KOL presenting</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">15+</div><div class="hero-stat-label" data-i18n="con.stat.booths">Exhibition booths</div></div>
       <div class="hero-stat"><div class="hero-stat-num">Oct 17–18</div><div class="hero-stat-label">2026 · 108 Military Central Hospital HCMC</div></div>
     </div>
   </div>
@@ -503,5 +510,7 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
 const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 </script>
+<script src="js/ko.js"></script>
+<script src="js/i18n.js"></script>
 </body>
 </html>

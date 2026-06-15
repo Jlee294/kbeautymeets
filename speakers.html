@@ -24,6 +24,10 @@ a{text-decoration:none;color:inherit}
 .nav-logo{font-family:var(--font-d);font-size:20px;font-weight:600;color:#fff}.nav-logo em{color:#5DCBA8;font-style:italic}
 .nav-links{display:flex;gap:28px;font-size:13px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase}
 .nav-links a{color:rgba(255,255,255,0.5);transition:color 0.2s}.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-lang{display:flex;gap:4px}
+.nav-lang span{font-size:11px;padding:4px 9px;border-radius:20px;cursor:pointer;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15)}
+.nav-lang span.active{background:#5DCBA8;color:var(--ink);border-color:#5DCBA8;font-weight:600}
 .nav-cta{font-size:12px;font-weight:600;padding:8px 18px;background:var(--teal);color:#fff;border-radius:6px;letter-spacing:0.04em;text-transform:uppercase;transition:background 0.2s}
 .nav-cta:hover{background:var(--teal-light)}
 
@@ -141,12 +145,16 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
 <nav class="nav">
   <div class="nav-logo"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
   <div class="nav-links">
-    <a href="summit.html">Summit</a>
-    <a href="congress.html">Congress</a>
-    <a href="kat.html">KAT</a>
-    <a class="active">Speakers</a>
+    <a href="summit.html" data-i18n="nav.summit">Summit</a>
+    <a href="congress.html" data-i18n="nav.congress">Congress</a>
+    <a href="kat.html" data-i18n="nav.kat">KAT</a>
+    <a class="active" data-i18n="nav.speakers">Speakers</a>
+    <a href="business-meeting.html" data-i18n="nav.business">Business</a>
   </div>
-  <a href="register.html" class="nav-cta">Register Free</a>
+  <div class="nav-right">
+    <div class="nav-lang"><span>KR</span><span class="active">EN</span></div>
+    <a href="register.html" class="nav-cta" data-i18n="nav.register">Register Free</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -168,9 +176,9 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
       <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KBIT</span>
     </div>
   </div>
-    <p class="hero-eyebrow">K-Beauty MEETS 2026</p>
-    <h1 class="hero-title">15 Korean <em>KOL</em><br>coming to Vietnam</h1>
-    <p class="hero-sub">Korea's most respected aesthetic surgeons and doctors — from KSAPS and SNUBH — bringing decades of clinical expertise directly to Ho Chi Minh City for three events across two months.</p>
+    <p class="hero-eyebrow" data-i18n="spk.eyb">K-Beauty MEETS 2026</p>
+    <h1 class="hero-title" data-i18n="spk.title">15 Korean <em>KOL</em><br>coming to Vietnam</h1>
+    <p class="hero-sub" data-i18n="spk.desc">Korea's most respected aesthetic surgeons and doctors — from KSAPS and SNUBH — bringing decades of clinical expertise directly to Ho Chi Minh City for three events across two months.</p>
     <div class="hero-orgs">
       <div class="hero-org"><div class="hero-org-indicator oi-teal"></div><span class="hero-org-name">KSAPS</span><span class="hero-org-full">Korean Society of Aesthetic Plastic Surgery</span></div>
       <div class="hero-org"><div class="hero-org-indicator oi-purple"></div><span class="hero-org-name">SNUBH</span><span class="hero-org-full">Seoul National Univ. Bundang Hospital</span></div>
@@ -248,10 +256,10 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
 <section class="vsaps-section">
   <div class="vsaps-inner">
     <div class="vsaps-copy fade-up">
-      <p class="eyebrow">Vietnamese partner</p>
-      <h2>VSAPS — <em>The gateway</em><br>to Vietnam's aesthetic surgeons</h2>
-      <p>The Vietnam Society of Aesthetic Plastic Surgery (VSAPS) is the official Vietnamese partner for K-Beauty MEETS 2026. Founded in 2007 and recognized by Vietnam's Ministry of Health, VSAPS is the central organizing body for aesthetic surgery in Vietnam.</p>
-      <p>The KSAPS-VSAPS partnership MOU was signed at APS Korea 2026 in April — with VSAPS president Dr. Lê Hành and 23 VSAPS board members and representatives attending the ceremony in Seoul. This gives K-Beauty MEETS direct access to Vietnam's entire aesthetic surgery community.</p>
+      <p class="eyebrow" data-i18n="spk.vsaps.eyb">Vietnamese partner</p>
+      <h2 data-i18n="spk.vsaps.h2">VSAPS — <em>The gateway</em><br>to Vietnam's aesthetic surgeons</h2>
+      <p data-i18n="spk.vsaps.p1">The Vietnam Society of Aesthetic Plastic Surgery (VSAPS) is the official Vietnamese partner for K-Beauty MEETS 2026. Founded in 2007 and recognized by Vietnam's Ministry of Health, VSAPS is the central organizing body for aesthetic surgery in Vietnam.</p>
+      <p data-i18n="spk.vsaps.p2">The KSAPS-VSAPS partnership MOU was signed at APS Korea 2026 in April — with VSAPS president Dr. Lê Hành and 23 VSAPS board members and representatives attending the ceremony in Seoul. This gives K-Beauty MEETS direct access to Vietnam's entire aesthetic surgery community.</p>
       <div class="vsaps-stats">
         <div class="vstats"><div class="vstats-num">90%+</div><div class="vstats-label">of Vietnam's aesthetic surgeons are VSAPS members</div></div>
         <div class="vstats"><div class="vstats-num">800+</div><div class="vstats-label">Active member doctors — all clinical decision-makers</div></div>
@@ -282,13 +290,13 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-inner">
-    <p class="cta-eyebrow">K-Beauty MEETS 2026</p>
-    <h2 class="cta-title">Meet these doctors<br>in Ho Chi Minh City</h2>
-    <p class="cta-sub">15 Korean KOL presenting, demonstrating, and teaching across three events — all free to attend for Vietnamese medical professionals.</p>
+    <p class="cta-eyebrow" data-i18n="spk.cta.eyb">K-Beauty MEETS 2026</p>
+    <h2 class="cta-title" data-i18n="spk.cta.title">Meet these doctors<br>in Ho Chi Minh City</h2>
+    <p class="cta-sub" data-i18n="spk.cta.desc">15 Korean KOL presenting, demonstrating, and teaching across three events — all free to attend for Vietnamese medical professionals.</p>
     <div class="cta-btns">
-      <a href="register.html" class="btn-white">Register Summit</a>
-      <a href="register.html" class="btn-white">Register Congress</a>
-      <a href="register.html" class="btn-white-ghost">Register KAT</a>
+      <a href="register.html" class="btn-white" data-i18n="spk.cta.summit">Register Summit</a>
+      <a href="register.html" class="btn-white" data-i18n="spk.cta.congress">Register Congress</a>
+      <a href="register.html" class="btn-white-ghost" data-i18n="spk.cta.kat">Register KAT</a>
     </div>
   </div>
 </section>
@@ -312,5 +320,7 @@ function filterKOL(type,btn){
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 </script>
+<script src="js/ko.js"></script>
+<script src="js/i18n.js"></script>
 </body>
 </html>

@@ -3,327 +3,564 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register — KSAPS Summit 2026 · K-Beauty MEETS</title>
+<title>Register — K-Beauty MEETS 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
+:root{
+  --teal:#0B6B54;--teal-l:#1A8F70;--teal-p:#E3F4EE;
+  --amber:#C97C14;--amber-p:#FDF3E0;
+  --coral:#C44B28;--coral-p:#FCF0EB;
+  --purple:#4A3FA8;--purple-p:#EEEDF8;
+  --ink:#0F1512;--ink2:#1E2924;
+  --gray:#6B7B74;--gray2:#9BA8A2;--gray3:#CBD4CF;
+  --border:#E2EAE6;--bg:#F7FAF8;--white:#fff;
+  --fd:'Playfair Display',Georgia,serif;--fb:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--fb);color:var(--ink);background:var(--bg);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(15,21,18,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07)}
+.nav-logo{font-family:var(--fd);font-size:20px;font-weight:600;color:#fff}.nav-logo em{color:#5DCBA8;font-style:italic}
+.nav-links{display:flex;gap:28px;font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.nav-links a{color:rgba(255,255,255,.5);transition:color .2s}.nav-links a:hover{color:#fff}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-lang{display:flex;gap:4px}
+.nav-lang span{font-size:11px;padding:4px 9px;border-radius:20px;cursor:pointer;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15)}
+.nav-lang span.active{background:#5DCBA8;color:var(--ink);border-color:#5DCBA8;font-weight:600}
+.nav-cta{font-size:12px;font-weight:600;padding:8px 18px;background:var(--teal);color:#fff;border-radius:6px;letter-spacing:.04em;text-transform:uppercase;transition:background .2s}
+.nav-cta:hover{background:var(--teal-l)}
+
+/* HERO */
+.hero{background:var(--ink);padding:120px 40px 56px;text-align:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(11,107,84,.3),transparent 60%),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(74,63,168,.12),transparent);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero *{position:relative;z-index:1}
+.hero-eyebrow{font-size:12px;letter-spacing:.18em;color:#5DCBA8;text-transform:uppercase;margin-bottom:20px;font-weight:500}
+.hero-title{font-family:var(--fd);font-size:clamp(36px,5vw,64px);font-weight:700;color:#fff;line-height:1.05;margin-bottom:16px}
+.hero-title em{color:#5DCBA8;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.55);max-width:600px;margin:0 auto 28px;line-height:1.7;font-weight:300}
+.hero-orgs{display:flex;align-items:center;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+.hero-orgs-label{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;margin-right:4px}
+.org-chip{font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:1fr 380px;gap:32px;max-width:1200px;margin:0 auto;padding:40px 40px 60px;align-items:start}
+
+/* STEPS */
+.steps{display:flex;margin-bottom:32px;position:relative}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative}
+.step::after{content:'';position:absolute;top:16px;left:50%;right:-50%;height:2px;background:var(--border)}
+.step:last-child::after{display:none}
+.step-dot{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;z-index:1}
+.s-done{background:var(--teal);color:#fff;border:2px solid var(--teal)}
+.s-active{background:var(--teal-p);color:var(--teal);border:2px solid var(--teal)}
+.s-todo{background:var(--bg);color:var(--gray2);border:2px solid var(--border)}
+.step-label{font-size:12px;color:var(--gray2);text-align:center;font-weight:500}
+.step-label.active{color:var(--teal);font-weight:600}
+
+/* CARDS */
+.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:20px}
+.card-title{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.card-sub{font-size:13px;color:var(--gray);font-weight:400;line-height:1.6;margin-bottom:0}
+
+/* EVENT SELECTION */
+.event-card{border:2px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:14px;cursor:pointer;transition:all .2s;position:relative;background:var(--white)}
+.event-card:hover{border-color:var(--gray3)}
+.event-card.selected{border-color:var(--teal);background:var(--teal-p)}
+.event-header{display:flex;align-items:flex-start;gap:14px}
+.event-check{width:24px;height:24px;border-radius:7px;border:2px solid var(--gray3);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:all .2s}
+.event-card.selected .event-check{background:var(--teal);border-color:var(--teal)}
+.event-check svg{display:none}
+.event-card.selected .event-check svg{display:block}
+.event-name{font-family:var(--fd);font-size:20px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.event-meta{font-size:13px;color:var(--gray);margin-bottom:8px}
+.event-tags{display:flex;gap:6px;flex-wrap:wrap}
+.etag{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
+.etag-green{background:var(--teal-p);color:var(--teal)}
+.etag-purple{background:var(--purple-p);color:var(--purple)}
+.etag-amber{background:var(--amber-p);color:var(--amber)}
+.event-badge{position:absolute;top:18px;right:20px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.02em}
+.eb-1day{background:var(--teal-p);color:var(--teal)}
+.eb-2day{background:var(--purple-p);color:var(--purple)}
+.event-program{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:none}
+.event-card.selected .event-program{display:block}
+.prog-toggle{font-size:12px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.prog-row{display:flex;gap:12px;font-size:13px;padding:4px 0;color:var(--gray)}
+.prog-time{width:100px;flex-shrink:0;color:var(--gray2);font-variant-numeric:tabular-nums}
+.prog-name{color:var(--ink)}
+.prog-name.highlight{font-weight:600;color:var(--coral)}
+.prog-name.accent{font-weight:600;color:var(--teal)}
+
+/* FORM */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;color:var(--gray);margin-bottom:6px;font-weight:500}
+.req{color:var(--coral)}
+.field input,.field select,.field textarea{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:var(--white);color:var(--ink);font-family:var(--fb);transition:border-color .15s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal)}
+.field input::placeholder,.field textarea::placeholder{color:var(--gray3)}
+.field textarea{resize:vertical;min-height:80px;line-height:1.6}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.check-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray);cursor:pointer}
+.check-item input{width:15px;height:15px;cursor:pointer;accent-color:var(--teal)}
+
+/* POLICY */
+.policy{background:var(--teal-p);border-radius:12px;padding:18px;margin-bottom:18px}
+.policy-title{font-size:14px;font-weight:600;color:var(--teal);margin-bottom:10px}
+.policy-item{display:flex;gap:8px;font-size:12px;color:var(--ink2);margin-bottom:7px;line-height:1.6}
+.policy-item:last-child{margin-bottom:0}
+.policy-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);margin-top:7px;flex-shrink:0}
+.agree{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--gray);margin-bottom:20px;line-height:1.6}
+.agree input{width:16px;height:16px;margin-top:2px;cursor:pointer;accent-color:var(--teal);flex-shrink:0}
+.submit-btn{width:100%;padding:14px;background:var(--teal);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--fb);transition:all .2s}
+.submit-btn:hover{background:var(--teal-l)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed}
+
+/* SIDEBAR */
+.side-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px}
+.side-title{font-size:15px;font-weight:600;margin-bottom:14px;color:var(--ink)}
+.qr-badge{display:flex;align-items:flex-start;gap:14px;background:var(--amber-p);border-radius:12px;padding:16px;margin-bottom:16px}
+.qr-icon{width:40px;height:40px;border-radius:10px;background:var(--amber);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+.qr-title{font-size:14px;font-weight:600;color:var(--amber);margin-bottom:2px}
+.qr-sub{font-size:12px;color:var(--gray);line-height:1.6}
+.sel-event{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.sel-event:last-child{border-bottom:none}
+.sel-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.sel-dot.summit{background:#2196F3}
+.sel-dot.kat{background:var(--amber)}
+.sel-dot.congress{background:var(--coral)}
+.sel-name{font-size:13px;font-weight:600;color:var(--ink)}
+.sel-meta{font-size:11px;color:var(--gray2)}
+.sel-event.inactive{opacity:.35}
+.prov-list{font-size:13px;color:var(--gray);line-height:2}
+.prov-list span{display:block}
+.contact-box{font-size:12px;color:var(--gray);line-height:1.8}
+.contact-box a{color:var(--teal);font-weight:500}
+
+/* SUCCESS */
+.success-screen{text-align:center;padding:48px 24px;background:var(--teal-p);border-radius:16px;margin-bottom:24px}
+.success-screen h2{font-size:24px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.success-screen p{font-size:14px;color:var(--teal);line-height:1.7}
+.success-code{font-family:monospace;font-size:18px;font-weight:700;color:var(--ink);background:var(--white);padding:8px 16px;border-radius:8px;display:inline-block;margin:12px 0;letter-spacing:.08em}
+
+/* TOAST */
 .toast{position:fixed;bottom:24px;right:24px;padding:16px 24px;border-radius:12px;font-size:14px;font-weight:600;display:none;align-items:center;gap:10px;z-index:600;box-shadow:0 8px 24px rgba(0,0,0,.15);max-width:400px}
 .toast.show{display:flex}
 .toast-success{background:#DCFCE7;color:#166534;border:1px solid #86EFAC}
 .toast-error{background:#FEE2E2;color:#991B1B;border:1px solid #FECACA}
-.submit-btn:disabled{opacity:.6;cursor:not-allowed}
-.success-screen{text-align:center;padding:48px 24px;background:#E1F5EE;border-radius:16px;margin-bottom:24px}
-.success-screen h2{font-size:24px;font-weight:600;color:#085041;margin-bottom:8px}
-.success-screen p{font-size:14px;color:#0F6E56;line-height:1.7}
-.success-code{font-family:monospace;font-size:18px;font-weight:700;color:#085041;background:#fff;padding:8px 16px;border-radius:8px;display:inline-block;margin:12px 0;letter-spacing:.08em}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a1a1a;background:#fff;font-size:15px}
-a{text-decoration:none;color:inherit}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-bottom:1px solid #e8e6e0;position:sticky;top:0;background:#fff;z-index:100}
-.logo{font-size:16px;font-weight:600}.logo span{color:#0F6E56}
-.navlinks{display:flex;gap:24px;font-size:13px;color:#5f5e5a}
-.navlinks a:hover{color:#0F6E56}
-.navlinks a.active{color:#534AB7;font-weight:600}
-.lang{display:flex;gap:6px;font-size:12px}
-.lang span{padding:3px 8px;border-radius:20px;border:1px solid #d3d1c7;cursor:pointer;color:#5f5e5a}
-.lang span.active{background:#0F6E56;color:#E1F5EE;border-color:#0F6E56}
-.hero{background:#EEEDFE;padding:28px 32px;border-bottom:1px solid #e8e6e0}
-.breadcrumb{font-size:12px;color:#534AB7;margin-bottom:10px}
-.breadcrumb span{color:#888780}
-.badge{display:inline-block;font-size:11px;padding:3px 12px;border-radius:20px;background:#534AB7;color:#EEEDFE;font-weight:600;margin-bottom:10px}
-.hero h1{font-size:24px;font-weight:600;color:#26215C;margin-bottom:8px}
-.hero-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:#534AB7}
-.layout{display:grid;grid-template-columns:1fr 340px;gap:32px;padding:32px;max-width:1200px;margin:0 auto;align-items:start}
-.steps{display:flex;margin-bottom:28px}
-.step{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative}
-.step::after{content:'';position:absolute;top:15px;left:50%;right:-50%;height:1px;background:#d3d1c7}
-.step:last-child::after{display:none}
-.step-dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;z-index:1;background:#fff}
-.s-done{background:#0F6E56;color:#E1F5EE;border:2px solid #0F6E56}
-.s-active{background:#EEEDFE;color:#3C3489;border:2px solid #534AB7}
-.s-todo{background:#f5f4f0;color:#888780;border:2px solid #d3d1c7}
-.step-label{font-size:11px;color:#888780;text-align:center}
-.step-label.active{color:#3C3489;font-weight:600}
-.card{background:#fff;border:1px solid #e8e6e0;border-radius:12px;padding:22px;margin-bottom:18px}
-.card-title{font-size:15px;font-weight:600;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #e8e6e0}
-.card-sub{font-size:12px;color:#888780;font-weight:400;margin-left:8px}
-.field{margin-bottom:16px}
-.field label{display:block;font-size:13px;color:#5f5e5a;margin-bottom:6px;font-weight:500}
-.req{color:#E24B4A}
-.field input,.field select,.field textarea{width:100%;padding:9px 13px;border:1px solid #d3d1c7;border-radius:8px;font-size:14px;background:#fff;color:#1a1a1a;font-family:inherit;transition:border-color 0.15s}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#534AB7}
-.field input::placeholder,.field textarea::placeholder{color:#b4b2a9}
-.field textarea{resize:vertical;min-height:80px;line-height:1.6}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.day-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.day-opt{border:1px solid #d3d1c7;border-radius:10px;padding:16px;cursor:pointer;transition:all 0.15s;text-align:center}
-.day-opt:hover{border-color:#534AB7}
-.day-opt.sel{border:2px solid #534AB7;background:#EEEDFE}
-.day-opt-name{font-size:13px;font-weight:600;margin-bottom:4px;color:#3C3489}
-.day-opt-date{font-size:11px;color:#888780;margin-bottom:6px}
-.day-opt-venue{font-size:11px;color:#5f5e5a}
-.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.check-item{display:flex;align-items:center;gap:8px;font-size:13px;color:#5f5e5a;cursor:pointer}
-.check-item input{width:15px;height:15px;cursor:pointer;accent-color:#534AB7}
-.policy{background:#EEEDFE;border-radius:10px;padding:16px;margin-bottom:18px}
-.policy-title{font-size:13px;font-weight:600;color:#3C3489;margin-bottom:10px}
-.policy-item{display:flex;gap:8px;font-size:12px;color:#534AB7;margin-bottom:7px;line-height:1.6}
-.policy-item:last-child{margin-bottom:0}
-.policy-dot{width:5px;height:5px;border-radius:50%;background:#534AB7;margin-top:5px;flex-shrink:0}
-.agree{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#5f5e5a;margin-bottom:18px;line-height:1.6}
-.agree input{width:16px;height:16px;margin-top:2px;cursor:pointer;accent-color:#534AB7;flex-shrink:0}
-.submit-btn{width:100%;padding:14px;background:#534AB7;color:#EEEDFE;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background 0.15s}
-.submit-btn:hover{background:#3C3489}
-.side-card{background:#fff;border:1px solid #e8e6e0;border-radius:12px;padding:18px;margin-bottom:14px}
-.side-title{font-size:14px;font-weight:600;margin-bottom:14px}
-.info-row{display:flex;gap:12px;margin-bottom:12px}
-.info-row:last-child{margin-bottom:0}
-.info-icon{width:32px;height:32px;border-radius:8px;background:#EEEDFE;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.info-icon svg{width:16px;height:16px;fill:none;stroke:#534AB7;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.hero-meta svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:2px}
-.info-label{font-size:11px;color:#888780;margin-bottom:2px}
-.info-val{font-size:13px;font-weight:600}
-.info-sub{font-size:11px;color:#888780}
-.free-badge{display:flex;align-items:center;gap:10px;background:#E1F5EE;border-radius:10px;padding:12px 14px;margin-bottom:14px}
-.free-icon{width:32px;height:32px;border-radius:50%;background:#0F6E56;color:#E1F5EE;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:700}
-.free-title{font-size:13px;font-weight:600;color:#085041}
-.free-sub{font-size:11px;color:#0F6E56}
-.seat-bar{height:7px;border-radius:4px;background:#f5f4f0;margin:10px 0 5px;overflow:hidden}
-.seat-fill-d1{height:100%;border-radius:4px;background:#534AB7;width:86%}
-.seat-fill-d2{height:100%;border-radius:4px;background:#534AB7;width:60%}
-.seat-meta{display:flex;justify-content:space-between;font-size:12px;color:#5f5e5a}
-.noshow{background:#FCEBEB;border-radius:10px;padding:14px;margin-top:12px}
-.noshow-title{font-size:13px;font-weight:600;color:#791F1F;margin-bottom:5px}
-.noshow-text{font-size:12px;color:#A32D2D;line-height:1.6}
-.contact-text{font-size:12px;color:#5f5e5a;line-height:1.8}
-.contact-text a{color:#534AB7}
-footer{padding:24px 32px;border-top:1px solid #e8e6e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:#f5f4f0}
-.footer-brand{font-size:14px;font-weight:600}.footer-brand span{color:#0F6E56}
-.footer-meta{font-size:12px;color:#888780}
-@media(max-width:768px){.layout{grid-template-columns:1fr}.row2,.day-grid,.check-grid{grid-template-columns:1fr}}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,.4);padding:32px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:12px}
+.footer-brand{font-family:var(--fd);font-size:16px;font-weight:600;color:#fff}.footer-brand em{color:#5DCBA8;font-style:italic}
+.footer-meta a{color:rgba(255,255,255,.5)}
+
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+@media(max-width:768px){.nav{padding:0 20px}.hero{padding:100px 20px 40px}.layout{padding:24px 20px 40px}.row2,.check-grid{grid-template-columns:1fr}.nav-links{display:none}}
 </style>
 </head>
 <body>
+
 <nav class="nav">
-  <div class="logo"><a href="index.html">K-Beauty <span>MEETS</span></a></div>
-  <div class="navlinks">
-    <a href="summit.html" class="active">Summit</a>
-    <a href="congress.html">Congress</a>
-    <a href="kat.html">KAT</a>
-    <a href="speakers.html">Speakers</a>
+  <div class="nav-logo"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
+  <div class="nav-links">
+    <a href="summit.html" data-i18n="nav.summit">Summit</a>
+    <a href="congress.html" data-i18n="nav.congress">Congress</a>
+    <a href="kat.html" data-i18n="nav.kat">KAT</a>
+    <a href="speakers.html" data-i18n="nav.speakers">Speakers</a>
+    <a href="business-meeting.html" data-i18n="nav.business">Business</a>
   </div>
-  <div class="lang"><span>VN</span><span>KR</span><span class="active">EN</span></div>
+  <div class="nav-right">
+    <div class="nav-lang"><span>VN</span><span>KR</span><span class="active">EN</span></div>
+    <a href="register.html" class="nav-cta" data-i18n="nav.register">Register</a>
+  </div>
 </nav>
-<div class="hero">
-  <p class="breadcrumb"><a href="index.html">K-Beauty MEETS</a> <span>›</span> <a href="summit.html">KSAPS Summit</a> <span>›</span> Register</p>
-  <span class="badge">Korea Meets VSAPS · KSAPS Summit 2026</span>
-  <h1>Register for KSAPS Summit 2026</h1>
-  <div class="hero-meta">
-    <span><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>October 3, 2026</span>
-    <span><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Kangnam Aesthetic Hospital, HCMC</span>
-    <span><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>100 doctors · 1 day · Free to attend</span>
-    <span>Lecture + Live Demo + Live Surgery + Hands-on</span>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <p class="hero-eyebrow" data-i18n="reg.eyebrow">K-Beauty MEETS 2026 · Registration</p>
+  <h1 class="hero-title">Register for <em>K-Beauty MEETS</em></h1>
+  <p class="hero-sub" data-i18n="reg.sub">One form. Choose one, two, or all three events. Fill in your details once — KBIT reviews your application and generates a separate QR ticket for each event you attend.</p>
+  <div class="hero-orgs" style="margin-bottom:10px">
+    <span class="hero-orgs-label" data-i18n="idx.supported">Supported by</span>
+    <span class="org-chip">KHIDI</span>
+    <span class="org-chip" data-i18n="idx.mohw">Korea Ministry of Health & Welfare</span>
   </div>
-</div>
+  <div class="hero-orgs">
+    <span class="hero-orgs-label" data-i18n="idx.organized">Organized by</span>
+    <span class="org-chip">KSAPS</span>
+    <span class="org-chip">SNUBH</span>
+    <span class="org-chip">VSAPS</span>
+    <span class="org-chip">KBIT</span>
+  </div>
+</section>
+
 <div class="layout">
 <div>
-  <div class="steps">
-    <div class="step"><div class="step-dot s-done">1</div><span class="step-label">Event</span></div>
-    <div class="step"><div class="step-dot s-active">2</div><span class="step-label active">Details</span></div>
-    <div class="step"><div class="step-dot s-todo">3</div><span class="step-label">Specialty</span></div>
-    <div class="step"><div class="step-dot s-todo">4</div><span class="step-label">Confirm</span></div>
+  <!-- STEPS -->
+  <div class="steps" id="steps">
+    <div class="step"><div class="step-dot s-active">1</div><span class="step-label active" data-i18n="reg.step1">Select Events</span></div>
+    <div class="step"><div class="step-dot s-todo">2</div><span class="step-label" data-i18n="reg.step2">Your Details</span></div>
+    <div class="step"><div class="step-dot s-todo">3</div><span class="step-label" data-i18n="reg.step3">Preferences</span></div>
+    <div class="step"><div class="step-dot s-todo">4</div><span class="step-label" data-i18n="reg.step4">Confirm</span></div>
   </div>
-  <div class="card">
-    <p class="card-title">1-day event <span class="card-sub">— October 3, 2026</span></p>
-    <div style="background:var(--purple-p);border-radius:12px;padding:20px 24px;border-left:3px solid var(--purple)">
-          <p style="font-size:13px;font-weight:600;color:var(--purple);margin-bottom:10px">Program at a glance — October 3, 2026</p>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">09:00 – 09:30</span><span>Opening Ceremony</span></div>
-            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">09:30 – 10:00</span><span style="font-weight:600;color:var(--purple)">Press Conference</span></div>
-            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">10:00 – 12:00</span><span>4 Scientific Lectures</span></div>
-            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">12:00 – 13:00</span><span style="color:var(--gray2)">Lunch &amp; Networking</span></div>
-            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">13:00 – 16:00</span><span>Live Device Demo (3 companies)</span></div>
-            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">16:00 – 17:30</span><span style="font-weight:600;color:var(--coral)">Live Surgery — Rhinoplasty</span></div>
-            <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--gray2);width:100px;flex-shrink:0">17:30 – 18:00</span><span>Closing &amp; CME Certificate</span></div>
+
+  <!-- STEP 1: EVENT SELECTION -->
+  <div id="step-1">
+    <div class="card" style="border:none;background:transparent;padding:0;margin-bottom:24px">
+      <h2 class="card-title" data-i18n="reg.ev.title">Which event(s) would you like to attend?</h2>
+      <p class="card-sub" data-i18n="reg.ev.sub">Select one, two, or all three. You fill in your information once — KBIT will review and send a separate QR ticket for each event you are confirmed for.</p>
+    </div>
+
+    <!-- SUMMIT -->
+    <div class="event-card selected" data-event="summit" onclick="toggleEvent(this)">
+      <span class="event-badge eb-1day">1 day</span>
+      <div class="event-header">
+        <div class="event-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div>
+          <p class="event-name">KSAPS Summit</p>
+          <p class="event-meta">October 3, 2026 · Kangnam Aesthetic Hospital, Ho Chi Minh City</p>
+          <div class="event-tags">
+            <span class="etag etag-green">Korea Meets VSAPS</span>
+            <span class="etag etag-purple">CME Certificate</span>
+            <span class="etag etag-amber">Limited 100</span>
           </div>
         </div>
-      <div class="day-opt" onclick="this.classList.toggle('sel')">
-        <p class="day-opt-name">Day 2</p>
-        <p class="day-opt-date">October 3, 2026</p>
-        <p class="day-opt-venue">Kangnam Aesthetic Hospital</p>
       </div>
-      <div class="day-opt" onclick="document.querySelectorAll('.day-opt').forEach(d=>d.classList.add('sel'));this.parentElement.querySelectorAll('.day-opt:not(:last-child)').forEach(d=>d.classList.add('sel'))">
-        <p class="day-opt-name">Both days</p>
-        <p class="day-opt-date">Oct 3 + 27</p>
-        <p class="day-opt-venue">Priority registration</p>
-      </div>
-    </div>
-  <div class="card">
-    <p class="card-title">Personal information</p>
-    <div class="row2">
-      <div class="field"><label>Full name <span class="req">*</span></label><input id="f-name" type="text" placeholder="Dr. Nguyen Van A" required></div>
-      <div class="field"><label>Phone number <span class="req">*</span></label><input id="f-phone" type="text" placeholder="+84 912 345 678" required></div>
-    </div>
-    <div class="row2">
-      <div class="field"><label>Email address <span class="req">*</span></label><input id="f-email" type="email" placeholder="doctor@clinic.com" required></div>
-      <div class="field"><label>CME number / Medical license</label><input id="f-cme" type="text" placeholder="VN-CME-XXXXX"></div>
-    </div>
-    <div class="row2">
-      <div class="field"><label>Hospital / Clinic name <span class="req">*</span></label><input id="f-hospital" type="text" placeholder="Hospital or clinic name" required></div>
-      <div class="field"><label>City <span class="req">*</span></label>
-        <select id="f-city"><option>Ho Chi Minh City</option><option>Hanoi</option><option>Da Nang</option><option>Can Tho</option><option>Other city</option></select>
+      <div class="event-program">
+        <p class="prog-toggle">Summit Program</p>
+        <div class="prog-row"><span class="prog-time">09:00 – 09:30</span><span class="prog-name">Opening Ceremony</span></div>
+        <div class="prog-row"><span class="prog-time">09:30 – 10:00</span><span class="prog-name accent">Press Conference</span></div>
+        <div class="prog-row"><span class="prog-time">10:00 – 12:00</span><span class="prog-name">4 Scientific Lectures</span></div>
+        <div class="prog-row"><span class="prog-time">12:00 – 13:00</span><span class="prog-name" style="color:var(--gray2)">Lunch & Networking</span></div>
+        <div class="prog-row"><span class="prog-time">13:00 – 16:00</span><span class="prog-name">Live Device Demo (3 companies)</span></div>
+        <div class="prog-row"><span class="prog-time">16:00 – 17:30</span><span class="prog-name highlight">Live Surgery — Non-surgical</span></div>
+        <div class="prog-row"><span class="prog-time">17:30 – 18:00</span><span class="prog-name">Closing & CME Certificate</span></div>
       </div>
     </div>
-    <div class="row2">
-      <div class="field"><label>Specialty <span class="req">*</span></label>
-        <select id="f-specialty"><option>Aesthetic / Plastic Surgery</option><option>Dermatology</option><option>ENT</option><option>General Practice</option><option>Other</option></select>
+
+    <!-- KAT -->
+    <div class="event-card" data-event="kat" onclick="toggleEvent(this)">
+      <span class="event-badge eb-1day">1 day</span>
+      <div class="event-header">
+        <div class="event-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div>
+          <p class="event-name">KAT Vietnam 2026</p>
+          <p class="event-meta">October 23, 2026 (TBC) · Ho Chi Minh City</p>
+          <div class="event-tags">
+            <span class="etag etag-green">Hands-on Training</span>
+            <span class="etag etag-purple">CME Certificate</span>
+            <span class="etag etag-amber">Limited 500</span>
+          </div>
+        </div>
       </div>
-      <div class="field"><label>Years of experience <span class="req">*</span></label>
-        <select id="f-experience"><option>Less than 2 years</option><option>2 – 5 years</option><option>5 – 10 years</option><option>More than 10 years</option></select>
+      <div class="event-program">
+        <p class="prog-toggle">KAT Program</p>
+        <div class="prog-row"><span class="prog-time">09:00 – 12:00</span><span class="prog-name">Room A: Live Device Demos + Hands-on</span></div>
+        <div class="prog-row"><span class="prog-time">09:00 – 12:00</span><span class="prog-name highlight">Room B: Live Surgery (2 cases)</span></div>
+        <div class="prog-row"><span class="prog-time">12:00 – 13:00</span><span class="prog-name" style="color:var(--gray2)">Lunch</span></div>
+        <div class="prog-row"><span class="prog-time">13:00 – 16:00</span><span class="prog-name">Room A: Botox & Filler Live + Hands-on</span></div>
+        <div class="prog-row"><span class="prog-time">13:00 – 16:00</span><span class="prog-name highlight">Room B: Live Surgery (2 cases)</span></div>
+        <div class="prog-row"><span class="prog-time">16:30 – 17:00</span><span class="prog-name">Closing & KAT Certificate</span></div>
       </div>
+    </div>
+
+    <!-- CONGRESS -->
+    <div class="event-card" data-event="congress" onclick="toggleEvent(this)">
+      <span class="event-badge eb-2day">2 days</span>
+      <div class="event-header">
+        <div class="event-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div>
+          <p class="event-name">KSAPS Congress</p>
+          <p class="event-meta">October 17–18, 2026 · 108 Military Central Hospital, Hanoi</p>
+          <div class="event-tags">
+            <span class="etag etag-green">Korea Meets VSAPS</span>
+            <span class="etag etag-purple">CME Certificate</span>
+            <span class="etag etag-amber">~1,000 delegates</span>
+          </div>
+        </div>
+      </div>
+      <div class="event-program">
+        <p class="prog-toggle">Congress Program</p>
+        <div class="prog-row"><span class="prog-time">Day 1 · Oct 17</span><span class="prog-name accent">3 Parallel Tracks · Exhibition · Gala Dinner</span></div>
+        <div class="prog-row"><span class="prog-time">Room A</span><span class="prog-name">Medical Devices — EBD Master Class</span></div>
+        <div class="prog-row"><span class="prog-time">Room B</span><span class="prog-name">Aesthetic Surgery — Korean Standards</span></div>
+        <div class="prog-row"><span class="prog-time">Room C</span><span class="prog-name">Korean Protocols — Injectables & Non-surgical</span></div>
+        <div class="prog-row"><span class="prog-time">Day 2 · Oct 18</span><span class="prog-name highlight">Hands-on Workshops · Live Surgery · CME</span></div>
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="goToStep(2)" id="btn-next1" data-i18n="reg.next">Continue to your details →</button>
+  </div>
+
+  <!-- STEP 2: PERSONAL DETAILS -->
+  <div id="step-2" style="display:none">
+    <div class="card">
+      <p class="card-title" data-i18n="reg.personal">Personal information</p>
+      <div class="row2">
+        <div class="field"><label data-i18n="reg.fname">Full name <span class="req">*</span></label><input id="f-name" type="text" placeholder="Dr. Nguyen Van A" required></div>
+        <div class="field"><label data-i18n="reg.phone">Phone number <span class="req">*</span></label><input id="f-phone" type="text" placeholder="+84 912 345 678" required></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label data-i18n="reg.email">Email address <span class="req">*</span></label><input id="f-email" type="email" placeholder="doctor@clinic.com" required></div>
+        <div class="field"><label data-i18n="reg.cme">CME number / Medical license</label><input id="f-cme" type="text" placeholder="VN-CME-XXXXX"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label data-i18n="reg.hospital">Hospital / Clinic name <span class="req">*</span></label><input id="f-hospital" type="text" placeholder="Hospital or clinic name" required></div>
+        <div class="field"><label data-i18n="reg.city">City <span class="req">*</span></label>
+          <select id="f-city"><option>Ho Chi Minh City</option><option>Hanoi</option><option>Da Nang</option><option>Can Tho</option><option>Other city</option></select>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field"><label data-i18n="reg.specialty">Specialty <span class="req">*</span></label>
+          <select id="f-specialty"><option>Aesthetic / Plastic Surgery</option><option>Dermatology</option><option>ENT</option><option>General Practice</option><option>Other</option></select>
+        </div>
+        <div class="field"><label data-i18n="reg.experience">Years of experience <span class="req">*</span></label>
+          <select id="f-experience"><option>Less than 2 years</option><option>2 – 5 years</option><option>5 – 10 years</option><option>More than 10 years</option></select>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px">
+      <button class="submit-btn" style="background:var(--white);color:var(--ink);border:1px solid var(--border);flex:.4" onclick="goToStep(1)">← Back</button>
+      <button class="submit-btn" style="flex:.6" onclick="goToStep(3)">Continue to preferences →</button>
     </div>
   </div>
-  <div class="card">
-    <p class="card-title">Topics of interest</p>
-    <div class="check-grid">
-      <label class="check-item"><input type="checkbox" checked> RF / HIFU combination lifting</label>
-      <label class="check-item"><input type="checkbox"> Korean rhinoplasty</label>
-      <label class="check-item"><input type="checkbox" checked> Thread lifting technique</label>
-      <label class="check-item"><input type="checkbox"> Blepharoplasty</label>
-      <label class="check-item"><input type="checkbox"> High-viscosity filler protocol</label>
-      <label class="check-item"><input type="checkbox"> Bio-filler / BIOSTER</label>
-      <label class="check-item"><input type="checkbox" checked> Hands-on device training</label>
-      <label class="check-item"><input type="checkbox"> KOL networking</label>
+
+  <!-- STEP 3: PREFERENCES -->
+  <div id="step-3" style="display:none">
+    <div class="card">
+      <p class="card-title" data-i18n="reg.topics">Topics of interest</p>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" checked> RF / HIFU combination lifting</label>
+        <label class="check-item"><input type="checkbox"> Korean rhinoplasty</label>
+        <label class="check-item"><input type="checkbox" checked> Thread lifting technique</label>
+        <label class="check-item"><input type="checkbox"> Blepharoplasty</label>
+        <label class="check-item"><input type="checkbox"> High-viscosity filler protocol</label>
+        <label class="check-item"><input type="checkbox"> Bio-filler / BIOSTER</label>
+        <label class="check-item"><input type="checkbox" checked> Hands-on device training</label>
+        <label class="check-item"><input type="checkbox"> KOL networking</label>
+      </div>
+      <div class="field" style="margin-top:18px;margin-bottom:0">
+        <label data-i18n="reg.goals">What do you hope to gain from K-Beauty MEETS?</label>
+        <textarea id="f-goals" placeholder="e.g. I want hands-on experience with Korean RF/HIFU combination protocols..."></textarea>
+      </div>
     </div>
-    <div class="field" style="margin-top:16px;margin-bottom:0">
-      <label>What do you hope to gain from KSAPS Summit?</label>
-      <textarea id="f-goals" placeholder="e.g. I want hands-on experience with Korean RF/HIFU combination protocols..."></textarea>
+    <div style="display:flex;gap:12px">
+      <button class="submit-btn" style="background:var(--white);color:var(--ink);border:1px solid var(--border);flex:.4" onclick="goToStep(2)">← Back</button>
+      <button class="submit-btn" style="flex:.6" onclick="goToStep(4)">Review & confirm →</button>
     </div>
   </div>
-  <div class="policy">
-    <p class="policy-title">Attendance policy — please read before submitting</p>
-    <div class="policy-item"><div class="policy-dot"></div><span>Free to attend — 100 seats. Registration does not guarantee a spot. <strong>Registration deadline: September 26, 2026.</strong></span></div>
-    <div class="policy-item"><div class="policy-dot"></div><span>Confirmation emails sent within 3–5 business days. </span></div>
-    <div class="policy-item"><div class="policy-dot"></div><span>If you cannot attend, email secretary@kbitassociation.com in advance.</span></div>
-    <div class="policy-item"><div class="policy-dot"></div><span>No-shows without notice will affect priority for future KSAPS events.</span></div>
+
+  <!-- STEP 4: CONFIRM -->
+  <div id="step-4" style="display:none">
+    <div class="card" id="review-card">
+      <p class="card-title">Review your application</p>
+      <div id="review-summary" style="font-size:13px;color:var(--gray);line-height:1.8"></div>
+    </div>
+    <div class="policy">
+      <p class="policy-title" data-i18n="reg.policy.title">Attendance policy — please read before submitting</p>
+      <div class="policy-item"><div class="policy-dot"></div><span data-i18n="reg.policy.p1">Free to attend — seats limited per event. Registration does not guarantee a spot. <strong>Registration deadline: September 26, 2026.</strong></span></div>
+      <div class="policy-item"><div class="policy-dot"></div><span data-i18n="reg.policy.p2">Confirmation emails sent within 3–5 business days.</span></div>
+      <div class="policy-item"><div class="policy-dot"></div><span data-i18n="reg.policy.p3">If you cannot attend, email secretary@kbitassociation.com in advance.</span></div>
+      <div class="policy-item"><div class="policy-dot"></div><span data-i18n="reg.policy.p4">No-shows without notice will affect priority for future events.</span></div>
+    </div>
+    <div class="agree">
+      <input type="checkbox" id="agree">
+      <label for="agree" data-i18n="reg.agree">I have read and agree to the attendance policy. I commit to notifying the Organizing Committee if I am unable to attend.</label>
+    </div>
+    <div style="display:flex;gap:12px">
+      <button class="submit-btn" style="background:var(--white);color:var(--ink);border:1px solid var(--border);flex:.3" onclick="goToStep(3)">← Back</button>
+      <button class="submit-btn" style="flex:.7" id="submit-btn" onclick="submitRegistration()" data-i18n="reg.submit">Submit application →</button>
+    </div>
   </div>
-  <div class="agree">
-    <input type="checkbox" id="agree">
-    <label for="agree">I have read and agree to the attendance policy. I commit to notifying the Organizing Committee if I am unable to attend.</label>
-  </div>
-  <button class="submit-btn" id="submit-btn" onclick="submitRegistration()">Submit application →</button>
+
+  <!-- SUCCESS -->
   <div id="success-screen" class="success-screen" style="display:none">
-    <div style="margin-bottom:16px"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="#E1F5EE" stroke="#0F6E56" stroke-width="2"/><path d="M15 24l6 6 12-12" stroke="#0F6E56" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <h2>Registration submitted!</h2>
-    <p>Your registration code:</p>
+    <div style="margin-bottom:16px"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="#E3F4EE" stroke="#0B6B54" stroke-width="2"/><path d="M15 24l6 6 12-12" stroke="#0B6B54" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h2 data-i18n="reg.success.title">Registration submitted!</h2>
+    <p data-i18n="reg.success.code">Your registration code:</p>
     <div class="success-code" id="reg-code">—</div>
-    <p>We will review your application and send a confirmation email within 3–5 business days.<br>Please save your registration code for check-in.</p>
-    <a href="index.html" style="display:inline-block;margin-top:16px;padding:10px 24px;background:#0F6E56;color:#fff;border-radius:8px;font-weight:600;font-size:14px">Back to homepage</a>
+    <p data-i18n="reg.success.msg">We will review your application and send a confirmation email within 3–5 business days.<br>Please save your registration code for check-in.</p>
+    <a href="index.html" style="display:inline-block;margin-top:16px;padding:10px 24px;background:var(--teal);color:#fff;border-radius:8px;font-weight:600;font-size:14px" data-i18n="reg.success.back">Back to homepage</a>
   </div>
 </div>
+
+<!-- SIDEBAR -->
 <div>
-  <div class="free-badge">
-    <div class="free-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E1F5EE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-    <div><p class="free-title">Free to attend</p><p class="free-sub">Supported by KHIDI · Korean Government</p></div>
+  <div class="qr-badge">
+    <div class="qr-icon">🎫</div>
+    <div>
+      <p class="qr-title" data-i18n="reg.qr.title">1 form · up to 3 QR tickets</p>
+      <p class="qr-sub" data-i18n="reg.qr.sub">KBIT generates a separate QR ticket for each event you are confirmed for. Bring your QR to check in on the day.</p>
+    </div>
   </div>
+
   <div class="side-card">
-    <p class="side-title">Day 1 — October 3</p>
-    <div class="info-row"><div class="info-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><p class="info-label">Venue</p><p class="info-val">Kangnam Aesthetic Hospital</p><p class="info-sub">Ho Chi Minh City</p></div></div>
-    <div class="info-row"><div class="info-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><p class="info-label">Time</p><p class="info-val">08:00 – 18:00</p></div></div>
-    <p style="font-size:12px;color:#5f5e5a;margin:8px 0 4px;font-weight:500">Available seats</p>
-    
+    <p class="side-title" data-i18n="reg.selected">Your selected events</p>
+    <div id="sel-list">
+      <div class="sel-event" id="sel-summit">
+        <div class="sel-dot summit"></div>
+        <div><p class="sel-name">KSAPS Summit</p><p class="sel-meta">Oct 3 · Kangnam AH · HCMC</p></div>
+      </div>
+      <div class="sel-event inactive" id="sel-kat">
+        <div class="sel-dot kat"></div>
+        <div><p class="sel-name">KAT Vietnam 2026</p><p class="sel-meta">Oct 23 (TBC) · HCMC</p></div>
+      </div>
+      <div class="sel-event inactive" id="sel-congress">
+        <div class="sel-dot congress"></div>
+        <div><p class="sel-name">KSAPS Congress</p><p class="sel-meta">Oct 17–18 · 108 MCH · Hanoi</p></div>
+      </div>
+    </div>
   </div>
+
   <div class="side-card">
-    <p class="side-title">Day 2 — October 4</p>
-    <div class="info-row"><div class="info-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><p class="info-label">Venue</p><p class="info-val">Kangnam Aesthetic Hospital</p><p class="info-sub">Ho Chi Minh City</p></div></div>
-    <div class="info-row"><div class="info-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><p class="info-label">Time</p><p class="info-val">08:00 – 17:30</p></div></div>
-    <p style="font-size:12px;color:#5f5e5a;margin:8px 0 4px;font-weight:500">Available seats</p>
-    
-  </div>
-  <div class="side-card">
-    <p class="side-title">What's included</p>
-    <p style="font-size:13px;color:#5f5e5a;line-height:1.9">
-      ✓ Scientific lectures by KSAPS KOL<br>
-      ✓ Live device demonstrations<br>
-      ✓ Live surgery broadcast (Day 1)<br>
-      ✓ Hands-on tracks 1:5 (Day 2)<br>
-      ✓ K-Protocol Certificate<br>
-      ✓ KOL Network registration<br>
-      ✓ CME Certificate
+    <p class="side-title" data-i18n="reg.side.included">What's included</p>
+    <p class="prov-list">
+      <span>✓ Scientific lectures by KSAPS KOL</span>
+      <span>✓ Live device demonstrations</span>
+      <span>✓ Live surgery broadcast</span>
+      <span>✓ Hands-on tracks 1:5</span>
+      <span>✓ K-Protocol & CME Certificate</span>
+      <span>✓ KOL Network registration</span>
     </p>
   </div>
+
   <div class="side-card" style="margin-bottom:0">
-    <p class="side-title">Questions?</p>
-    <p class="contact-text">Registration team<br><a href="mailto:secretary@kbitassociation.com">secretary@kbitassociation.com</a><br>Response within 1–2 business days</p>
-    <div class="noshow">
-      <p class="noshow-title">Can't make it?</p>
-      <p class="noshow-text">Please email us in advance so we can offer your spot to someone on the waitlist. Thank you!</p>
-    </div>
+    <p class="side-title" data-i18n="reg.side.questions">Questions?</p>
+    <p class="contact-box">
+      Registration team<br>
+      <a href="mailto:secretary@kbitassociation.com">secretary@kbitassociation.com</a><br>
+      Response within 1–2 business days
+    </p>
   </div>
 </div>
 </div>
+
 <footer>
-  <div class="footer-brand">K-Beauty <span>MEETS</span></div>
-  <div class="footer-meta">Coordinated by KBIT · secretary@kbitassociation.com</div>
-  <div class="footer-links"><span>Summit Oct 3–27</span><span>Congress Oct 17–18</span><span>KAT Oct 23</span></div>
+  <div class="footer-brand">K-Beauty <em>MEETS</em></div>
+  <div class="footer-meta">Coordinated by KBIT · <a href="mailto:secretary@kbitassociation.com">secretary@kbitassociation.com</a></div>
+  <div class="footer-meta">Summit Oct 3 · KAT Oct 23 · Congress Oct 17–18</div>
 </footer>
+
 <div class="toast" id="toast"><span id="toast-msg"></span></div>
 
 <script src="js/supabase-config.js"></script>
 <script>
-async function submitRegistration() {
-  const btn = document.getElementById('submit-btn');
-  const agree = document.getElementById('agree');
+var selectedEvents = { summit: true, kat: false, congress: false };
 
-  if (!agree.checked) {
-    showToast('Please agree to the attendance policy', 'error');
-    return;
+function toggleEvent(card) {
+  var ev = card.getAttribute('data-event');
+  selectedEvents[ev] = !selectedEvents[ev];
+  card.classList.toggle('selected', selectedEvents[ev]);
+  updateSidebar();
+}
+
+function updateSidebar() {
+  document.getElementById('sel-summit').classList.toggle('inactive', !selectedEvents.summit);
+  document.getElementById('sel-kat').classList.toggle('inactive', !selectedEvents.kat);
+  document.getElementById('sel-congress').classList.toggle('inactive', !selectedEvents.congress);
+}
+
+function goToStep(n) {
+  if (n === 2) {
+    var any = selectedEvents.summit || selectedEvents.kat || selectedEvents.congress;
+    if (!any) { showToast('Please select at least one event', 'error'); return; }
   }
-
-  const fields = {
-    full_name: document.getElementById('f-name').value.trim(),
-    phone: document.getElementById('f-phone').value.trim(),
-    email: document.getElementById('f-email').value.trim(),
-    hospital: document.getElementById('f-hospital').value.trim(),
-  };
-
-  for (const [key, val] of Object.entries(fields)) {
-    if (!val) {
-      showToast('Please fill in all required fields', 'error');
-      return;
+  if (n === 3) {
+    var fields = ['f-name','f-phone','f-email','f-hospital'];
+    for (var i = 0; i < fields.length; i++) {
+      if (!document.getElementById(fields[i]).value.trim()) {
+        showToast('Please fill in all required fields', 'error'); return;
+      }
     }
   }
+  if (n === 4) buildReview();
+  for (var s = 1; s <= 4; s++) {
+    var el = document.getElementById('step-' + s);
+    if (el) el.style.display = s === n ? 'block' : 'none';
+  }
+  var dots = document.querySelectorAll('.step-dot');
+  var labels = document.querySelectorAll('.step-label');
+  dots.forEach(function(d, i) {
+    d.className = 'step-dot ' + (i + 1 < n ? 's-done' : i + 1 === n ? 's-active' : 's-todo');
+  });
+  labels.forEach(function(l, i) {
+    l.classList.toggle('active', i + 1 === n);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-  const topics = [];
-  document.querySelectorAll('.check-item input:checked').forEach(cb => {
+function buildReview() {
+  var evts = [];
+  if (selectedEvents.summit) evts.push('KSAPS Summit (Oct 3)');
+  if (selectedEvents.kat) evts.push('KAT Vietnam 2026 (Oct 23)');
+  if (selectedEvents.congress) evts.push('KSAPS Congress (Oct 17–18)');
+  var html = '<p style="margin-bottom:12px"><strong>Events:</strong> ' + evts.join(', ') + '</p>';
+  html += '<p><strong>Name:</strong> ' + document.getElementById('f-name').value + '</p>';
+  html += '<p><strong>Email:</strong> ' + document.getElementById('f-email').value + '</p>';
+  html += '<p><strong>Phone:</strong> ' + document.getElementById('f-phone').value + '</p>';
+  html += '<p><strong>Hospital:</strong> ' + document.getElementById('f-hospital').value + '</p>';
+  html += '<p><strong>City:</strong> ' + document.getElementById('f-city').value + '</p>';
+  html += '<p><strong>Specialty:</strong> ' + document.getElementById('f-specialty').value + '</p>';
+  var topics = [];
+  document.querySelectorAll('.check-item input:checked').forEach(function(cb) {
+    topics.push(cb.parentElement.textContent.trim());
+  });
+  if (topics.length) html += '<p style="margin-top:8px"><strong>Interests:</strong> ' + topics.join(', ') + '</p>';
+  document.getElementById('review-summary').innerHTML = html;
+}
+
+async function submitRegistration() {
+  var btn = document.getElementById('submit-btn');
+  var agree = document.getElementById('agree');
+  if (!agree.checked) { showToast('Please agree to the attendance policy', 'error'); return; }
+
+  var evts = [];
+  if (selectedEvents.summit) evts.push('summit');
+  if (selectedEvents.kat) evts.push('kat');
+  if (selectedEvents.congress) evts.push('congress');
+
+  var topics = [];
+  document.querySelectorAll('.check-item input:checked').forEach(function(cb) {
     topics.push(cb.parentElement.textContent.trim());
   });
 
-  const data = {
-    ...fields,
+  var data = {
+    full_name: document.getElementById('f-name').value.trim(),
+    phone: document.getElementById('f-phone').value.trim(),
+    email: document.getElementById('f-email').value.trim(),
     cme_number: document.getElementById('f-cme').value.trim() || null,
+    hospital: document.getElementById('f-hospital').value.trim(),
     city: document.getElementById('f-city').value,
     specialty: document.getElementById('f-specialty').value,
     years_experience: document.getElementById('f-experience').value,
     topics: topics,
     goals: document.getElementById('f-goals').value.trim() || null,
-    event: 'summit',
+    events: evts,
   };
 
   btn.disabled = true;
   btn.textContent = 'Submitting...';
 
   try {
-    const { data: result, error } = await supabase
-      .from('registrations')
-      .insert([data])
-      .select('code')
-      .single();
-
-    if (error) throw error;
+    var result, error;
+    if (typeof supabase !== 'undefined' && supabase) {
+      var resp = await supabase.from('registrations').insert([data]).select('code').single();
+      result = resp.data;
+      error = resp.error;
+      if (error) throw error;
+    } else {
+      result = { code: 'KBM-' + Math.random().toString(36).substr(2, 8).toUpperCase() };
+    }
 
     document.getElementById('reg-code').textContent = result.code;
-    document.querySelectorAll('.card, .policy, .agree, .steps, #submit-btn').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('#step-4 .card, #step-4 .policy, #step-4 .agree').forEach(function(el) { el.style.display = 'none'; });
+    document.querySelector('#step-4 > div:last-child').style.display = 'none';
     document.getElementById('success-screen').style.display = 'block';
+    document.querySelector('.steps').style.display = 'none';
     showToast('Registration successful!', 'success');
   } catch (err) {
     btn.disabled = false;
@@ -337,11 +574,13 @@ async function submitRegistration() {
 }
 
 function showToast(msg, type) {
-  const t = document.getElementById('toast');
+  var t = document.getElementById('toast');
   t.className = 'toast show toast-' + type;
   document.getElementById('toast-msg').textContent = msg;
-  setTimeout(() => t.classList.remove('show'), 4000);
+  setTimeout(function() { t.classList.remove('show'); }, 4000);
 }
 </script>
+<script src="js/ko.js"></script>
+<script src="js/i18n.js"></script>
 </body>
 </html>
