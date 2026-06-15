@@ -33,21 +33,21 @@ a{text-decoration:none;color:inherit}
 .nav-cta{font-size:12px;font-weight:600;padding:8px 18px;background:var(--gold);color:#fff;border-radius:6px;letter-spacing:.04em;text-transform:uppercase}
 
 /* HERO */
-.hero{background:linear-gradient(160deg,#0A0C08 0%,#141A10 40%,#1A2418 100%);padding:130px 40px 72px;position:relative;overflow:hidden}
+.hero{background:linear-gradient(160deg,#0A0C08 0%,#141A10 40%,#1A2418 100%);padding:130px 40px 72px;text-align:center;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(184,148,42,0.15),transparent 60%);pointer-events:none}
 .hero-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
 .hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
 .hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#F0C060;margin-bottom:14px}
 .hero-title{font-family:var(--fd);font-size:clamp(36px,5vw,60px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:14px;letter-spacing:-.02em}
 .hero-title em{color:#F0C060;font-style:italic}
-.hero-sub{font-size:16px;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:32px;font-weight:300;max-width:620px}
-.hero-events{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:32px;font-weight:300;max-width:620px;margin:0 auto 32px}
+.hero-events{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px;justify-content:center}
 .he{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);font-size:13px;color:rgba(255,255,255,.7)}
 .he-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .hed-summit{background:#AFA9EC}
 .hed-congress{background:#F0A090}
 .hed-kat{background:#F0C060}
-.hero-cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.hero-cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 .btn-gold{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--gold);color:#fff;border-radius:8px;font-size:14px;font-weight:600;transition:all .2s}
 .btn-gold:hover{background:#9A7A20;transform:translateY(-1px)}
 .btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:transparent;color:rgba(255,255,255,.65);border-radius:8px;font-size:14px;font-weight:500;border:1px solid rgba(255,255,255,.18);transition:all .2s}
@@ -249,27 +249,27 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
   <div class="hero-bg"></div>
   <div class="hero-lines"></div>
   <div class="hero-inner">
-    <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;margin-bottom:24px">
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase">Supported by</span>
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:center;margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center">
+      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase" data-i18n="biz.hero.supported">Supported by</span>
       <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KHIDI</span>
-      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">Korea Ministry of Health &amp; Welfare</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em" data-i18n="biz.hero.mohw">Korea Ministry of Health &amp; Welfare</span>
     </div>
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase">Organized by</span>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center">
+      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase" data-i18n="biz.hero.organized">Organized by</span>
       <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KSAPS</span>
       <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">SNUBH</span>
       <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">VSAPS</span>
       <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KBIT</span>
     </div>
   </div>
-    <p class="hero-eyebrow">K-Beauty MEETS 2026 · Business Program</p>
-    <h1 class="hero-title">Meet the decision-makers.<br><em>Close the deal.</em></h1>
-    <p class="hero-sub">K-Beauty MEETS 2026 brings 1,000+ Vietnamese aesthetic physicians and clinic decision-makers to three events across Ho Chi Minh City and Hanoi. Register your company for a structured 1:1 Business Meeting — KBIT will facilitate the connection.</p>
+    <p class="hero-eyebrow" data-i18n="biz.hero.eyb">K-Beauty MEETS 2026 · Business Program</p>
+    <h1 class="hero-title" data-i18n="biz.hero.title">Meet the decision-makers.<br><em>Close the deal.</em></h1>
+    <p class="hero-sub" data-i18n="biz.hero.sub">K-Beauty MEETS 2026 brings 1,000+ Vietnamese aesthetic physicians and clinic decision-makers to three events across Ho Chi Minh City and Hanoi. Register your company for a structured 1:1 Business Meeting — KBIT will facilitate the connection.</p>
     <div class="hero-events">
-      <div class="he"><div class="he-dot hed-summit"></div>KSAPS Summit · Oct 3 · HCMC</div>
-      <div class="he"><div class="he-dot hed-kat"></div>KAT Vietnam · Oct 4 · HCMC</div>
-      <div class="he"><div class="he-dot hed-congress"></div>KSAPS Congress · Oct 17–18 · Hanoi</div>
+      <div class="he" data-i18n="biz.hero.ev.summit"><div class="he-dot hed-summit"></div>KSAPS Summit · Oct 3 · HCMC</div>
+      <div class="he" data-i18n="biz.hero.ev.kat"><div class="he-dot hed-kat"></div>KAT Vietnam · Oct 4 · HCMC</div>
+      <div class="he" data-i18n="biz.hero.ev.congress"><div class="he-dot hed-congress"></div>KSAPS Congress · Oct 17–18 · Hanoi</div>
     </div>
     <div class="hero-cta-row">
       <a href="#register" class="btn-gold">Register for Business Meeting →</a>

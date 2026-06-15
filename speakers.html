@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Speakers — K-Beauty MEETS 2026</title>
+<title data-i18n="spk.page.title">Speakers — K-Beauty MEETS 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -163,14 +163,14 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
   <div class="hero-bg"></div>
   <div class="hero-dots"></div>
   <div class="hero-inner">
-    <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;margin-bottom:24px">
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase">Supported by</span>
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:center;margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center">
+      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase" data-i18n="spk.supported">Supported by</span>
       <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KHIDI</span>
-      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">Korea Ministry of Health &amp; Welfare</span>
+      <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em" data-i18n="spk.mohw">Korea Ministry of Health &amp; Welfare</span>
     </div>
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase">Organized by</span>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center">
+      <span style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase" data-i18n="spk.organized">Organized by</span>
       <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">KSAPS</span>
       <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">SNUBH</span>
       <span style="font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);font-weight:500;letter-spacing:.04em">VSAPS</span>
@@ -181,22 +181,22 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
     <h1 class="hero-title" data-i18n="spk.title">15 Korean <em>KOL</em><br>coming to Vietnam</h1>
     <p class="hero-sub" data-i18n="spk.desc">Korea's most respected aesthetic surgeons and doctors — from KSAPS and SNUBH — bringing decades of clinical expertise directly to Ho Chi Minh City for three events across two months.</p>
     <div class="hero-orgs">
-      <div class="hero-org"><div class="hero-org-indicator oi-teal"></div><span class="hero-org-name">KSAPS</span><span class="hero-org-full">Korean Society of Aesthetic Plastic Surgery</span></div>
-      <div class="hero-org"><div class="hero-org-indicator oi-purple"></div><span class="hero-org-name">SNUBH</span><span class="hero-org-full">Seoul National Univ. Bundang Hospital</span></div>
+      <div class="hero-org"><div class="hero-org-indicator oi-teal"></div><span class="hero-org-name">KSAPS</span><span class="hero-org-full" data-i18n="spk.org.ksaps.full">Korean Society of Aesthetic Plastic Surgery</span></div>
+      <div class="hero-org"><div class="hero-org-indicator oi-purple"></div><span class="hero-org-name">SNUBH</span><span class="hero-org-full" data-i18n="spk.org.snubh.full">Seoul National Univ. Bundang Hospital</span></div>
     </div>
   </div>
 </section>
 
 <!-- FILTER BAR -->
 <div class="filter-bar">
-  <button class="filter-btn active" onclick="filterKOL('all',this)">All KOL <span class="filter-count">15</span></button>
-  <button class="filter-btn" onclick="filterKOL('summit',this)">Summit <span class="filter-count">4+</span></button>
-  <button class="filter-btn" onclick="filterKOL('congress',this)">Congress <span class="filter-count">8+</span></button>
-  <button class="filter-btn" onclick="filterKOL('kat',this)">KAT <span class="filter-count">8+</span></button>
+  <button class="filter-btn active" onclick="filterKOL('all',this)" data-i18n="spk.filter.all">All KOL <span class="filter-count">15</span></button>
+  <button class="filter-btn" onclick="filterKOL('summit',this)" data-i18n="spk.filter.summit">Summit <span class="filter-count">4+</span></button>
+  <button class="filter-btn" onclick="filterKOL('congress',this)" data-i18n="spk.filter.congress">Congress <span class="filter-count">8+</span></button>
+  <button class="filter-btn" onclick="filterKOL('kat',this)" data-i18n="spk.filter.kat">KAT <span class="filter-count">8+</span></button>
   <button class="filter-btn" onclick="filterKOL('snubh',this)">SNUBH</button>
   <button class="filter-btn" onclick="filterKOL('ksaps',this)">KSAPS</button>
-  <button class="filter-btn" onclick="filterKOL('surgery',this)">Surgery</button>
-  <button class="filter-btn" onclick="filterKOL('devices',this)">Devices</button>
+  <button class="filter-btn" onclick="filterKOL('surgery',this)" data-i18n="spk.filter.surgery">Surgery</button>
+  <button class="filter-btn" onclick="filterKOL('devices',this)" data-i18n="spk.filter.devices">Devices</button>
 </div>
 
 <!-- KOL GRID -->

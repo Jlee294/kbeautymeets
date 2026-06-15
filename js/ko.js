@@ -169,7 +169,7 @@ window.KO={
 'sum.inc2':'라이브 기기 시연 — 한국 기업 6개사',
 'sum.inc3':'라이브 OR 수술 방송 (1일차)',
 'sum.inc4':'3개 병행 핸즈온 트랙 (2일차)',
-'sum.inc5':'K-프로토콜 수료증 + CME 수료증',
+'sum.inc5':'K-프로토콜 수료증 + CME 수료증 (350,000₫/인)',
 'sum.prog.eyb':'프로그램',
 'sum.prog.h2':'2026년 10월 3일<br><em>종일 프로그램</em>',
 'sum.prog.lead':'하루 집중 프로그램 — 오전 기자회견, 학술 강연, 오후 라이브 기기 시연, 마무리 라이브 비성형술 수술 방송.',
@@ -282,8 +282,8 @@ window.KO={
 'con.card2.desc':'한국 의료기기 기업 15개사 이상의 전시 구역. B2B 매칭, KOL 인증 사용자 프로그램, 유통 계약 LOI 체결.',
 'con.card3.title':'VIP 갈라 디너',
 'con.card3.desc':'10월 17일 저녁 150~200명 VIP 전용 네트워킹 디너. 전문의 및 학술대회 + KAT 콤보 등록자 우선.',
-'con.card4.title':'CME 수료증',
-'con.card4.desc':'KSAPS & KBIT 발행 KSAPS 학술대회 2026 수료증. 행사 후 CME 수료증 발급.',
+'con.card4.title':'CME 수료증 (350,000₫/인)',
+'con.card4.desc':'KSAPS & KBIT 발행 KSAPS 학술대회 2026 수료증. 행사 후 CME 수료증 발급. 비용: 350,000₫/인.',
 
 // Program structure
 'con.rooms.eyb':'프로그램 구성',
@@ -343,7 +343,7 @@ window.KO={
 'kat.inc2':'보톡스 & 필러 핸즈온 (한국 KOL 직접 지도)',
 'kat.inc3':'Room B: 라이브 비성형술, 안검성형, SVF',
 'kat.inc4':'KAT 2026 수료증 — KSAPS + KBIT',
-'kat.inc5':'CME 수료증 발급',
+'kat.inc5':'CME 수료증 (350,000₫/인)',
 'kat.what.eyb':'KAT의 차별점',
 'kat.what.h2':'이론이 아닌, <em style="color:#F0C060">실습.</em>',
 'kat.what.lead':'KAT 베트남 2026은 전날의 학술대회와 의도적으로 다릅니다. 학술대회가 3개 트랙에서 학문적 폭을 제공한다면, KAT은 한 방향으로 깊이 들어갑니다: 듣기만 한 것이 아니라 직접 해본 경험을 가지고 떠나는 것.',

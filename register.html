@@ -210,7 +210,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
 <section class="hero">
   <div class="hero-bg"></div>
   <p class="hero-eyebrow" data-i18n="reg.eyebrow">K-Beauty MEETS 2026 · Registration</p>
-  <h1 class="hero-title">Register for <em>K-Beauty MEETS</em></h1>
+  <h1 class="hero-title" data-i18n="reg.hero.title">Register for <em>K-Beauty MEETS</em></h1>
   <p class="hero-sub" data-i18n="reg.sub">One form. Choose one, two, or all three events. Fill in your details once — KBIT reviews your application and generates a separate QR ticket for each event you attend.</p>
   <div class="hero-orgs">
     <div class="hero-org-row">
@@ -255,7 +255,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
               <p class="ev-date">October 3, 2026 · Kangnam Aesthetic Hospital, Ho Chi Minh City</p>
               <div class="ev-tags">
                 <span class="ev-tag et-summit">Korea Meets VSAPS</span>
-                <span class="ev-tag et-cme">CME Certificate</span>
+                <span class="ev-tag et-cme">CME Certificate (350,000₫)</span>
                 <span class="ev-tag" style="background:var(--bg);color:var(--gray)">Limited 100</span>
               </div>
             </div>
@@ -280,7 +280,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
               <p class="ev-date">October 4, 2026 · Ho Chi Minh City</p>
               <div class="ev-tags">
                 <span class="ev-tag et-kat">K-Beauty Advanced Skills Training</span>
-                <span class="ev-tag et-cme">CME Certificate</span>
+                <span class="ev-tag et-cme">CME Certificate (350,000₫)</span>
               </div>
             </div>
             <span class="ev-badge eb-kat">1 day</span>
@@ -304,7 +304,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
               <p class="ev-date">October 17–18, 2026 · 108 Military Central Hospital, Hanoi</p>
               <div class="ev-tags">
                 <span class="ev-tag et-congress">Korea Meets VSAPS</span>
-                <span class="ev-tag et-cme">CME Certificate</span>
+                <span class="ev-tag et-cme">CME Certificate (350,000₫)</span>
                 <span class="ev-tag" style="background:var(--bg);color:var(--gray)">~1,000 delegates</span>
               </div>
             </div>
@@ -511,7 +511,7 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
     <p class="side-title">All events include</p>
     <p style="font-size:13px;color:var(--gray);line-height:1.9">
       ✓ Free to attend<br>
-      ✓ CME Certificate issued<br>
+      ✓ CME Certificate (350,000₫/person)<br>
       ✓ QR ticket for entry<br>
       ✓ Korean KOL speakers<br>
       ✓ KSAPS + KBIT organized
@@ -636,7 +636,7 @@ function buildConfirmScreen() {
   container.innerHTML = events.map(ev => `
     <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;background:var(--bg);border:1px solid var(--border)">
       <div style="width:10px;height:10px;border-radius:50%;background:${ev.color};flex-shrink:0"></div>
-      <div><p style="font-size:13px;font-weight:600">${ev.name}</p><p style="font-size:11px;color:var(--gray2)">${ev.date} · ${ev.venue} · CME Certificate</p></div>
+      <div><p style="font-size:13px;font-weight:600">${ev.name}</p><p style="font-size:11px;color:var(--gray2)">${ev.date} · ${ev.venue} · CME Certificate (350,000₫)</p></div>
       <div style="margin-left:auto;font-size:11px;padding:3px 10px;border-radius:20px;background:var(--teal-p);color:var(--teal);font-weight:600">🎫 QR ticket</div>
     </div>`).join('');
   syncLang();
