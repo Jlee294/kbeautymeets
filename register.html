@@ -540,6 +540,8 @@ footer{background:var(--ink);padding:36px 40px;display:flex;justify-content:spac
 <script>
 // ── State ──
 const state = { summit: true, kat: false, congress: false, katRoom: null, congressRooms: [], gala: false };
+function syncLang(){ if(window.I18N) window.I18N.apply(window.I18N.get()); }
+function msg(en){ return window.I18N && window.I18N.get()==='ko' ? ((window.KO_TEXT||{})[en] || en) : en; }
 
 // ── Toggle event selection ──
 function toggleEvent(ev) {
@@ -637,6 +639,7 @@ function buildConfirmScreen() {
       <div><p style="font-size:13px;font-weight:600">${ev.name}</p><p style="font-size:11px;color:var(--gray2)">${ev.date} · ${ev.venue} · CME Certificate</p></div>
       <div style="margin-left:auto;font-size:11px;padding:3px 10px;border-radius:20px;background:var(--teal-p);color:var(--teal);font-weight:600">🎫 QR ticket</div>
     </div>`).join('');
+  syncLang();
 
   document.getElementById('confirm-name').textContent = document.getElementById('f-name').value || '—';
   document.getElementById('confirm-email').textContent = document.getElementById('f-email').value || '—';
@@ -649,11 +652,11 @@ function buildConfirmScreen() {
 // ── Submit ──
 function submitForm() {
   if (!document.getElementById('consent-check').checked) {
-    alert('Please provide your data consent to continue.');
+    alert(msg('Please provide your data consent to continue.'));
     return;
   }
   if (!document.getElementById('agree-check').checked) {
-    alert('Please agree to the attendance policy before submitting.');
+    alert(msg('Please agree to the attendance policy before submitting.'));
     return;
   }
   const events = [];
@@ -671,6 +674,7 @@ function submitForm() {
       <div class="ecr-dot" style="background:${ev.color}"></div>
       <div><p class="ecr-name">${ev.name}</p><p class="ecr-meta">${ev.date} · QR ticket will be emailed</p></div>
     </div>`).join('');
+  syncLang();
 
   document.getElementById('success-screen').style.display = 'block';
   document.getElementById('success-screen').classList.add('fade-in');
