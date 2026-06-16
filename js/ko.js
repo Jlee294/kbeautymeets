@@ -7,6 +7,7 @@ window.KO={
 'nav.business':'비즈니스',
 'nav.register':'무료 등록',
 'nav.reg':'등록',
+'nav.library':'라이브러리',
 'nav.regmeet':'미팅 등록',
 
 // ===== SHARED FOOTER =====
@@ -1248,5 +1249,35 @@ window.KO_PH={
 "e.g. HIFU device, HA filler, thread lifting":"예: HIFU 기기, HA 필러, 실리프팅",
 "https://":"https://",
 "e.g. Find a local distributor for our RF device. Demonstrate clinical outcomes to 3–5 hospital buyers. Sign LOI for product trial at 2 HCMC clinics.":"예: RF 기기의 현지 유통사를 찾고, 병원 바이어 3~5명에게 임상 결과를 시연하며, 호치민시 클리닉 2곳과 제품 테스트 LOI를 체결하고 싶습니다.",
-"Optional — if you have specific targets, we will try to arrange.":"선택 — 특정 타깃이 있으면 가능한 범위에서 조율합니다."
+"Optional — if you have specific targets, we will try to arrange.":"선택 — 특정 타깃이 있으면 가능한 범위에서 조율합니다.",
+
+// ===== LIBRARY PAGE =====
+'lib.eyb':'K-BEAUTY MEETS · 라이브러리',
+'lib.title':'<em>K-Beauty MEETS</em>의 순간들',
+'lib.sub':'과거 행사 사진 및 하이라이트 — KSAPS 서밋, KAT 베트남, KSAPS 학술대회.',
+'lib.filter':'필터:',
+'lib.all':'전체',
+'lib.f.summit':'KSAPS 서밋',
+'lib.f.congress':'KSAPS 학술대회',
+'lib.f.kat':'KAT 베트남',
+'lib.s25.eyb':'KSAPS 서밋',
+'lib.s25.loc':'호치민시',
+'lib.s25.venue':'강남미용성형병원',
+'lib.k25.eyb':'KAT 베트남',
+'lib.k25.loc':'호치민시',
+'lib.c25.eyb':'KSAPS 학술대회',
+'lib.c25.loc':'하노이',
+'lib.c25.venue':'108 중앙군사병원',
+'lib.empty.title':'사진 준비 중',
+'lib.empty.desc':'행사 사진은 행사 종료 후 업로드됩니다. 곧 하이라이트와 추억을 확인해 주세요.',
+'lib.cta.eyb':'K-BEAUTY MEETS 2026',
+'lib.cta.title':'<em>다음 장</em>의 주인공이 되세요',
+'lib.cta.sub':'K-Beauty MEETS 2026에 지금 등록하세요 — 의료 전문가 무료.',
+"Moments from":"순간들 —",
+"Photos coming soon":"사진 준비 중",
+"Event photos will be uploaded here after the event. Check back soon for highlights and memories.":"행사 사진은 행사 종료 후 업로드됩니다. 곧 하이라이트와 추억을 확인해 주세요.",
+"Be part of the next chapter":"다음 장의 주인공이 되세요",
+"Register now for K-Beauty MEETS 2026 — free for all medical professionals.":"K-Beauty MEETS 2026에 지금 등록하세요 — 의료 전문가 무료.",
+"All Events":"전체",
+"Library":"라이브러리"
 };

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library — K-Beauty MEETS 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0B6B54;--teal-l:#1A8F70;--teal-p:#E3F4EE;
+  --amber:#C97C14;--amber-p:#FDF3E0;
+  --coral:#C44B28;--coral-p:#FCF0EB;
+  --purple:#4A3FA8;--purple-p:#EEEDF8;
+  --ink:#0F1512;--ink2:#1E2924;
+  --gray:#6B7B74;--gray2:#9BA8A2;--gray3:#CBD4CF;
+  --border:#E2EAE6;--bg:#F7FAF8;--white:#fff;
+  --fd:'Playfair Display',Georgia,serif;--fb:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--fb);color:var(--ink);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(15,21,18,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07)}
+.nav-logo{font-family:var(--fd);font-size:20px;font-weight:600;color:#fff}.nav-logo em{color:#5DCBA8;font-style:italic}
+.nav-links{display:flex;gap:28px;font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.nav-links a{color:rgba(255,255,255,.5);transition:color .2s}.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-lang{display:flex;gap:4px}
+.nav-lang span{font-size:11px;padding:4px 9px;border-radius:20px;cursor:pointer;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15)}
+.nav-lang span.active{background:#5DCBA8;color:var(--ink);border-color:#5DCBA8;font-weight:600}
+.nav-cta{font-size:12px;font-weight:600;padding:8px 18px;background:var(--teal);color:#fff;border-radius:6px;letter-spacing:.04em;text-transform:uppercase;transition:background .2s}
+.nav-cta:hover{background:var(--teal-l)}
+
+/* HERO */
+.hero{background:var(--ink);padding:140px 40px 80px;text-align:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(11,107,84,.25),transparent 60%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-eyebrow{font-size:12px;letter-spacing:.18em;color:#5DCBA8;text-transform:uppercase;margin-bottom:16px;font-weight:500;position:relative}
+.hero-title{font-family:var(--fd);font-size:clamp(36px,5vw,64px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:16px;position:relative}
+.hero-title em{color:#5DCBA8;font-style:italic}
+.hero-sub{font-size:clamp(13px,1.4vw,16px);color:rgba(255,255,255,.5);line-height:1.7;font-weight:300;max-width:560px;margin:0 auto;position:relative}
+
+/* FILTER */
+.filter-s{background:var(--bg);padding:32px 40px;border-bottom:1px solid var(--border);position:sticky;top:64px;z-index:100}
+.filter-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.filter-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gray2);font-weight:500;margin-right:4px}
+.filter-btn{font-size:13px;padding:8px 20px;border-radius:20px;background:var(--white);color:var(--gray);border:1px solid var(--border);cursor:pointer;font-weight:500;font-family:var(--fb);transition:all .2s}
+.filter-btn:hover{border-color:var(--teal);color:var(--teal)}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+/* EVENT SECTIONS */
+.event-s{padding:80px 40px}
+.event-s:nth-child(odd){background:var(--white)}
+.event-s:nth-child(even){background:var(--bg)}
+.event-inner{max-width:1200px;margin:0 auto}
+.event-header{margin-bottom:40px}
+.event-eyb{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+.event-eyb.summit{color:var(--purple)}.event-eyb.kat{color:var(--amber)}.event-eyb.congress{color:var(--coral)}
+.event-title{font-family:var(--fd);font-size:clamp(24px,3vw,36px);font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:8px}
+.event-title em{font-style:italic}
+.event-title em.summit{color:var(--purple)}.event-title em.kat{color:var(--amber)}.event-title em.congress{color:var(--coral)}
+.event-meta{font-size:13px;color:var(--gray);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.event-meta-dot{width:4px;height:4px;border-radius:50%;background:var(--gray3)}
+
+/* GALLERY GRID */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gallery-item{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;background:var(--bg);border:1px solid var(--border);transition:transform .3s,box-shadow .3s}
+.gallery-item:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.1)}
+.gallery-item.wide{grid-column:span 2}
+.gallery-item.tall{grid-row:span 2;aspect-ratio:auto}
+.gallery-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.gallery-item:hover .gallery-img{transform:scale(1.03)}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:16px 18px;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;opacity:0;transition:opacity .3s}
+.gallery-item:hover .gallery-caption{opacity:1}
+.caption-text{font-size:13px;font-weight:500;line-height:1.4}
+.caption-sub{font-size:11px;color:rgba(255,255,255,.6);margin-top:3px}
+
+/* EMPTY STATE */
+.gallery-empty{grid-column:1/-1;padding:60px 40px;text-align:center;border:2px dashed var(--border);border-radius:16px}
+.empty-icon{font-size:48px;margin-bottom:16px;opacity:.4}
+.empty-title{font-family:var(--fd);font-size:20px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.empty-desc{font-size:13px;color:var(--gray);line-height:1.7;max-width:400px;margin:0 auto}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:40px}
+.lightbox.open{display:flex}
+.lightbox-img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:8px}
+.lightbox-close{position:absolute;top:24px;right:28px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-family:var(--fb)}
+.lightbox-close:hover{background:rgba(255,255,255,.2)}
+.lightbox-caption{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);text-align:center;color:rgba(255,255,255,.7);font-size:14px}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-family:var(--fb)}
+.lightbox-nav:hover{background:rgba(255,255,255,.18)}
+.lightbox-prev{left:24px}
+.lightbox-next{right:24px}
+
+/* CTA */
+.cta-s{background:var(--ink);padding:80px 40px;text-align:center;position:relative;overflow:hidden}
+.cta-s::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(11,107,84,.15),transparent);pointer-events:none}
+.cta-eyb{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#5DCBA8;margin-bottom:14px;font-weight:500;position:relative}
+.cta-title{font-family:var(--fd);font-size:clamp(24px,3vw,40px);font-weight:600;color:#fff;margin-bottom:12px;position:relative}
+.cta-title em{color:#5DCBA8;font-style:italic}
+.cta-sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:32px;position:relative}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--teal);color:#fff;border-radius:8px;font-size:14px;font-weight:600;transition:all .2s;position:relative}
+.cta-btn:hover{background:var(--teal-l);transform:translateY(-2px)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;border-top:1px solid rgba(255,255,255,.07)}
+.footer-brand{font-family:var(--fd);font-size:18px;font-weight:600;color:#fff}.footer-brand em{color:#5DCBA8;font-style:italic}
+.footer-links{display:flex;gap:24px;font-size:13px;color:rgba(255,255,255,.4)}
+.footer-links a:hover{color:#fff}
+.footer-contact{font-size:12px;color:rgba(255,255,255,.3)}.footer-contact a{color:#5DCBA8}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .gallery{grid-template-columns:1fr 1fr}
+  .gallery-item.wide{grid-column:span 1}
+  .filter-inner{justify-content:center}
+}
+@media(max-width:600px){
+  .gallery{grid-template-columns:1fr}
+  .hero{padding:120px 24px 60px}
+  .event-s{padding:60px 24px}
+  .filter-s{padding:20px 24px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
+  <div class="nav-links">
+    <a href="summit.html" data-i18n="nav.summit">Summit</a>
+    <a href="congress.html" data-i18n="nav.congress">Congress</a>
+    <a href="kat.html" data-i18n="nav.kat">KAT</a>
+    <a href="speakers.html" data-i18n="nav.speakers">Speakers</a>
+    <a href="business-meeting.html" data-i18n="nav.business">Business</a>
+    <a class="active" data-i18n="nav.library">Library</a>
+    <a href="register.html" data-i18n="nav.reg">Register</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-lang"><span onclick="switchLang('ko')">KR</span><span class="active" onclick="switchLang('en')">EN</span></div>
+    <a href="register.html" class="nav-cta" data-i18n="nav.register">Register Free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <p class="hero-eyebrow" data-i18n="lib.eyb">K-BEAUTY MEETS · LIBRARY</p>
+  <h1 class="hero-title" data-i18n="lib.title">Moments from <em>K-Beauty MEETS</em></h1>
+  <p class="hero-sub" data-i18n="lib.sub">Photos and highlights from our past events — KSAPS Summit, KAT Vietnam, and KSAPS Congress.</p>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-s">
+  <div class="filter-inner">
+    <span class="filter-label" data-i18n="lib.filter">Filter:</span>
+    <button class="filter-btn active" onclick="filterGallery('all')" data-i18n="lib.all">All Events</button>
+    <button class="filter-btn" onclick="filterGallery('summit')" data-i18n="lib.f.summit">KSAPS Summit</button>
+    <button class="filter-btn" onclick="filterGallery('congress')" data-i18n="lib.f.congress">KSAPS Congress</button>
+    <button class="filter-btn" onclick="filterGallery('kat')" data-i18n="lib.f.kat">KAT Vietnam</button>
+  </div>
+</div>
+
+<!-- KSAPS SUMMIT 2025 -->
+<section class="event-s" data-event="summit" id="summit-2025">
+  <div class="event-inner">
+    <div class="event-header fade-up">
+      <p class="event-eyb summit" data-i18n="lib.s25.eyb">KSAPS SUMMIT</p>
+      <h2 class="event-title">KSAPS Summit <em class="summit">2025</em></h2>
+      <div class="event-meta">
+        <span data-i18n="lib.s25.loc">Ho Chi Minh City</span>
+        <span class="event-meta-dot"></span>
+        <span data-i18n="lib.s25.venue">Kangnam Aesthetic Hospital</span>
+        <span class="event-meta-dot"></span>
+        <span>2025</span>
+      </div>
+    </div>
+    <div class="gallery fade-up d1">
+      <div class="gallery-empty">
+        <div class="empty-icon">📸</div>
+        <p class="empty-title" data-i18n="lib.empty.title">Photos coming soon</p>
+        <p class="empty-desc" data-i18n="lib.empty.desc">Event photos will be uploaded here after the event. Check back soon for highlights and memories.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KAT VIETNAM 2025 -->
+<section class="event-s" data-event="kat" id="kat-2025">
+  <div class="event-inner">
+    <div class="event-header fade-up">
+      <p class="event-eyb kat" data-i18n="lib.k25.eyb">KAT VIETNAM</p>
+      <h2 class="event-title">KAT Vietnam <em class="kat">2025</em></h2>
+      <div class="event-meta">
+        <span data-i18n="lib.k25.loc">Ho Chi Minh City</span>
+        <span class="event-meta-dot"></span>
+        <span>2025</span>
+      </div>
+    </div>
+    <div class="gallery fade-up d1">
+      <div class="gallery-empty">
+        <div class="empty-icon">📸</div>
+        <p class="empty-title" data-i18n="lib.empty.title">Photos coming soon</p>
+        <p class="empty-desc" data-i18n="lib.empty.desc">Event photos will be uploaded here after the event. Check back soon for highlights and memories.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KSAPS CONGRESS 2025 -->
+<section class="event-s" data-event="congress" id="congress-2025">
+  <div class="event-inner">
+    <div class="event-header fade-up">
+      <p class="event-eyb congress" data-i18n="lib.c25.eyb">KSAPS CONGRESS</p>
+      <h2 class="event-title">KSAPS Congress <em class="congress">2025</em></h2>
+      <div class="event-meta">
+        <span data-i18n="lib.c25.loc">Hanoi</span>
+        <span class="event-meta-dot"></span>
+        <span data-i18n="lib.c25.venue">108 Military Central Hospital</span>
+        <span class="event-meta-dot"></span>
+        <span>2025</span>
+      </div>
+    </div>
+    <div class="gallery fade-up d1">
+      <div class="gallery-empty">
+        <div class="empty-icon">📸</div>
+        <p class="empty-title" data-i18n="lib.empty.title">Photos coming soon</p>
+        <p class="empty-desc" data-i18n="lib.empty.desc">Event photos will be uploaded here after the event. Check back soon for highlights and memories.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-s">
+  <p class="cta-eyb" data-i18n="lib.cta.eyb">K-BEAUTY MEETS 2026</p>
+  <h2 class="cta-title" data-i18n="lib.cta.title">Be part of <em>the next chapter</em></h2>
+  <p class="cta-sub" data-i18n="lib.cta.sub">Register now for K-Beauty MEETS 2026 — free for all medical professionals.</p>
+  <a href="register.html" class="cta-btn" data-i18n="nav.register">Register Free →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><a href="index.html">K-Beauty <em>MEETS</em></a></div>
+  <div class="footer-links">
+    <a href="summit.html">Summit</a><a href="congress.html">Congress</a><a href="kat.html">KAT</a><a href="speakers.html">Speakers</a>
+    <a href="business-meeting.html">Business</a>
+  </div>
+  <div class="footer-contact"><a href="mailto:secretary@kbitassociation.com">secretary@kbitassociation.com</a> · KBIT</div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-nav lightbox-prev" onclick="navLightbox(event,-1)">&#8249;</button>
+  <img class="lightbox-img" id="lb-img" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="navLightbox(event,1)">&#8250;</button>
+  <div class="lightbox-caption" id="lb-caption"></div>
+</div>
+
+<script>
+// Fade-up animation
+const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+// Filter gallery sections
+function filterGallery(type) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.event-s').forEach(s => {
+    if (type === 'all' || s.dataset.event === type) {
+      s.style.display = '';
+    } else {
+      s.style.display = 'none';
+    }
+  });
+}
+
+// Lightbox
+let lbImages = [];
+let lbIndex = 0;
+
+function openLightbox(src, caption) {
+  lbImages = Array.from(document.querySelectorAll('.gallery-item:not(.gallery-empty) .gallery-img')).map(img => ({
+    src: img.src,
+    caption: img.closest('.gallery-item').querySelector('.caption-text')?.textContent || ''
+  }));
+  lbIndex = lbImages.findIndex(i => i.src === src);
+  if (lbIndex < 0) lbIndex = 0;
+  showLbImage();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function showLbImage() {
+  if (!lbImages.length) return;
+  document.getElementById('lb-img').src = lbImages[lbIndex].src;
+  document.getElementById('lb-caption').textContent = lbImages[lbIndex].caption;
+}
+
+function closeLightbox(e) {
+  if (e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox-close')) return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function navLightbox(e, dir) {
+  e.stopPropagation();
+  lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+  showLbImage();
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') navLightbox(e, -1);
+  if (e.key === 'ArrowRight') navLightbox(e, 1);
+});
+
+// Language switch
+function switchLang(lang) {
+  localStorage.setItem('kbm-lang', lang);
+  document.querySelectorAll('.nav-lang span').forEach(s => {
+    s.classList.toggle('active', (lang === 'ko' && s.textContent === 'KR') || (lang === 'en' && s.textContent === 'EN'));
+  });
+  if (window.I18N) window.I18N.apply(lang);
+}
+</script>
+<script src="js/ko.js"></script>
+<script src="js/i18n.js"></script>
+</body>
+</html>
