@@ -1,9 +1,25 @@
 (function(){
   var KEY='kbm-lang';
-  var labels={'en':'EN','ko':'KR'};
-  var codes={'EN':'en','KR':'ko'};
+  var labels={'vi':'VI','en':'EN','ko':'KR'};
+  var codes={'VI':'vi','EN':'en','KR':'ko'};
 
-  function get(){return localStorage.getItem(KEY)||'en'}
+  function get(){return localStorage.getItem(KEY)||'vi'}
+
+  function getDict(lang){
+    if(lang==='ko') return window.KO||{};
+    if(lang==='vi') return window.VI||{};
+    return {};
+  }
+  function getTextMap(lang){
+    if(lang==='ko') return window.KO_TEXT||{};
+    if(lang==='vi') return window.VI_TEXT||{};
+    return {};
+  }
+  function getPhMap(lang){
+    if(lang==='ko') return window.KO_PH||{};
+    if(lang==='vi') return window.VI_PH||{};
+    return {};
+  }
 
   function set(lang){
     localStorage.setItem(KEY,lang);
@@ -11,7 +27,7 @@
   }
 
   function apply(lang){
-    var t=window.KO||{};
+    var t=getDict(lang);
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var k=el.getAttribute('data-i18n');
       if(lang==='en'){
@@ -27,7 +43,6 @@
       }
     });
     applyTextMap(lang);
-    // placeholders
     document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
       var k=el.getAttribute('data-i18n-ph');
       if(lang==='en'){
@@ -41,11 +56,11 @@
     document.querySelectorAll('.nav-lang span').forEach(function(b){
       b.classList.toggle('active',b.textContent.trim()===labels[lang]);
     });
-    document.documentElement.lang=lang;
+    document.documentElement.lang=lang==='vi'?'vi':lang==='ko'?'ko':'en';
   }
 
   function applyTextMap(lang){
-    var map=window.KO_TEXT||{};
+    var map=getTextMap(lang);
     if(!document.body) return;
     var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
       acceptNode:function(node){
@@ -73,7 +88,7 @@
   }
 
   function applyPlaceholderMap(lang){
-    var map=window.KO_PH||{};
+    var map=getPhMap(lang);
     document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(function(el){
       if(lang==='en'){
         if(el._origAutoPh!=null) el.placeholder=el._origAutoPh;

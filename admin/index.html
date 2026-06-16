@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM Admin — K-Beauty MEETS 2026 · KBIT</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js"></script>
+<style>
+:root{
+  --teal:#0B6B54;--teal-l:#1A8F70;--teal-p:#E3F4EE;
+  --ink:#0F1512;--bg:#F7FAF8;--white:#fff;
+  --border:#E2EAE6;--gray:#6B7B74;--gray2:#9BA8A2;
+  --summit:#4A3FA8;--congress:#C44B28;--kat:#C97C14;
+  --fd:'Playfair Display',serif;--fb:'DM Sans',sans-serif;
+  --danger:#991B1B;--danger-bg:#FEE2E2;--danger-border:#FECACA;
+  --warn-bg:#FEF9C3;--warn-text:#854D0E;
+  --ok-bg:#DCFCE7;--ok-text:#166534;--ok-border:#86EFAC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);background:var(--bg);color:var(--ink);font-size:15px}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-logo{font-family:var(--fd);font-size:18px;color:#fff;text-decoration:none}.nav-logo em{color:#5DCBA8;font-style:italic}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-badge{font-size:11px;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);font-weight:500}
+.nav-user{font-size:12px;color:rgba(255,255,255,.5)}
+.nav-logout{font-size:11px;padding:5px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.6);cursor:pointer;font-family:var(--fb)}
+.nav-logout:hover{border-color:rgba(255,255,255,.3);color:#fff}
+
+/* SIDEBAR LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 60px)}
+.sidebar{width:220px;background:var(--white);border-right:1px solid var(--border);padding:16px 0;flex-shrink:0}
+.sb-section{padding:0 16px;margin-bottom:20px}
+.sb-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--gray2);padding:0 12px;margin-bottom:8px}
+.sb-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--gray);cursor:pointer;transition:all .15s;border:none;background:none;width:100%;text-align:left;font-family:var(--fb)}
+.sb-item:hover{background:var(--bg);color:var(--ink)}
+.sb-item.active{background:var(--teal-p);color:var(--teal);font-weight:600}
+.sb-item .sb-icon{width:20px;text-align:center;font-size:15px}
+.sb-item .sb-count{margin-left:auto;font-size:11px;background:var(--bg);color:var(--gray2);padding:2px 8px;border-radius:10px;font-weight:600}
+.sb-item.active .sb-count{background:rgba(11,107,84,.15);color:var(--teal)}
+
+.content{flex:1;padding:28px 32px;max-width:1100px;overflow-y:auto}
+.page{display:none}
+.page.active{display:block}
+
+/* PAGE HEADER */
+.page-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.page-title{font-family:var(--fd);font-size:24px;font-weight:600}
+.page-sub{font-size:13px;color:var(--gray);margin-top:2px}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.sc-num{font-family:var(--fd);font-size:32px;font-weight:600;color:var(--ink);line-height:1}
+.sc-label{font-size:12px;color:var(--gray2);margin-top:4px}
+.sc-num.teal{color:var(--teal)}.sc-num.amber{color:var(--kat)}.sc-num.red{color:var(--congress)}
+
+/* EVENT CARDS */
+.event-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+.ev-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px;border-top:3px solid var(--teal)}
+.ev-card-name{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.ev-card-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.ev-card-row span{color:var(--gray)}
+.ev-card-bar{height:4px;background:var(--bg);border-radius:2px;margin-top:10px;overflow:hidden}
+.ev-card-fill{height:100%;border-radius:2px}
+
+/* PILLS */
+.pills{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.pill{padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid transparent;transition:all .2s;background:var(--bg);color:var(--gray)}
+.pill:hover,.pill.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pill-summit.active{background:var(--summit);border-color:var(--summit)}
+.pill-kat.active{background:var(--kat);border-color:var(--kat)}
+.pill-congress.active{background:var(--congress);border-color:var(--congress)}
+
+/* TOOLBAR */
+.toolbar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.search-input{flex:1;min-width:200px;padding:9px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--fb);background:var(--white)}
+.search-input:focus{outline:none;border-color:var(--teal)}
+select.form-select{padding:9px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--fb);background:var(--white);cursor:pointer}
+select.form-select:focus{outline:none;border-color:var(--teal)}
+
+/* BUTTONS */
+.btn{padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:var(--fb);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-teal{background:var(--teal);color:#fff}.btn-teal:hover{background:var(--teal-l)}
+.btn-outline{background:var(--white);color:var(--ink);border:1px solid var(--border)}.btn-outline:hover{border-color:var(--teal);color:var(--teal)}
+.btn-red{background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger-border)}.btn-red:hover{background:var(--danger);color:#fff}
+.btn-sm{padding:6px 12px;font-size:12px;border-radius:6px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* TABLE */
+.table-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px}
+table{width:100%;border-collapse:collapse}
+thead{background:var(--bg)}
+th{padding:11px 14px;font-size:11px;font-weight:600;color:var(--gray2);text-align:left;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:12px 14px;font-size:13px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg)}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600}
+.b-pending{background:var(--warn-bg);color:var(--warn-text)}
+.b-confirmed{background:var(--teal-p);color:var(--teal)}
+.b-attended{background:var(--ok-bg);color:var(--ok-text)}
+.b-noshow,.b-cancelled{background:var(--danger-bg);color:var(--danger)}
+.b-unpaid{background:var(--danger-bg);color:var(--danger)}
+.b-paid{background:var(--ok-bg);color:var(--ok-text)}
+
+.event-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
+.et-summit{background:rgba(74,63,168,.1);color:var(--summit)}
+.et-kat{background:rgba(201,124,20,.1);color:var(--kat)}
+.et-congress{background:rgba(196,75,40,.1);color:var(--congress)}
+
+.action-btn{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--white);cursor:pointer;font-family:var(--fb);transition:all .2s;margin-right:4px}
+.action-btn:hover{border-color:var(--teal);color:var(--teal)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:500}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:16px;padding:32px;width:560px;max-width:90vw;max-height:85vh;overflow-y:auto}
+.modal-title{font-family:var(--fd);font-size:20px;font-weight:600;margin-bottom:6px}
+.modal-sub{font-size:13px;color:var(--gray);margin-bottom:24px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{margin-bottom:14px}
+.form-group.full{grid-column:1/-1}
+.form-label{display:block;font-size:12px;color:var(--gray);margin-bottom:5px;font-weight:500}
+.form-input{width:100%;padding:9px 13px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--fb)}
+.form-input:focus{outline:none;border-color:var(--teal)}
+textarea.form-input{resize:vertical;min-height:80px}
+
+/* CARD */
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px}
+.card-title{font-size:15px;font-weight:600;margin-bottom:16px}
+
+/* SCAN */
+.scan-area{border:2px dashed var(--border);border-radius:12px;padding:40px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);margin-bottom:16px}
+.scan-area:hover{border-color:var(--teal);background:var(--teal-p)}
+.scan-icon{font-size:48px;margin-bottom:12px}
+.scan-label{font-size:14px;font-weight:500;color:var(--gray)}
+.scan-sub{font-size:12px;color:var(--gray2);margin-top:4px}
+
+/* GALLERY GRID */
+.gallery-admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.gallery-admin-item{position:relative;border-radius:10px;overflow:hidden;background:var(--bg);border:1px solid var(--border);aspect-ratio:4/3}
+.gallery-admin-item img{width:100%;height:100%;object-fit:cover}
+.gallery-admin-item .ga-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;gap:8px;opacity:0;transition:opacity .2s}
+.gallery-admin-item:hover .ga-overlay{opacity:1}
+.ga-btn{padding:6px 12px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:var(--fb)}
+.ga-btn-edit{background:var(--white);color:var(--ink)}
+.ga-btn-del{background:var(--danger);color:#fff}
+.gallery-admin-item .ga-badge{position:absolute;top:8px;left:8px;font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(0,0,0,.6);color:#fff;font-weight:600}
+
+/* UPLOAD ZONE */
+.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:40px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);margin-bottom:20px}
+.upload-zone:hover,.upload-zone.dragover{border-color:var(--teal);background:var(--teal-p)}
+.upload-zone .uz-icon{font-size:40px;margin-bottom:8px}
+.upload-zone .uz-text{font-size:14px;font-weight:500;color:var(--gray)}
+.upload-zone .uz-sub{font-size:12px;color:var(--gray2);margin-top:4px}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;padding:14px 20px;border-radius:10px;font-size:14px;font-weight:600;display:none;align-items:center;gap:10px;z-index:600;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.toast.show{display:flex}
+.toast-success{background:var(--ok-bg);color:var(--ok-text);border:1px solid var(--ok-border)}
+.toast-error{background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger-border)}
+
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--gray)}
+.pagination .pag-btns{display:flex;gap:6px}
+.pag-btn{padding:6px 12px;border-radius:6px;border:1px solid var(--border);background:var(--white);cursor:pointer;font-size:12px;font-family:var(--fb)}
+.pag-btn:hover{border-color:var(--teal);color:var(--teal)}
+.pag-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.pag-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* QR MODAL */
+.qr-modal{background:var(--white);border-radius:16px;padding:32px;width:360px;max-width:90vw;text-align:center}
+.qr-name{font-family:var(--fd);font-size:20px;font-weight:600;margin-bottom:4px}
+.qr-meta{font-size:13px;color:var(--gray);margin-bottom:20px}
+#qrcode{display:flex;justify-content:center;margin-bottom:16px}
+
+/* LOGIN */
+.login-overlay{position:fixed;inset:0;background:var(--ink);display:flex;align-items:center;justify-content:center;z-index:1000}
+.login-box{background:var(--white);border-radius:20px;padding:40px;width:380px;max-width:90vw;text-align:center}
+.login-box h1{font-family:var(--fd);font-size:22px;font-weight:600;margin-bottom:6px}
+.login-box p{font-size:13px;color:var(--gray);margin-bottom:24px}
+.login-field{margin-bottom:14px;text-align:left}
+.login-field label{display:block;font-size:12px;color:var(--gray);margin-bottom:5px;font-weight:500}
+.login-field input{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--fb)}
+.login-field input:focus{outline:none;border-color:var(--teal)}
+.login-btn{width:100%;padding:12px;background:var(--teal);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--fb);margin-top:8px}
+.login-btn:hover{background:var(--teal-l)}
+.login-btn:disabled{opacity:.6;cursor:not-allowed}
+.login-error{color:var(--danger);font-size:12px;margin-top:10px;display:none}
+.app-content{display:none}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px 20px;color:var(--gray2)}
+.empty-state .es-icon{font-size:48px;margin-bottom:12px}
+.empty-state .es-text{font-size:15px;font-weight:500;margin-bottom:4px;color:var(--gray)}
+.empty-state .es-sub{font-size:13px}
+
+/* RECENT ACTIVITY */
+.activity-list{list-style:none}
+.activity-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.activity-item:last-child{border-bottom:none}
+.activity-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.activity-text{font-size:13px;line-height:1.5}
+.activity-time{font-size:11px;color:var(--gray2);margin-top:2px}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .sidebar{display:none}
+  .event-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .gallery-admin-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .content{padding:20px 16px}
+  .stats-row{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .nav{padding:0 16px}
+  .gallery-admin-grid{grid-template-columns:1fr}
+}
+
+/* MOBILE NAV */
+.mobile-nav{display:none;background:var(--white);border-bottom:1px solid var(--border);padding:8px 16px;overflow-x:auto;white-space:nowrap}
+.mobile-nav .sb-item{display:inline-flex;padding:8px 14px;border-radius:20px;font-size:12px}
+@media(max-width:1024px){.mobile-nav{display:flex;gap:6px}}
+</style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ═══ -->
+<div class="login-overlay" id="login-overlay">
+  <div class="login-box">
+    <div style="font-size:36px;margin-bottom:12px">🔐</div>
+    <h1>KBIT CRM Admin</h1>
+    <p>K-Beauty MEETS 2026 · Management System</p>
+    <div class="login-field">
+      <label>Email</label>
+      <input type="email" id="login-email" placeholder="admin@kbitassociation.com">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="login-btn" id="login-btn" onclick="doLogin()">Sign in</button>
+    <p class="login-error" id="login-error"></p>
+  </div>
+</div>
+
+<!-- ═══ APP ═══ -->
+<div class="app-content" id="app-content">
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="../index.html">K-Beauty <em>MEETS</em></a>
+  <div class="nav-right">
+    <span class="nav-badge">🔐 KBIT CRM Admin</span>
+    <span class="nav-user" id="nav-user"></span>
+    <button class="nav-logout" onclick="doLogout()">Sign out</button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <button class="sb-item active" onclick="showPage('dashboard',this)"><span class="sb-icon">📊</span> Dashboard</button>
+  <button class="sb-item" onclick="showPage('registrations',this)"><span class="sb-icon">📋</span> Registrations</button>
+  <button class="sb-item" onclick="showPage('checkin',this)"><span class="sb-icon">📷</span> Check-in</button>
+  <button class="sb-item" onclick="showPage('events',this)"><span class="sb-icon">📅</span> Events</button>
+  <button class="sb-item" onclick="showPage('library',this)"><span class="sb-icon">🖼️</span> Library</button>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-section">
+    <div class="sb-label">Main</div>
+    <button class="sb-item active" onclick="showPage('dashboard',this)" data-page="dashboard">
+      <span class="sb-icon">📊</span> Dashboard
+    </button>
+    <button class="sb-item" onclick="showPage('registrations',this)" data-page="registrations">
+      <span class="sb-icon">📋</span> Registrations
+      <span class="sb-count" id="sb-reg-count">0</span>
+    </button>
+    <button class="sb-item" onclick="showPage('checkin',this)" data-page="checkin">
+      <span class="sb-icon">📷</span> Check-in
+    </button>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Manage</div>
+    <button class="sb-item" onclick="showPage('events',this)" data-page="events">
+      <span class="sb-icon">📅</span> Events
+      <span class="sb-count" id="sb-ev-count">3</span>
+    </button>
+    <button class="sb-item" onclick="showPage('library',this)" data-page="library">
+      <span class="sb-icon">🖼️</span> Library
+      <span class="sb-count" id="sb-gal-count">0</span>
+    </button>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">System</div>
+    <button class="sb-item" onclick="showPage('export',this)" data-page="export">
+      <span class="sb-icon">📥</span> Export
+    </button>
+    <button class="sb-item" onclick="window.open('checkin.html','_blank')">
+      <span class="sb-icon">🔗</span> Check-in App
+    </button>
+  </div>
+</aside>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CONTENT AREA                                -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="content">
+
+<!-- ── DASHBOARD ── -->
+<div class="page active" id="page-dashboard">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">Dashboard</h1>
+      <p class="page-sub">K-Beauty MEETS 2026 · Real-time overview</p>
+    </div>
+    <button class="btn btn-outline" onclick="loadDashboard()">↻ Refresh</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="sc-num" id="d-total">0</div><div class="sc-label">Total registrations</div></div>
+    <div class="stat-card"><div class="sc-num teal" id="d-confirmed">0</div><div class="sc-label">Confirmed</div></div>
+    <div class="stat-card"><div class="sc-num teal" id="d-attended">0</div><div class="sc-label">Checked in</div></div>
+    <div class="stat-card"><div class="sc-num amber" id="d-pending">0</div><div class="sc-label">Pending review</div></div>
+  </div>
+
+  <div class="event-grid" id="d-event-cards"></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div class="card">
+      <div class="card-title">Recent Registrations</div>
+      <div id="d-recent-list">
+        <div class="empty-state"><div class="es-icon">📋</div><div class="es-sub">No registrations yet</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Quick Actions</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn btn-teal" onclick="showPage('checkin',document.querySelector('[data-page=checkin]'))">📷 Start Check-in</button>
+        <button class="btn btn-outline" onclick="showPage('registrations',document.querySelector('[data-page=registrations]'))">📋 View All Registrations</button>
+        <button class="btn btn-outline" onclick="showPage('library',document.querySelector('[data-page=library]'))">🖼️ Manage Library</button>
+        <button class="btn btn-outline" onclick="exportCSV('all')">📥 Export All Data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── REGISTRATIONS ── -->
+<div class="page" id="page-registrations">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">Registrations</h1>
+      <p class="page-sub">Manage all delegate registrations</p>
+    </div>
+    <button class="btn btn-teal" onclick="openRegModal()">+ Add Registration</button>
+  </div>
+
+  <div class="pills">
+    <span class="pill active" onclick="filterRegs('all',this)">All</span>
+    <span class="pill pill-summit" onclick="filterRegs('summit',this)">Summit</span>
+    <span class="pill pill-kat" onclick="filterRegs('kat',this)">KAT</span>
+    <span class="pill pill-congress" onclick="filterRegs('congress',this)">Congress</span>
+  </div>
+
+  <div class="toolbar">
+    <input class="search-input" placeholder="Search by name, email, code, hospital..." oninput="searchRegs(this.value)" id="reg-search">
+    <select class="form-select" onchange="filterRegStatus(this.value)" id="reg-status-filter">
+      <option value="">All statuses</option>
+      <option value="pending">Pending</option>
+      <option value="confirmed">Confirmed</option>
+      <option value="attended">Attended</option>
+      <option value="cancelled">Cancelled</option>
+    </select>
+    <button class="btn btn-outline btn-sm" onclick="loadRegistrations()">↻</button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Hospital</th>
+          <th>Event</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="reg-table">
+        <tr><td colspan="8"><div class="empty-state"><div class="es-icon">📋</div><div class="es-text">Loading...</div></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination" id="reg-pagination"></div>
+</div>
+
+<!-- ── CHECK-IN ── -->
+<div class="page" id="page-checkin">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">Check-in</h1>
+      <p class="page-sub">Scan QR codes or search delegates</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div class="card">
+      <div class="card-title">QR Code Scan</div>
+      <div class="scan-area" onclick="document.getElementById('checkin-code-input').focus()">
+        <div class="scan-icon">📷</div>
+        <div class="scan-label">Click here or scan QR code</div>
+        <div class="scan-sub">The scanner will auto-detect QR data</div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <input class="form-input" id="checkin-code-input" placeholder="Enter registration code (KBM-2026-...)" onkeydown="if(event.key==='Enter')doCheckin()">
+        <button class="btn btn-teal" onclick="doCheckin()">Check in</button>
+      </div>
+      <div id="checkin-result" style="border-radius:10px;padding:16px;display:none"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Recent Check-ins</div>
+      <div id="recent-checkins">
+        <div class="empty-state"><div class="es-icon">📷</div><div class="es-sub">No check-ins yet today</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <div class="card-title">Generate QR Ticket</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Delegate Name</label>
+        <input class="form-input" id="gen-name" placeholder="Dr. Full Name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Registration Code</label>
+        <input class="form-input" id="gen-code" placeholder="KBM-2026-S-0001">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Event</label>
+        <select class="form-input" id="gen-event">
+          <option value="KSAPS Summit · Oct 3, 2026">KSAPS Summit · Oct 3</option>
+          <option value="KAT Vietnam · Oct 4, 2026">KAT Vietnam · Oct 4</option>
+          <option value="KSAPS Congress · Oct 17–18, 2026">KSAPS Congress · Oct 17–18</option>
+        </select>
+      </div>
+      <div class="form-group" style="display:flex;align-items:flex-end">
+        <button class="btn btn-teal" onclick="generateQR()">Generate QR</button>
+      </div>
+    </div>
+    <div id="qr-preview-area" style="text-align:center;margin-top:20px;display:none">
+      <div id="qrcode" style="display:inline-block;margin-bottom:12px"></div>
+      <p style="font-size:13px;color:var(--gray)" id="qr-preview-info"></p>
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
+        <button class="btn btn-outline btn-sm" onclick="downloadQR()">📥 Download</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── EVENTS ── -->
+<div class="page" id="page-events">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">Events</h1>
+      <p class="page-sub">Manage conference events and capacity</p>
+    </div>
+    <button class="btn btn-teal" onclick="openEventModal()">+ Add Event</button>
+  </div>
+
+  <div id="events-list"></div>
+</div>
+
+<!-- ── LIBRARY ── -->
+<div class="page" id="page-library">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">Photo Library</h1>
+      <p class="page-sub">Manage event photos and gallery</p>
+    </div>
+  </div>
+
+  <div class="pills" id="lib-pills">
+    <span class="pill active" onclick="filterGallery('all',this)">All</span>
+  </div>
+
+  <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
+    <div class="uz-icon">📸</div>
+    <div class="uz-text">Click to upload or drag & drop photos</div>
+    <div class="uz-sub">JPG, PNG, WebP · Max 5MB per file</div>
+  </div>
+  <input type="file" id="file-input" multiple accept="image/*" style="display:none" onchange="handleFileUpload(this.files)">
+
+  <div id="upload-progress" style="margin-bottom:16px;display:none">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <span style="font-size:13px;font-weight:600">Uploading...</span>
+      <span style="font-size:12px;color:var(--gray)" id="upload-status">0/0</span>
+    </div>
+    <div style="height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
+      <div style="height:100%;background:var(--teal);border-radius:2px;transition:width .3s" id="upload-bar"></div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <select class="form-select" id="lib-event-select" onchange="filterGalleryEvent(this.value)">
+      <option value="">All events</option>
+    </select>
+    <span style="font-size:13px;color:var(--gray)" id="lib-count">0 photos</span>
+  </div>
+
+  <div class="gallery-admin-grid" id="gallery-grid">
+    <div style="grid-column:1/-1" class="empty-state">
+      <div class="es-icon">🖼️</div>
+      <div class="es-text">No photos yet</div>
+      <div class="es-sub">Upload photos to get started</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── EXPORT ── -->
+<div class="page" id="page-export">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">Export Data</h1>
+      <p class="page-sub">Download registration and attendance reports</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div class="card">
+      <div class="card-title">📥 Registration Reports</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn btn-outline" onclick="exportCSV('all')">All Registrations</button>
+        <button class="btn btn-outline" onclick="exportCSV('confirmed')">Confirmed Only</button>
+        <button class="btn btn-outline" onclick="exportCSV('pending')">Pending Review</button>
+        <button class="btn btn-outline" onclick="exportCSV('attended')">Checked-in Delegates</button>
+        <button class="btn btn-outline" onclick="exportCSV('noshow')">No-shows</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📅 By Event</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn btn-outline" onclick="exportCSV('all','summit')">Summit Registrations</button>
+        <button class="btn btn-outline" onclick="exportCSV('all','kat')">KAT Registrations</button>
+        <button class="btn btn-outline" onclick="exportCSV('all','congress')">Congress Registrations</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /layout -->
+</div><!-- /app-content -->
+
+<!-- ═══ REGISTRATION MODAL ═══ -->
+<div class="modal-overlay" id="reg-modal" onclick="if(event.target===this)closeRegModal()">
+  <div class="modal">
+    <div class="modal-title" id="reg-modal-title">Add Registration</div>
+    <div class="modal-sub">Enter delegate information</div>
+    <input type="hidden" id="reg-edit-id">
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Full Name *</label>
+        <input class="form-input" id="rf-name" placeholder="Dr. Full Name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email *</label>
+        <input class="form-input" id="rf-email" type="email" placeholder="email@example.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone *</label>
+        <input class="form-input" id="rf-phone" placeholder="+84 ...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Hospital *</label>
+        <input class="form-input" id="rf-hospital" placeholder="Hospital/Clinic">
+      </div>
+      <div class="form-group">
+        <label class="form-label">City *</label>
+        <input class="form-input" id="rf-city" placeholder="City">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Specialty *</label>
+        <input class="form-input" id="rf-specialty" placeholder="Specialty">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Years of Experience *</label>
+        <select class="form-input" id="rf-years">
+          <option value="0-2">0–2 years</option>
+          <option value="3-5">3–5 years</option>
+          <option value="6-10">6–10 years</option>
+          <option value="11+">11+ years</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Event *</label>
+        <select class="form-input" id="rf-event">
+          <option value="summit">KSAPS Summit</option>
+          <option value="kat">KAT Vietnam</option>
+          <option value="congress">KSAPS Congress</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">CME Number</label>
+        <input class="form-input" id="rf-cme" placeholder="CME number (if applicable)">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Status</label>
+        <select class="form-input" id="rf-status">
+          <option value="pending">Pending</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="attended">Attended</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Notes</label>
+        <textarea class="form-input" id="rf-notes" placeholder="Internal notes..."></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeRegModal()">Cancel</button>
+      <button class="btn btn-teal" onclick="saveRegistration()" id="reg-save-btn">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EVENT MODAL ═══ -->
+<div class="modal-overlay" id="event-modal" onclick="if(event.target===this)closeEventModal()">
+  <div class="modal">
+    <div class="modal-title" id="event-modal-title">Add Event</div>
+    <div class="modal-sub">Create or edit a conference event</div>
+    <input type="hidden" id="ev-edit-id">
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="form-label">Event Name *</label>
+        <input class="form-input" id="ef-name" placeholder="Event name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Slug (URL-safe) *</label>
+        <input class="form-input" id="ef-slug" placeholder="event-slug">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Color</label>
+        <input type="color" class="form-input" id="ef-color" value="#0B6B54" style="height:40px;padding:4px">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Start Date *</label>
+        <input class="form-input" id="ef-start" type="date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">End Date</label>
+        <input class="form-input" id="ef-end" type="date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Venue</label>
+        <input class="form-input" id="ef-venue" placeholder="Venue name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">City</label>
+        <input class="form-input" id="ef-city" placeholder="City">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Capacity</label>
+        <input class="form-input" id="ef-capacity" type="number" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Status</label>
+        <select class="form-input" id="ef-status">
+          <option value="upcoming">Upcoming</option>
+          <option value="ongoing">Ongoing</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Description</label>
+        <textarea class="form-input" id="ef-desc" placeholder="Event description..."></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeEventModal()">Cancel</button>
+      <button class="btn btn-teal" onclick="saveEvent()" id="event-save-btn">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ QR MODAL ═══ -->
+<div class="modal-overlay" id="qr-modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="qr-modal">
+    <div class="qr-name" id="modal-name"></div>
+    <div class="qr-meta" id="modal-event"></div>
+    <div id="qrcode-modal"></div>
+    <p style="font-size:11px;color:var(--gray2);letter-spacing:.08em;text-transform:uppercase;margin:12px 0" id="modal-code"></p>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <button class="btn btn-teal btn-sm" onclick="downloadModalQR()">📥 Download</button>
+      <button class="btn btn-outline btn-sm" onclick="document.getElementById('qr-modal-overlay').classList.remove('open')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VIEW REGISTRATION MODAL ═══ -->
+<div class="modal-overlay" id="view-reg-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-title">Registration Details</div>
+    <div id="view-reg-content"></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="document.getElementById('view-reg-modal').classList.remove('open')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span id="toast-icon">✓</span>
+  <span id="toast-msg"></span>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// GLOBALS
+// ═══════════════════════════════════════════════
+let allRegs = [];
+let allEvents = [];
+let allGallery = [];
+let currentEventFilter = 'all';
+let currentStatusFilter = '';
+let currentSearchQuery = '';
+let regPage = 1;
+const PER_PAGE = 25;
+let recentCheckins = [];
+
+// ═══════════════════════════════════════════════
+// AUTH
+// ═══════════════════════════════════════════════
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const btn = document.getElementById('login-btn');
+  const err = document.getElementById('login-error');
+  if (!email || !pass) { err.textContent = 'Please fill in all fields'; err.style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = 'Signing in...';
+  const { error } = await supabase.auth.signInWithPassword({ email, password: pass });
+  if (error) { err.textContent = error.message; err.style.display = 'block'; btn.disabled = false; btn.textContent = 'Sign in'; return; }
+  initApp();
+}
+
+async function doLogout() {
+  await supabase.auth.signOut();
+  document.getElementById('login-overlay').style.display = 'flex';
+  document.getElementById('app-content').style.display = 'none';
+}
+
+async function checkAuth() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session) initApp();
+}
+
+function initApp() {
+  document.getElementById('login-overlay').style.display = 'none';
+  document.getElementById('app-content').style.display = 'block';
+  supabase.auth.getUser().then(({ data: { user } }) => {
+    if (user) document.getElementById('nav-user').textContent = user.email;
+  });
+  loadDashboard();
+  loadRegistrations();
+  loadEvents();
+  loadGallery();
+  subscribeRealtime();
+}
+
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.sidebar .sb-item, .mobile-nav .sb-item').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const sidebarBtn = document.querySelector('.sidebar [data-page="' + id + '"]');
+  if (sidebarBtn) sidebarBtn.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════════════
+async function loadDashboard() {
+  const { data: regs } = await supabase.from('registrations').select('*').order('created_at', { ascending: false });
+  const { data: events } = await supabase.from('events').select('*').order('sort_order');
+  if (!regs) return;
+
+  const total = regs.length;
+  const confirmed = regs.filter(r => r.status === 'confirmed').length;
+  const attended = regs.filter(r => r.status === 'attended').length;
+  const pending = regs.filter(r => r.status === 'pending').length;
+
+  document.getElementById('d-total').textContent = total;
+  document.getElementById('d-confirmed').textContent = confirmed;
+  document.getElementById('d-attended').textContent = attended;
+  document.getElementById('d-pending').textContent = pending;
+  document.getElementById('sb-reg-count').textContent = total;
+
+  if (events && events.length) {
+    const cardsHtml = events.map(ev => {
+      const evRegs = regs.filter(r => r.event === ev.slug);
+      const evConf = evRegs.filter(r => r.status === 'confirmed').length;
+      const evAtt = evRegs.filter(r => r.status === 'attended').length;
+      const pct = ev.capacity ? Math.round(evRegs.length / ev.capacity * 100) : 0;
+      return `<div class="ev-card" style="border-top-color:${ev.color}">
+        <p class="ev-card-name" style="color:${ev.color}">${escHtml(ev.name)}</p>
+        <div class="ev-card-row"><span>Registered</span><strong>${evRegs.length}</strong></div>
+        <div class="ev-card-row"><span>Confirmed</span><strong style="color:var(--teal)">${evConf}</strong></div>
+        <div class="ev-card-row"><span>Checked in</span><strong style="color:var(--teal)">${evAtt}</strong></div>
+        ${ev.capacity ? `<div class="ev-card-row"><span>Capacity</span><strong>${ev.capacity}</strong></div>
+        <div class="ev-card-bar"><div class="ev-card-fill" style="width:${Math.min(pct,100)}%;background:${ev.color}"></div></div>` : ''}
+      </div>`;
+    }).join('');
+    document.getElementById('d-event-cards').innerHTML = cardsHtml;
+    document.getElementById('sb-ev-count').textContent = events.length;
+  }
+
+  const recent = regs.slice(0, 8);
+  if (recent.length) {
+    document.getElementById('d-recent-list').innerHTML = '<ul class="activity-list">' +
+      recent.map(r => `<li class="activity-item">
+        <div class="activity-dot" style="background:${r.event === 'summit' ? 'var(--summit)' : r.event === 'kat' ? 'var(--kat)' : 'var(--congress)'}"></div>
+        <div><div class="activity-text"><strong>${escHtml(r.full_name)}</strong> registered for <span class="event-tag et-${r.event}">${r.event}</span></div>
+        <div class="activity-time">${timeAgo(r.created_at)} · ${r.code}</div></div>
+      </li>`).join('') + '</ul>';
+  }
+}
+
+// ═══════════════════════════════════════════════
+// REGISTRATIONS
+// ═══════════════════════════════════════════════
+async function loadRegistrations() {
+  let query = supabase.from('registrations').select('*').order('created_at', { ascending: false });
+  const { data, error } = await query;
+  if (error) { showToast('Error loading registrations', 'error'); return; }
+  allRegs = data || [];
+  renderRegs();
+}
+
+function renderRegs() {
+  let filtered = allRegs;
+  if (currentEventFilter !== 'all') filtered = filtered.filter(r => r.event === currentEventFilter);
+  if (currentStatusFilter) filtered = filtered.filter(r => r.status === currentStatusFilter);
+  if (currentSearchQuery) {
+    const q = currentSearchQuery.toLowerCase();
+    filtered = filtered.filter(r =>
+      (r.full_name || '').toLowerCase().includes(q) ||
+      (r.email || '').toLowerCase().includes(q) ||
+      (r.code || '').toLowerCase().includes(q) ||
+      (r.hospital || '').toLowerCase().includes(q) ||
+      (r.phone || '').toLowerCase().includes(q)
+    );
+  }
+
+  const totalPages = Math.ceil(filtered.length / PER_PAGE) || 1;
+  if (regPage > totalPages) regPage = totalPages;
+  const start = (regPage - 1) * PER_PAGE;
+  const paged = filtered.slice(start, start + PER_PAGE);
+
+  const tbody = document.getElementById('reg-table');
+  if (!paged.length) {
+    tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><div class="es-icon">📋</div><div class="es-text">No registrations found</div></div></td></tr>';
+  } else {
+    tbody.innerHTML = paged.map(r => `<tr>
+      <td><code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px">${r.code}</code></td>
+      <td><strong>${escHtml(r.full_name)}</strong></td>
+      <td style="font-size:12px">${escHtml(r.email)}</td>
+      <td style="font-size:12px">${escHtml(r.hospital || '')}</td>
+      <td><span class="event-tag et-${r.event}">${r.event}</span></td>
+      <td><span class="badge b-${r.status}">${r.status}</span></td>
+      <td style="font-size:12px;color:var(--gray)">${new Date(r.created_at).toLocaleDateString()}</td>
+      <td style="white-space:nowrap">
+        <button class="action-btn" onclick="viewReg('${r.id}')">👁️</button>
+        <button class="action-btn" onclick="editReg('${r.id}')">✏️</button>
+        <button class="action-btn" onclick="showRegQR('${r.id}')">QR</button>
+        ${r.status === 'pending' ? `<button class="action-btn" style="background:var(--teal);color:#fff;border-color:var(--teal)" onclick="confirmReg('${r.id}')">✓</button>` : ''}
+        ${r.status === 'confirmed' ? `<button class="action-btn checkin" onclick="checkinReg('${r.id}')">📷</button>` : ''}
+      </td>
+    </tr>`).join('');
+  }
+
+  const pagDiv = document.getElementById('reg-pagination');
+  pagDiv.innerHTML = `<span>Showing ${start + 1}–${Math.min(start + PER_PAGE, filtered.length)} of ${filtered.length}</span>
+    <div class="pag-btns">
+      <button class="pag-btn" onclick="regPage--;renderRegs()" ${regPage <= 1 ? 'disabled' : ''}>← Prev</button>
+      <span style="font-size:12px;padding:6px 10px">${regPage} / ${totalPages}</span>
+      <button class="pag-btn" onclick="regPage++;renderRegs()" ${regPage >= totalPages ? 'disabled' : ''}>Next →</button>
+    </div>`;
+}
+
+function filterRegs(event, el) {
+  currentEventFilter = event;
+  regPage = 1;
+  document.querySelectorAll('#page-registrations .pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  renderRegs();
+}
+
+function filterRegStatus(status) { currentStatusFilter = status; regPage = 1; renderRegs(); }
+function searchRegs(q) { currentSearchQuery = q; regPage = 1; renderRegs(); }
+
+function openRegModal(reg) {
+  document.getElementById('reg-modal-title').textContent = reg ? 'Edit Registration' : 'Add Registration';
+  document.getElementById('reg-edit-id').value = reg ? reg.id : '';
+  document.getElementById('rf-name').value = reg ? reg.full_name : '';
+  document.getElementById('rf-email').value = reg ? reg.email : '';
+  document.getElementById('rf-phone').value = reg ? reg.phone : '';
+  document.getElementById('rf-hospital').value = reg ? reg.hospital : '';
+  document.getElementById('rf-city').value = reg ? reg.city : '';
+  document.getElementById('rf-specialty').value = reg ? reg.specialty : '';
+  document.getElementById('rf-years').value = reg ? reg.years_experience : '0-2';
+  document.getElementById('rf-event').value = reg ? reg.event : 'summit';
+  document.getElementById('rf-cme').value = reg ? (reg.cme_number || '') : '';
+  document.getElementById('rf-status').value = reg ? reg.status : 'pending';
+  document.getElementById('rf-notes').value = reg ? (reg.notes || '') : '';
+  document.getElementById('reg-modal').classList.add('open');
+}
+
+function closeRegModal() { document.getElementById('reg-modal').classList.remove('open'); }
+
+async function saveRegistration() {
+  const id = document.getElementById('reg-edit-id').value;
+  const data = {
+    full_name: document.getElementById('rf-name').value.trim(),
+    email: document.getElementById('rf-email').value.trim(),
+    phone: document.getElementById('rf-phone').value.trim(),
+    hospital: document.getElementById('rf-hospital').value.trim(),
+    city: document.getElementById('rf-city').value.trim(),
+    specialty: document.getElementById('rf-specialty').value.trim(),
+    years_experience: document.getElementById('rf-years').value,
+    event: document.getElementById('rf-event').value,
+    cme_number: document.getElementById('rf-cme').value.trim() || null,
+    status: document.getElementById('rf-status').value,
+    notes: document.getElementById('rf-notes').value.trim() || null
+  };
+
+  if (!data.full_name || !data.email || !data.phone || !data.hospital || !data.city || !data.specialty) {
+    showToast('Please fill in all required fields', 'error'); return;
+  }
+
+  const btn = document.getElementById('reg-save-btn');
+  btn.disabled = true; btn.textContent = 'Saving...';
+
+  let error;
+  if (id) {
+    ({ error } = await supabase.from('registrations').update(data).eq('id', id));
+  } else {
+    ({ error } = await supabase.from('registrations').insert(data));
+  }
+
+  btn.disabled = false; btn.textContent = 'Save';
+  if (error) { showToast('Error: ' + error.message, 'error'); return; }
+  showToast(id ? 'Registration updated' : 'Registration created', 'success');
+  closeRegModal();
+  loadRegistrations();
+  loadDashboard();
+}
+
+async function confirmReg(id) {
+  await supabase.from('registrations').update({ status: 'confirmed' }).eq('id', id);
+  showToast('Registration confirmed', 'success');
+  loadRegistrations();
+  loadDashboard();
+}
+
+async function checkinReg(id) {
+  await supabase.from('registrations').update({ status: 'attended', checked_in_at: new Date().toISOString() }).eq('id', id);
+  showToast('Delegate checked in', 'success');
+  loadRegistrations();
+  loadDashboard();
+}
+
+function editReg(id) {
+  const reg = allRegs.find(r => r.id === id);
+  if (reg) openRegModal(reg);
+}
+
+function viewReg(id) {
+  const r = allRegs.find(x => x.id === id);
+  if (!r) return;
+  const content = `
+    <div style="margin-top:16px">
+      <div class="form-grid">
+        <div class="form-group"><div class="form-label">Code</div><div style="font-weight:600">${r.code}</div></div>
+        <div class="form-group"><div class="form-label">Status</div><span class="badge b-${r.status}">${r.status}</span></div>
+        <div class="form-group"><div class="form-label">Full Name</div><div>${escHtml(r.full_name)}</div></div>
+        <div class="form-group"><div class="form-label">Email</div><div>${escHtml(r.email)}</div></div>
+        <div class="form-group"><div class="form-label">Phone</div><div>${escHtml(r.phone)}</div></div>
+        <div class="form-group"><div class="form-label">Hospital</div><div>${escHtml(r.hospital)}</div></div>
+        <div class="form-group"><div class="form-label">City</div><div>${escHtml(r.city)}</div></div>
+        <div class="form-group"><div class="form-label">Specialty</div><div>${escHtml(r.specialty)}</div></div>
+        <div class="form-group"><div class="form-label">Experience</div><div>${r.years_experience}</div></div>
+        <div class="form-group"><div class="form-label">Event</div><span class="event-tag et-${r.event}">${r.event}</span></div>
+        ${r.cme_number ? `<div class="form-group"><div class="form-label">CME Number</div><div>${escHtml(r.cme_number)}</div></div>` : ''}
+        ${r.gala ? '<div class="form-group"><div class="form-label">Gala Dinner</div><div>Yes</div></div>' : ''}
+        ${r.cme ? '<div class="form-group"><div class="form-label">CME Certificate</div><div>Yes</div></div>' : ''}
+        ${r.rooms && r.rooms.length ? `<div class="form-group full"><div class="form-label">Rooms</div><div>${r.rooms.join(', ')}</div></div>` : ''}
+        ${r.notes ? `<div class="form-group full"><div class="form-label">Notes</div><div>${escHtml(r.notes)}</div></div>` : ''}
+        <div class="form-group"><div class="form-label">Registered</div><div style="font-size:12px;color:var(--gray)">${new Date(r.created_at).toLocaleString()}</div></div>
+        ${r.checked_in_at ? `<div class="form-group"><div class="form-label">Checked in</div><div style="font-size:12px;color:var(--teal)">${new Date(r.checked_in_at).toLocaleString()}</div></div>` : ''}
+      </div>
+    </div>`;
+  document.getElementById('view-reg-content').innerHTML = content;
+  document.getElementById('view-reg-modal').classList.add('open');
+}
+
+function showRegQR(id) {
+  const r = allRegs.find(x => x.id === id);
+  if (!r) return;
+  document.getElementById('modal-name').textContent = r.full_name;
+  document.getElementById('modal-event').textContent = r.event;
+  document.getElementById('modal-code').textContent = r.code;
+  const container = document.getElementById('qrcode-modal');
+  container.innerHTML = '';
+  new QRCode(container, {
+    text: JSON.stringify({ code: r.code, name: r.full_name, event: r.event }),
+    width: 200, height: 200,
+    colorDark: '#0F1512', colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  document.getElementById('qr-modal-overlay').classList.add('open');
+}
+
+function downloadModalQR() {
+  const canvas = document.querySelector('#qrcode-modal canvas');
+  if (!canvas) return;
+  const a = document.createElement('a');
+  a.href = canvas.toDataURL('image/png');
+  a.download = (document.getElementById('modal-code').textContent || 'qr') + '.png';
+  a.click();
+  showToast('QR downloaded', 'success');
+}
+
+// ═══════════════════════════════════════════════
+// CHECK-IN
+// ═══════════════════════════════════════════════
+async function doCheckin() {
+  const input = document.getElementById('checkin-code-input').value.trim();
+  const result = document.getElementById('checkin-result');
+  result.style.display = 'block';
+  if (!input) { result.style.background = 'var(--danger-bg)'; result.innerHTML = '<p style="color:var(--danger);font-weight:600">Please enter a registration code</p>'; return; }
+
+  let code = input;
+  try { const parsed = JSON.parse(input); code = parsed.code || input; } catch(e) {}
+
+  const { data, error } = await supabase.from('registrations').select('*').eq('code', code).single();
+  if (error || !data) {
+    result.style.background = 'var(--danger-bg)'; result.style.border = '1px solid var(--danger-border)';
+    result.innerHTML = '<p style="color:var(--danger);font-weight:600">Not found</p><p style="font-size:13px;color:var(--danger)">No registration with code: ' + escHtml(code) + '</p>';
+    return;
+  }
+
+  if (data.status === 'attended') {
+    result.style.background = 'var(--warn-bg)'; result.style.border = '1px solid #FDE68A';
+    result.innerHTML = `<p style="font-weight:600;color:var(--warn-text)">Already checked in</p><p style="font-size:13px;color:var(--warn-text)">${escHtml(data.full_name)} · ${data.code} · Checked in at ${new Date(data.checked_in_at).toLocaleTimeString()}</p>`;
+    return;
+  }
+
+  await supabase.from('registrations').update({ status: 'attended', checked_in_at: new Date().toISOString() }).eq('id', data.id);
+  result.style.background = 'var(--ok-bg)'; result.style.border = '1px solid var(--ok-border)';
+  result.innerHTML = `<p style="font-size:14px;font-weight:600;color:var(--ok-text);margin-bottom:4px">Check-in successful ✓</p><p style="font-size:13px;color:var(--ok-text)">${escHtml(data.full_name)}<br>Code: ${data.code} · ${data.event}</p>`;
+  showToast('Checked in: ' + data.full_name, 'success');
+  document.getElementById('checkin-code-input').value = '';
+
+  recentCheckins.unshift(data);
+  renderRecentCheckins();
+  loadDashboard();
+  loadRegistrations();
+}
+
+function renderRecentCheckins() {
+  const el = document.getElementById('recent-checkins');
+  if (!recentCheckins.length) {
+    el.innerHTML = '<div class="empty-state"><div class="es-icon">📷</div><div class="es-sub">No check-ins yet today</div></div>';
+    return;
+  }
+  el.innerHTML = '<ul class="activity-list">' + recentCheckins.slice(0, 10).map(r => `<li class="activity-item">
+    <div class="activity-dot" style="background:var(--ok-text)"></div>
+    <div><div class="activity-text"><strong>${escHtml(r.full_name)}</strong> · <span class="event-tag et-${r.event}">${r.event}</span></div>
+    <div class="activity-time">${r.code}</div></div>
+  </li>`).join('') + '</ul>';
+}
+
+function generateQR() {
+  const name = document.getElementById('gen-name').value.trim() || 'Dr. Name';
+  const code = document.getElementById('gen-code').value.trim() || 'KBM-2026-X-0000';
+  const event = document.getElementById('gen-event').value;
+  const container = document.getElementById('qrcode');
+  container.innerHTML = '';
+  new QRCode(container, { text: JSON.stringify({ code, name, event }), width: 180, height: 180, colorDark: '#0F1512', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.H });
+  document.getElementById('qr-preview-info').textContent = name + ' · ' + code;
+  document.getElementById('qr-preview-area').style.display = 'block';
+  showToast('QR generated', 'success');
+}
+
+function downloadQR() {
+  const canvas = document.querySelector('#qrcode canvas');
+  if (!canvas) return;
+  const a = document.createElement('a');
+  a.href = canvas.toDataURL('image/png');
+  a.download = (document.getElementById('gen-code').value.trim() || 'ticket') + '.png';
+  a.click();
+}
+
+// ═══════════════════════════════════════════════
+// EVENTS
+// ═══════════════════════════════════════════════
+async function loadEvents() {
+  const { data } = await supabase.from('events').select('*').order('sort_order');
+  allEvents = data || [];
+  renderEvents();
+  renderLibraryPills();
+}
+
+function renderEvents() {
+  const el = document.getElementById('events-list');
+  if (!allEvents.length) {
+    el.innerHTML = '<div class="empty-state"><div class="es-icon">📅</div><div class="es-text">No events yet</div><div class="es-sub">Click "Add Event" to create one</div></div>';
+    return;
+  }
+
+  el.innerHTML = allEvents.map(ev => `<div class="card" style="border-left:4px solid ${ev.color}">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div>
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:2px">${escHtml(ev.name)}</h3>
+        <p style="font-size:12px;color:var(--gray)">${ev.venue || 'TBD'} · ${ev.city || ''} · ${formatDate(ev.date_start)}${ev.date_end && ev.date_end !== ev.date_start ? ' – ' + formatDate(ev.date_end) : ''}</p>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-outline btn-sm" onclick='editEvent(${JSON.stringify(ev).replace(/'/g,"&#39;")})'>✏️ Edit</button>
+        <button class="btn btn-red btn-sm" onclick="deleteEvent('${ev.id}')">🗑️</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:20px;font-size:13px;flex-wrap:wrap">
+      <div><span style="color:var(--gray)">Slug:</span> <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:11px">${ev.slug}</code></div>
+      <div><span style="color:var(--gray)">Capacity:</span> <strong>${ev.capacity || '∞'}</strong></div>
+      <div><span style="color:var(--gray)">Status:</span> <span class="badge ${ev.status === 'upcoming' ? 'b-pending' : ev.status === 'completed' ? 'b-attended' : ev.status === 'cancelled' ? 'b-cancelled' : 'b-confirmed'}">${ev.status}</span></div>
+    </div>
+    ${ev.description ? `<p style="font-size:13px;color:var(--gray);margin-top:10px">${escHtml(ev.description)}</p>` : ''}
+  </div>`).join('');
+}
+
+function openEventModal(ev) {
+  document.getElementById('event-modal-title').textContent = ev ? 'Edit Event' : 'Add Event';
+  document.getElementById('ev-edit-id').value = ev ? ev.id : '';
+  document.getElementById('ef-name').value = ev ? ev.name : '';
+  document.getElementById('ef-slug').value = ev ? ev.slug : '';
+  document.getElementById('ef-color').value = ev ? ev.color : '#0B6B54';
+  document.getElementById('ef-start').value = ev ? ev.date_start : '';
+  document.getElementById('ef-end').value = ev ? (ev.date_end || '') : '';
+  document.getElementById('ef-venue').value = ev ? (ev.venue || '') : '';
+  document.getElementById('ef-city').value = ev ? (ev.city || '') : '';
+  document.getElementById('ef-capacity').value = ev ? (ev.capacity || '') : '';
+  document.getElementById('ef-status').value = ev ? ev.status : 'upcoming';
+  document.getElementById('ef-desc').value = ev ? (ev.description || '') : '';
+  document.getElementById('event-modal').classList.add('open');
+}
+
+function editEvent(ev) { openEventModal(ev); }
+function closeEventModal() { document.getElementById('event-modal').classList.remove('open'); }
+
+async function saveEvent() {
+  const id = document.getElementById('ev-edit-id').value;
+  const data = {
+    name: document.getElementById('ef-name').value.trim(),
+    slug: document.getElementById('ef-slug').value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-'),
+    color: document.getElementById('ef-color').value,
+    date_start: document.getElementById('ef-start').value,
+    date_end: document.getElementById('ef-end').value || null,
+    venue: document.getElementById('ef-venue').value.trim() || null,
+    city: document.getElementById('ef-city').value.trim() || null,
+    capacity: parseInt(document.getElementById('ef-capacity').value) || 0,
+    status: document.getElementById('ef-status').value,
+    description: document.getElementById('ef-desc').value.trim() || null
+  };
+
+  if (!data.name || !data.slug || !data.date_start) { showToast('Name, slug, and start date are required', 'error'); return; }
+
+  const btn = document.getElementById('event-save-btn');
+  btn.disabled = true; btn.textContent = 'Saving...';
+
+  let error;
+  if (id) {
+    ({ error } = await supabase.from('events').update(data).eq('id', id));
+  } else {
+    data.sort_order = allEvents.length + 1;
+    ({ error } = await supabase.from('events').insert(data));
+  }
+
+  btn.disabled = false; btn.textContent = 'Save';
+  if (error) { showToast('Error: ' + error.message, 'error'); return; }
+  showToast(id ? 'Event updated' : 'Event created', 'success');
+  closeEventModal();
+  loadEvents();
+  loadDashboard();
+}
+
+async function deleteEvent(id) {
+  if (!confirm('Delete this event? This cannot be undone.')) return;
+  const { error } = await supabase.from('events').delete().eq('id', id);
+  if (error) { showToast('Error: ' + error.message, 'error'); return; }
+  showToast('Event deleted', 'success');
+  loadEvents();
+}
+
+// ═══════════════════════════════════════════════
+// LIBRARY / GALLERY
+// ═══════════════════════════════════════════════
+async function loadGallery() {
+  const { data } = await supabase.from('gallery_images').select('*').order('created_at', { ascending: false });
+  allGallery = data || [];
+  renderGallery();
+  document.getElementById('sb-gal-count').textContent = allGallery.length;
+}
+
+function renderLibraryPills() {
+  const el = document.getElementById('lib-pills');
+  const sel = document.getElementById('lib-event-select');
+  let pills = '<span class="pill active" onclick="filterGallery(\'all\',this)">All</span>';
+  let opts = '<option value="">All events</option>';
+  allEvents.forEach(ev => {
+    pills += `<span class="pill" onclick="filterGallery('${ev.slug}',this)">${escHtml(ev.name)}</span>`;
+    opts += `<option value="${ev.slug}">${escHtml(ev.name)}</option>`;
+  });
+  el.innerHTML = pills;
+  sel.innerHTML = opts;
+}
+
+function renderGallery(filter) {
+  let items = allGallery;
+  if (filter && filter !== 'all') items = items.filter(g => g.event_slug === filter);
+
+  document.getElementById('lib-count').textContent = items.length + ' photo' + (items.length !== 1 ? 's' : '');
+  const grid = document.getElementById('gallery-grid');
+
+  if (!items.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1" class="empty-state"><div class="es-icon">🖼️</div><div class="es-text">No photos yet</div><div class="es-sub">Upload photos to get started</div></div>';
+    return;
+  }
+
+  grid.innerHTML = items.map(g => `<div class="gallery-admin-item">
+    <img src="${g.image_url}" alt="${escHtml(g.title || '')}" loading="lazy">
+    <div class="ga-badge">${g.event_slug}</div>
+    <div class="ga-overlay">
+      <button class="ga-btn ga-btn-del" onclick="deleteGalleryImage('${g.id}','${g.storage_path}')">🗑️</button>
+    </div>
+  </div>`).join('');
+}
+
+function filterGallery(slug, el) {
+  document.querySelectorAll('#lib-pills .pill').forEach(p => p.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderGallery(slug);
+}
+
+function filterGalleryEvent(slug) { renderGallery(slug || 'all'); }
+
+// Upload zone drag & drop
+const uploadZone = document.getElementById('upload-zone');
+if (uploadZone) {
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault(); uploadZone.classList.remove('dragover');
+    if (e.dataTransfer.files.length) handleFileUpload(e.dataTransfer.files);
+  });
+}
+
+async function handleFileUpload(files) {
+  if (!files.length) return;
+  const eventSlug = document.getElementById('lib-event-select').value;
+  if (!eventSlug) {
+    showToast('Please select an event first', 'error');
+    return;
+  }
+
+  const progress = document.getElementById('upload-progress');
+  const bar = document.getElementById('upload-bar');
+  const status = document.getElementById('upload-status');
+  progress.style.display = 'block';
+
+  let uploaded = 0;
+  const total = files.length;
+  status.textContent = `0/${total}`;
+  bar.style.width = '0%';
+
+  for (const file of files) {
+    if (file.size > 5 * 1024 * 1024) { showToast(file.name + ' exceeds 5MB limit', 'error'); continue; }
+    if (!file.type.startsWith('image/')) { showToast(file.name + ' is not an image', 'error'); continue; }
+
+    const ext = file.name.split('.').pop();
+    const path = `${eventSlug}/${Date.now()}-${Math.random().toString(36).slice(2,8)}.${ext}`;
+
+    const { error: uploadError } = await supabase.storage.from('gallery').upload(path, file, { contentType: file.type });
+    if (uploadError) { showToast('Upload failed: ' + uploadError.message, 'error'); continue; }
+
+    const { data: { publicUrl } } = supabase.storage.from('gallery').getPublicUrl(path);
+
+    await supabase.from('gallery_images').insert({
+      event_slug: eventSlug,
+      title: file.name.replace(/\.[^.]+$/, ''),
+      storage_path: path,
+      image_url: publicUrl,
+      display_order: allGallery.length + uploaded
+    });
+
+    uploaded++;
+    status.textContent = `${uploaded}/${total}`;
+    bar.style.width = Math.round(uploaded / total * 100) + '%';
+  }
+
+  progress.style.display = 'none';
+  showToast(`${uploaded} photo${uploaded !== 1 ? 's' : ''} uploaded`, 'success');
+  loadGallery();
+}
+
+async function deleteGalleryImage(id, storagePath) {
+  if (!confirm('Delete this photo?')) return;
+  await supabase.storage.from('gallery').remove([storagePath]);
+  await supabase.from('gallery_images').delete().eq('id', id);
+  showToast('Photo deleted', 'success');
+  loadGallery();
+}
+
+// ═══════════════════════════════════════════════
+// EXPORT
+// ═══════════════════════════════════════════════
+async function exportCSV(statusFilter, eventFilter) {
+  let query = supabase.from('registrations').select('*').order('created_at');
+  if (eventFilter) query = query.eq('event', eventFilter);
+  const { data } = await query;
+  if (!data || !data.length) { showToast('No data to export', 'error'); return; }
+
+  let filtered = data;
+  if (statusFilter === 'confirmed') filtered = data.filter(d => d.status === 'confirmed');
+  if (statusFilter === 'pending') filtered = data.filter(d => d.status === 'pending');
+  if (statusFilter === 'attended') filtered = data.filter(d => d.status === 'attended');
+  if (statusFilter === 'noshow') filtered = data.filter(d => d.status === 'confirmed');
+
+  const headers = ['code','full_name','email','phone','hospital','city','specialty','years_experience','event','status','cme_number','gala','cme','rooms','notes','checked_in_at','created_at'];
+  const csv = [headers.join(','), ...filtered.map(r => headers.map(h => {
+    let v = r[h];
+    if (Array.isArray(v)) v = v.join('; ');
+    if (typeof v === 'boolean') v = v ? 'Yes' : 'No';
+    return '"' + String(v || '').replace(/"/g, '""') + '"';
+  }).join(','))].join('\n');
+
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'kbmeets-' + (statusFilter || 'all') + (eventFilter ? '-' + eventFilter : '') + '-' + new Date().toISOString().slice(0, 10) + '.csv';
+  a.click();
+  showToast('Exported ' + filtered.length + ' records', 'success');
+}
+
+// ═══════════════════════════════════════════════
+// REALTIME
+// ═══════════════════════════════════════════════
+function subscribeRealtime() {
+  supabase.channel('crm-changes')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'registrations' }, () => {
+      loadDashboard();
+      loadRegistrations();
+    })
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'events' }, () => {
+      loadEvents();
+    })
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'gallery_images' }, () => {
+      loadGallery();
+    })
+    .subscribe();
+}
+
+// ═══════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════
+function escHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  const icon = document.getElementById('toast-icon');
+  t.className = 'toast show toast-' + type;
+  icon.textContent = type === 'success' ? '✓' : '✗';
+  document.getElementById('toast-msg').textContent = msg;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function timeAgo(date) {
+  const s = Math.floor((Date.now() - new Date(date)) / 1000);
+  if (s < 60) return 'just now';
+  if (s < 3600) return Math.floor(s / 60) + 'm ago';
+  if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+  return Math.floor(s / 86400) + 'd ago';
+}
+
+function formatDate(d) {
+  if (!d) return '';
+  return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+checkAuth();
+</script>
+</body>
+</html>

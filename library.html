@@ -144,7 +144,7 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
     <a href="register.html" data-i18n="nav.reg">Register</a>
   </div>
   <div class="nav-right">
-    <div class="nav-lang"><span onclick="switchLang('ko')">KR</span><span class="active" onclick="switchLang('en')">EN</span></div>
+    <div class="nav-lang"><span onclick="switchLang('ko')">KR</span><span onclick="switchLang('en')">EN</span><span class="active" onclick="switchLang('vi')">VI</span></div>
     <a href="register.html" class="nav-cta" data-i18n="nav.register">Register Free</a>
   </div>
 </nav>
@@ -329,11 +329,12 @@ document.addEventListener('keydown', e => {
 function switchLang(lang) {
   localStorage.setItem('kbm-lang', lang);
   document.querySelectorAll('.nav-lang span').forEach(s => {
-    s.classList.toggle('active', (lang === 'ko' && s.textContent === 'KR') || (lang === 'en' && s.textContent === 'EN'));
+    s.classList.toggle('active', (lang === 'ko' && s.textContent === 'KR') || (lang === 'en' && s.textContent === 'EN') || (lang === 'vi' && s.textContent === 'VI'));
   });
   if (window.I18N) window.I18N.apply(lang);
 }
 </script>
+<script src="js/vi.js"></script>
 <script src="js/ko.js"></script>
 <script src="js/i18n.js"></script>
 </body>

@@ -203,7 +203,7 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
     <a href="register.html" data-i18n="nav.reg">Register</a>
   </div>
   <div class="nav-right">
-    <div class="nav-lang"><span>KR</span><span class="active">EN</span></div>
+    <div class="nav-lang"><span>KR</span><span>EN</span><span class="active">VI</span></div>
     <a href="register.html" class="nav-cta" data-i18n="nav.register">Register Free</a>
   </div>
 </nav>
@@ -413,6 +413,7 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 </script>
+<script src="js/vi.js"></script>
 <script src="js/ko.js"></script>
 <script src="js/i18n.js"></script>
 </body>
