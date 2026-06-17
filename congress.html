@@ -28,7 +28,7 @@ a{text-decoration:none;color:inherit}
 .hero-pattern{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,0.02) 40px,rgba(255,255,255,0.02) 41px);pointer-events:none}
 .hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end;position:relative;z-index:1}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);border:1px solid rgba(255,255,255,0.15);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:20px}
-.hero-title{font-family:var(--font-display);font-size:clamp(40px,5vw,72px);font-weight:700;color:#fff;line-height:1.05;margin-bottom:16px;letter-spacing:-0.02em}
+.hero-title{font-family:var(--font-display);font-size:clamp(40px,5vw,72px);font-weight:700;color:#fff;line-height:1.15;margin-bottom:16px;letter-spacing:-0.02em}
 .hero-title em{color:#F0A090;font-style:italic}
 .hero-desc{font-size:16px;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:32px;font-weight:300;max-width:480px}
 .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
@@ -47,7 +47,7 @@ a{text-decoration:none;color:inherit}
 .what-inner{max-width:1200px;margin:0 auto}
 .what-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .what-copy .eyebrow{font-size:11px;letter-spacing:0.16em;color:#F0A090;text-transform:uppercase;font-weight:500;margin-bottom:12px}
-.what-copy h2{font-family:var(--font-display);font-size:clamp(28px,3.5vw,44px);font-weight:600;color:#fff;line-height:1.2;margin-bottom:20px}
+.what-copy h2{font-family:var(--font-display);font-size:clamp(28px,3.5vw,44px);font-weight:600;color:#fff;line-height:1.35;margin-bottom:20px}
 .what-copy h2 em{color:#F0A090;font-style:italic}
 .what-copy p{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.85;margin-bottom:16px;font-weight:300}
 .what-cards{display:flex;flex-direction:column;gap:12px}
@@ -62,7 +62,7 @@ a{text-decoration:none;color:inherit}
 .rooms-section{padding:100px 40px;background:var(--bg)}
 .rooms-inner{max-width:1200px;margin:0 auto}
 .eyebrow{font-size:11px;letter-spacing:0.16em;color:var(--teal);text-transform:uppercase;font-weight:500;margin-bottom:12px}
-.section-h2{font-family:var(--font-display);font-size:clamp(28px,3.5vw,44px);font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:16px}
+.section-h2{font-family:var(--font-display);font-size:clamp(28px,3.5vw,44px);font-weight:600;color:var(--ink);line-height:1.35;margin-bottom:16px}
 .section-h2 em{color:var(--coral);font-style:italic}
 .section-lead{font-size:15px;color:var(--gray);line-height:1.8;margin-bottom:56px;max-width:560px;font-weight:300}
 .rooms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -131,7 +131,7 @@ a{text-decoration:none;color:inherit}
 .pi{display:flex;gap:12px;font-size:13px;color:var(--gray);line-height:1.6}
 .pi-dot{width:5px;height:5px;border-radius:50%;background:var(--coral);margin-top:7px;flex-shrink:0}
 .cta-box{text-align:center}
-.cta-box-title{font-family:var(--font-display);font-size:30px;font-weight:600;color:var(--ink);margin-bottom:10px;line-height:1.2}
+.cta-box-title{font-family:var(--font-display);font-size:30px;font-weight:600;color:var(--ink);margin-bottom:10px;line-height:1.35}
 .cta-box-sub{font-size:14px;color:var(--gray);margin-bottom:28px;line-height:1.7}
 .btn-coral-full{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;background:var(--coral);color:#fff;border-radius:10px;font-size:15px;font-weight:600;transition:all 0.2s}
 .btn-coral-full:hover{background:var(--coral-deep);transform:translateY(-2px)}
@@ -152,6 +152,9 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
   .tl-row{grid-template-columns:1fr}
   .tl-full{grid-column:1}
 }
+html[lang="vi"] .nav-links{gap:20px}
+html[lang="vi"] .nav-links a{line-height:1.4}
+html[lang="vi"] .nav-cta{line-height:1.3}
 </style>
 </head>
 <body>

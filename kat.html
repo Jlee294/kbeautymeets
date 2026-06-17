@@ -39,7 +39,7 @@ a{text-decoration:none;color:inherit}
 .hero-series-tag{display:inline-flex;align-items:center;gap:10px;font-size:11px;padding:6px 16px;border-radius:20px;background:rgba(201,124,20,0.15);color:#F0C060;border:1px solid rgba(201,124,20,0.25);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:20px}
 .series-pulse{width:7px;height:7px;border-radius:50%;background:#F0C060;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.4)}}
-.hero-title{font-family:var(--font-d);font-size:clamp(44px,5.5vw,76px);font-weight:700;color:#fff;line-height:1.0;margin-bottom:18px;letter-spacing:-0.02em}
+.hero-title{font-family:var(--font-d);font-size:clamp(44px,5.5vw,76px);font-weight:700;color:#fff;line-height:1.15;margin-bottom:18px;letter-spacing:-0.02em}
 .hero-title em{color:#F0C060;font-style:italic}
 .hero-sub{font-size:16px;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:28px;font-weight:300;max-width:480px}
 .hero-meta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px}
@@ -65,7 +65,7 @@ a{text-decoration:none;color:inherit}
 section.pad{padding:100px 40px}
 .sec-inner{max-width:1200px;margin:0 auto}
 .eyebrow{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
-.h2{font-family:var(--font-d);font-size:clamp(28px,3.5vw,44px);font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:16px}
+.h2{font-family:var(--font-d);font-size:clamp(28px,3.5vw,44px);font-weight:600;color:var(--ink);line-height:1.35;margin-bottom:16px}
 .h2 em{color:var(--amber);font-style:italic}
 .lead{font-size:15px;color:var(--gray);line-height:1.85;font-weight:300;max-width:580px;margin-bottom:56px}
 
@@ -84,7 +84,7 @@ section.pad{padding:100px 40px}
 .wc-3-glow{background:radial-gradient(circle,rgba(11,107,84,0.3),transparent)}
 .wc-icon{margin-bottom:16px}
 .wc-icon svg{width:32px;height:32px;fill:none;stroke:#F0C060;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.wc-title{font-family:var(--font-d);font-size:20px;font-weight:600;color:#fff;margin-bottom:10px;line-height:1.3}
+.wc-title{font-family:var(--font-d);font-size:20px;font-weight:600;color:#fff;margin-bottom:10px;line-height:1.4}
 .wc-desc{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.75}
 .wc-bottom{padding:20px 28px;background:rgba(255,255,255,0.03);border-top:1px solid rgba(255,255,255,0.06)}
 .wc-highlight{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.6;font-style:italic}
@@ -146,7 +146,7 @@ section.pad{padding:100px 40px}
 /* PROOF */
 .proof-section{background:var(--amber);padding:80px 40px}
 .proof-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.proof-right h2{font-family:var(--font-d);font-size:clamp(24px,3vw,38px);font-weight:600;color:#fff;margin-bottom:12px;line-height:1.2}
+.proof-right h2{font-family:var(--font-d);font-size:clamp(24px,3vw,38px);font-weight:600;color:#fff;margin-bottom:12px;line-height:1.35}
 .proof-right p{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.8;font-weight:300;margin-bottom:20px}
 .proof-quote{padding:20px 24px;background:rgba(255,255,255,0.12);border-radius:10px;border-left:3px solid rgba(255,255,255,0.4)}
 .pq-text{font-size:14px;color:rgba(255,255,255,0.85);line-height:1.7;font-style:italic}
@@ -166,7 +166,7 @@ section.pad{padding:100px 40px}
 .pbi{display:flex;gap:12px;font-size:13px;color:var(--gray);line-height:1.6}
 .pbi-dot{width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:8px;flex-shrink:0}
 .cta-box{text-align:center}
-.cta-title{font-family:var(--font-d);font-size:32px;font-weight:600;color:var(--ink);margin-bottom:10px;line-height:1.2}
+.cta-title{font-family:var(--font-d);font-size:32px;font-weight:600;color:var(--ink);margin-bottom:10px;line-height:1.35}
 .cta-sub{font-size:14px;color:var(--gray);line-height:1.8;margin-bottom:28px}
 .btn-amber-full{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;background:var(--amber);color:#fff;border-radius:10px;font-size:15px;font-weight:600;transition:all 0.2s}
 .btn-amber-full:hover{background:var(--amber-deep);transform:translateY(-2px)}
@@ -187,6 +187,9 @@ footer{background:var(--ink);padding:40px;display:flex;justify-content:space-bet
   section.pad{padding:64px 20px}.proof-section,.bottom-section{padding:64px 20px}
   .hero{padding:110px 20px 60px}
 }
+html[lang="vi"] .nav-links{gap:20px}
+html[lang="vi"] .nav-links a{line-height:1.4}
+html[lang="vi"] .nav-cta{line-height:1.3}
 </style>
 </head>
 <body>
